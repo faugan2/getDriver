@@ -11,6 +11,11 @@
         flex-direction:column;
         margin-bottom: 1rem;
         width:80%;
+        margin-top:1rem;
+
+        >p{
+            text-align:center;
+        }
 
         >label{
             font-weight: bold;

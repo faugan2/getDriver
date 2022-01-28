@@ -16,15 +16,15 @@ const AjouterClient= (e)=>{
 
     const ajouter_client=async (e)=>{
         if(nom==""){
-            alert("Le nom est vide");
+            set_alerte("Le nom est vide");
             return;
         }
         if(email==""){
-            alert("Le prenom est vide");
+            set_alerte("Le prenom est vide");
             return;
         }
         if(pw==""){
-            alert("Le mot de passe est vide");
+            set_alerte("Le mot de passe est vide");
         }
 
         const btn=e.target;
