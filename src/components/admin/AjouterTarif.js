@@ -5,7 +5,7 @@ import "./ajouter_client.scss";
 import {useState,useEffect} from "react";
 import firebase from "firebase";
 import {auth,db} from "../../firebase_file";
-
+import {types} from "./data";
 
 const AjouterClient= (e)=>{
 
@@ -32,7 +32,8 @@ const AjouterClient= (e)=>{
         const btn=e.target;
         btn.disabled=true;
         btn.innerHTML="Patientez...";
-        const tarif={type,frais_fixe,course,date:firebase.firestore.FieldValue.serverTimestamp()}
+        const nom=types[type];
+        const tarif={type,frais_fixe,course,date:firebase.firestore.FieldValue.serverTimestamp(),nom}
 
         db.collection("tarifs").add(tarif).then(()=>{
             btn.disabled=false;
@@ -54,7 +55,7 @@ const AjouterClient= (e)=>{
                     <AssignmentIndIcon style={{color:"gray",fontSize:"1.2rem"}}/>
                     <select value={type} onChange={e=>set_type(e.target.value)}>
                         <option value="0">Choisir un type de véhicule</option>
-                        <optin value="1">Taxi</optin>
+                        <option value="1">Taxi</option>
                         <option value="2">Véhicule léger</option>
                         <option value="3">Véhicule lourd</option>
                         <option value="4">Bus</option>

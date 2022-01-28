@@ -97,7 +97,7 @@ const Clients=()=>{
                                 let nom=user.nom;
 
                                 return(
-                                    <tr>
+                                    <tr key={user.key}>
                                         <td align="center">{date}</td>
                                         <td>{nom}</td>
                                         <td>{user.email}</td>

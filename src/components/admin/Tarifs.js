@@ -33,12 +33,31 @@ const Tarifs=()=>{
         })
     },[]);
 
+    const delete_tarif=async (id)=>{
+       await db.collection("tarifs").doc(id).delete();
+    }
+    const [search,set_search]=useState("");
+    useEffect(()=>{
+        if(search==""){
+            set_data_show(data);
+            return;
+        }
+
+        
+
+        const res=data_show.filter((item)=>{
+            return item.nom.toLowerCase().indexOf(search.toLowerCase())>=0
+            
+        })
+
+        set_data_show(res);
+    },[search])
     
     return (
         <div className="clients">
             <div className="head">
                 <div className="search">
-                    <input type="text" placeholder="Rechercher" />
+                    <input type="text" placeholder="Rechercher" value={search} onChange={e=>set_search(e.target.value)}/>
                     <SearchIcon style={{color:"gray",fontSize:"1.2rem"}} />
                 </div>
                 <div className="actions">
@@ -53,7 +72,7 @@ const Tarifs=()=>{
                     <thead>
                         <tr>
                             <th width="5%">N°</th>
-                            <th>Type</th>
+                            <th style={{textAlign:"left"}}>Type</th>
                             <th width="10%">Frais fixed</th>
                             <th width="10%">Prix unitaire</th>
                             <th width="10%">Actions</th>
@@ -66,14 +85,14 @@ const Tarifs=()=>{
                                 const frais_fixe=tarif.frais_fixe;
                                 const course=tarif.course;
                                 return(
-                                    <tr>
+                                    <tr key={tarif.key}>
                                         <td align="center">{index+1}</td>
-                                        <td align="center">{types[type]}</td>
+                                        <td>{tarif.nom}</td>
                                         <td align="center">{frais_fixe}</td>
                                         <td align="center">{course}</td>
                                         <td align="center">
                                             <div className="table_actions">
-                                                <button>
+                                                <button  onClick={delete_tarif.bind(this,tarif.key)}>
                                                     <DeleteIcon style={{color:"gray",fontSize:"1.2rem"}}/>
                                                 </button>
                                             </div>

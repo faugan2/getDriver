@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Modal from "./Modal";
 import AjouterPilote from "./AjouterPilote";
-
+import {types} from "./data";
 const Clients=()=>{
     const [data,setData]=useState([]);
     const [data_show,set_data_show]=useState([]);
@@ -48,8 +48,6 @@ const Clients=()=>{
             return;
         }
 
-        
-
         const res=data_show.filter((item)=>{
             return item.nom.toLowerCase().indexOf(search.toLowerCase())>=0 || 
             item.email.toLowerCase().indexOf(search.toLowerCase())>=0;
@@ -78,8 +76,10 @@ const Clients=()=>{
                     <thead>
                         <tr>
                             <th width="10%">Date</th>
-                            <th width="40%" style={{textAlign:"left"}}>Nom</th>
-                            <th width="40%" style={{textAlign:"left"}}>Email</th>
+                            <th width="10%">Type</th>
+                            <th width="35%" style={{textAlign:"left"}}>Nom</th>
+                            <th width="35%" style={{textAlign:"left"}}>Email</th>
+                            <th width="20%">Etoiles</th>
                             <th width="10%">Actions</th>
                         </tr>
                     </thead>
@@ -93,10 +93,12 @@ const Clients=()=>{
                                 let nom=user.nom;
 
                                 return(
-                                    <tr>
+                                    <tr key={user.key}>
                                         <td align="center">{date}</td>
+                                        <td align="center">{types[user.pilote]}</td>
                                         <td>{nom}</td>
                                         <td>{user.email}</td>
+                                        <td align="center">Etoile</td>
                                         <td align="center">
                                             <div className="table_actions">
                                                 <button  onClick={delete_user.bind(this,user.key)}>

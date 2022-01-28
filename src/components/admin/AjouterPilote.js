@@ -13,8 +13,10 @@ const AjouterClient= (e)=>{
     const [email,set_email]=useState("");
     const [pw,set_pw]=useState("");
     const [alerte,set_alerte]=useState("");
+    const [type,set_type]=useState("0");
 
     const ajouter_client=async (e)=>{
+        set_alerte("");
         if(nom==""){
             set_alerte("Le nom est vide");
             return;
@@ -27,10 +29,15 @@ const AjouterClient= (e)=>{
             set_alerte("Le mot de passe est vide");
         }
 
+        if(type=="0"){
+            set_alerte("Le type de pilote est vide");
+            return;
+        }
+
         const btn=e.target;
         btn.disabled=true;
         btn.innerHTML="Patientez...";
-        const user={nom,email,password:pw,type:2,date:firebase.firestore.FieldValue.serverTimestamp()}
+        const user={nom,email,password:pw,type:2,date:firebase.firestore.FieldValue.serverTimestamp(),pilote:type}
         auth.createUserWithEmailAndPassword(email,pw).then(async ()=>{
            await db.collection("users").add(user);
            btn.disabled=false;
@@ -54,6 +61,21 @@ const AjouterClient= (e)=>{
     
     return(
         <div className="ajouter_client">
+             <div className="line">
+                <label>Type de pilote</label>
+                <div>
+                    <AssignmentIndIcon style={{color:"gray",fontSize:"1.2rem"}}/>
+                    <select value={type} onChange={e=>set_type(e.target.value)}>
+                        <option value="0">Choisir un type de pilote</option>
+                        <option value="1">Taxi</option>
+                        <option value="2">Véhicule léger</option>
+                        <option value="3">Véhicule lourd</option>
+                        <option value="4">Bus</option>
+                    </select>
+                </div>
+                
+            </div>
+
             <div className="line">
                 <label>Nom du client</label>
                 <div>

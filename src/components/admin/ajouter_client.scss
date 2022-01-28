@@ -30,13 +30,19 @@
                 border:none;
                 flex:1;
                 outline:none;
-
+                background-color: white;
             }
             >select{
                 flex:1;
                 outline:none;
                 border:none;
                 background-color:white;
+            }
+
+            >textarea{
+                flex:1;
+                border:none;
+                outline:none;
             }
         }
 

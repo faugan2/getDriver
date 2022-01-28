@@ -23,8 +23,8 @@ export default function SimpleModal({open,content,click,width=60}) {
 
     const getModalStyle=()=> {
      
-      const top = 10 ;
-      const left = 20;
+      const top = 15 ;
+      const left = 25;
 
       return {
         top: `${top}%`,
@@ -42,7 +42,7 @@ export default function SimpleModal({open,content,click,width=60}) {
   const [close,set_close]=useState(open);
   
   const body = (
-    <div style={modalStyle} className={classes.paper}>
+    <div  className={classes.paper}>
       {content}
     </div>
   );
@@ -55,6 +55,7 @@ export default function SimpleModal({open,content,click,width=60}) {
         onClose={click}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
+        style={{border:"1px solid silver",display:"flex",paddingTop:"2rem",justifyContent:"center"}}
       >
         {body}
       </Modal>
