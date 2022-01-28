@@ -1,0 +1,35 @@
+.commander{
+	background-color:whitesmoke;
+	
+	.commander_body{
+		display:flex;
+		flex-direction:column;
+		
+		
+		.maps{
+		
+			>div{
+				height:50vh;
+			}
+
+			>div:last-child{
+				
+				display:flex;
+				
+			}
+			display:flex;
+			
+			flex-direction:column;
+			
+			img{
+				width:100%;
+				object-fit:cover;
+			}
+			
+			display:flex;
+			
+		}
+		
+		
+	}
+}

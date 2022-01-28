@@ -1,0 +1,40 @@
+.destination{
+	display:flex;
+	justify-content:flex-start;
+	align-items:center;
+	margin-top:1rem;
+	background-color:white;
+	padding:0.5rem;
+	
+	button{
+		margin-right:0.5rem;
+		width:3rem;
+		height:3rem;
+		border-radius:50%;
+		border:none;
+		background-color:whitesmoke;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		font-size:0.8rem;
+	}
+	
+	div{
+		display:flex;
+		flex-direction:column;
+		align-items:flex-start;
+		justify-content:center;
+		
+		p:first-child{
+			font-size:0.8rem;
+			color:black;
+			font-weight:bold;
+		}
+		
+		p:last-child{
+			font-size:0.7rem;
+			color:gray;
+		}
+		
+	}
+}

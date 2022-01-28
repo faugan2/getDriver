@@ -1,0 +1,44 @@
+.profile{
+	background-color:whitesmoke;
+	min-height:100vh;
+}
+
+.stats{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	border-right:1px solid silver;
+	padding-right:1rem;
+	flex:1;
+	p:first-child{
+		font-weight:bold;
+		font-size:1rem;
+	}
+	
+	p:last-child{
+		font-size:0.8rem;
+		color:gray;
+	}
+}
+
+.stats:last-child{
+	border-right:none;
+}
+
+.zone_edit{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	padding:1rem;
+	
+	button{
+		padding:1rem;
+		border:none;
+		outline:none;
+		background-color:#3f51b5;
+		color:white;
+		font-size:0.8rem;
+		font-weight:bold;
+	}
+}

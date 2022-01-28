@@ -1,0 +1,23 @@
+.historique_bottom{
+    margin-top:0.5rem;
+    >div{
+        flex:1;
+        display:flex;
+        flex-direction:column;
+
+        :first-child{
+            font-weight: bold;
+        }
+    }
+    :last-child{
+       align-items:flex-end;
+    }
+
+    :nth-child(2){
+        align-items:center;
+    }
+
+    :nth-child(3){
+        align-items:center;
+    }
+}

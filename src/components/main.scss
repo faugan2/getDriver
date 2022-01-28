@@ -1,0 +1,40 @@
+.main{
+    margin-top:1rem;
+    >.main_info{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        margin-bottom: 1rem;
+
+        >h1{
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        > p{
+            font-size: 0.8rem;
+            font-weight:bold;
+        }
+    }
+    >.main_line{
+        display:flex;
+        width:100vw;
+        align-items:center;
+        justify-content:space-around;
+        margin-bottom: 1rem;
+        >button{
+        padding:1rem;
+            background-color:white;
+            margin:2px;
+            border:none;
+            width:150px;
+            height:150px;
+
+            > p{
+                font-size: 0.7rem;
+                font-weight: 600;
+            }
+        }
+}
+}

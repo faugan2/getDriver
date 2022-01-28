@@ -1,0 +1,29 @@
+.wallet{
+	background-color:whitesmoke;
+	min-height:100vh;
+	
+	.top_wallet{
+		display:flex;
+		align-items:center;
+		flex-direction:column;
+		
+		p:first-child{
+			font-size:2.2rem;
+		}
+	}
+	
+	.wallet_money{
+		display:flex;
+		align-items:center;
+		justify-content:space-between;
+		padding:1rem 0.5rem;
+		background-color:white;
+		margin:1rem;
+		
+		div{
+			display:flex;
+			align-items:center;
+		}
+	}
+}
+

@@ -1,0 +1,41 @@
+.admin{
+    display:flex;
+    background-color:whitesmoke;
+    min-height:100vh;
+    >.left{
+        width:160px;
+        display:flex;
+        flex-direction:column;
+        padding:1rem;
+        >button{
+            margin-bottom: 1rem;
+            padding:1rem;
+            background-color:white;
+            border:1px solid silver;
+            border-radius: 5px;
+            display:flex;
+            align-items:center;
+            gap:0.5rem;
+            width:150px;
+            cursor:pointer;
+           
+
+        }
+
+        >button:hover{
+            opacity:0.6;
+        }
+
+        >button.active{
+            border:2px solid rgba(100,0,200,1);
+            font-weight: bold;
+            color:rgba(100,0,200,1);
+        }
+    }
+
+    > .right{
+        padding:1rem;
+       
+        flex:1;
+    }
+}

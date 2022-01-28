@@ -1,0 +1,17 @@
+.headerback{
+	background-color:#3f51b5;
+	height:60px;
+	color:white;
+	display:flex;
+	align-items:center;
+	font-size:1rem;
+	font-weight:bold;
+	
+	button{
+		margin-right:1rem;
+		border:none;
+		outline:none;
+		background-color:transparent;
+		color:white;
+	}
+}

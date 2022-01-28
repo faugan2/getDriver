@@ -1,0 +1,72 @@
+.recherche{
+    background-color:whitesmoke;
+
+    >.recherche_body{
+       
+
+        >.info{
+            padding:1rem;
+            font-size:0.8rem;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:0.5rem;
+            
+            >p{
+                text-align:center;
+            }
+
+            >button{
+                padding:1rem;
+                width: 150px;
+                border:1px solid silver;
+                border-radius: 5px;
+                background-color:white;
+                font-size: 0.8rem;
+                font-weight: bold;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+            }
+        }
+    }
+}
+
+.course{
+    position:fixed;
+    bottom:0;
+    background-color:white;
+    width:100%;
+    padding:1rem;
+
+    >.top{
+        display:flex;
+        align-items:center;
+    }
+
+    >.bottom{
+        margin-top:0.5rem;
+        >div{
+            flex:1;
+            display:flex;
+            flex-direction:column;
+    
+            :first-child{
+                font-weight: bold;
+            }
+        }
+        :last-child{
+           >p{
+               text-align:center;
+           }
+        }
+    
+        :nth-child(2){
+            align-items:center;
+        }
+    
+        :nth-child(3){
+            align-items:center;
+        }
+    }
+}

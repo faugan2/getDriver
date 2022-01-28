@@ -1,0 +1,76 @@
+.clients{
+    >.head{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        border-bottom: 1px solid silver;
+        padding-bottom: 0.5rem;
+        >.search{
+            width:300px;
+            display:flex;
+            align-items:center;
+            background-color:white;
+
+            >input{
+                width:250px;
+                padding:0.6rem;
+                border:none;
+                outline:none;
+            }
+        }
+        >.actions{
+            width:200px;
+            
+            display:flex;
+            align-items:center;
+            justify-content:flex-end;
+
+            >button{
+                display:flex;
+                align-items:center;
+                padding:0.6rem;
+                border:1px solid silver;
+                background-color:white;
+                font-size:0.8rem;
+                font-weight: bold;
+                border-radius:5px;
+                cursor:pointer;
+
+                
+            }
+
+            >button:hover{
+                opacity:0.6;
+            }
+            
+        }
+    }
+
+    >.body{
+        margin-top:1rem;
+
+        >table{
+            font-size:0.8rem;
+            
+        }
+    }
+}
+
+.table_actions{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0.5rem;
+    >button{
+        border:none;
+        background-color:white;
+        width:1.5rem;
+        height:1.5rem;
+        border-radius: 50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor: pointer;
+
+    }
+}
