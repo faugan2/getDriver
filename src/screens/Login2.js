@@ -2,6 +2,8 @@ import "./login2.scss";
 import ReactCountryFlag from "react-country-flag"
 import {useState,useEffect} from "react";
 import codes from 'country-calling-code';
+import Modal from "../components/admin/Modal";
+import LoginPilote from "../components/LoginPilote";
 
 const Login=()=>{
     const [pays,set_pays]=useState([])
@@ -22,6 +24,11 @@ const Login=()=>{
     useEffect(()=>{
         set_pays(codes);
     },[codes]);
+
+    const [open,set_open]=useState(false);
+    const close_modal=()=>{
+        set_open(false);
+    }
     return(
         <div className="login2">
            
@@ -66,6 +73,13 @@ const Login=()=>{
                 <div className="line2">
                     <button>Continuez</button>
                 </div>
+
+                <div className="line">
+                        <p>
+                            Etes-vous un pilote ? 
+                            <button onClick={e=>set_open(true)}>Cliquez ici</button>
+                        </p>
+                </div>
             </div>
 
             <div className="footer">
@@ -74,6 +88,14 @@ const Login=()=>{
                     <p>Service Afrique International</p>
                 </div>
             </div>
+
+            {
+                open==true && <Modal 
+                    content={<LoginPilote />}
+                    open={true}
+                    click={close_modal}
+                />
+            }
         </div>
     );
 }

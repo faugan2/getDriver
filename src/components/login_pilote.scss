@@ -1,0 +1,45 @@
+.login_pilote{
+    font-size: 0.8rem;
+    >.head{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+
+        >p{
+            font-weight: bold;
+        }
+        
+    }
+
+    >.body{
+        >.line{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+
+            margin-top:1rem;
+
+            >label{
+                font-weight: bold;
+            }
+
+            >div{
+                border-bottom: 1px solid silver;
+                >input{
+                    border:none;
+                    outline:none;
+                }
+            }
+
+            >button{
+                padding:0.6rem;
+                width:120px;
+                font-weight: bold;
+                background-color:#3f51b5;
+                color:white;
+                border:none;
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 .login2{
-    background-color:whitesmoke;
+    background-color:#e8e8e8;
     min-height:100vh;
     position:relative;
 
@@ -55,10 +55,27 @@
                 >p{
                     font-size: 0.8rem;
                     font-weight: bold;
-                    
+                    padding:0.5rem;
                     width:50px;
                 }
                 
+            }
+
+            >p{
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                
+                margin-top: 2rem;
+                font-size: 0.8rem;
+
+                >button{
+                    background-color:#e8e8e8;
+                    border:none;
+                    outline:none;
+                    color:#3f51b5;
+                    padding:0.5rem;
+                }
             }
 
             
