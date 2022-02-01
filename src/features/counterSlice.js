@@ -16,6 +16,14 @@ const initialState = {
   distance:0,
   map:null,
   searchDestinationText:"",
+  tarifs:[],
+  publicites:[],
+  publicite:null,
+  courses:[],
+  adminPilote:null,
+  adminSoldeClient:[],
+  adminClient:null,
+  adminClients:[],
   
 };
 
@@ -73,14 +81,64 @@ export const counterSlice = createSlice({
   },
   setIcon:(state,action)=>{
     state.icon=action.payload;
-  }
-   
   },
- 
- 
+
+  setTarifs:(state,action)=>{
+    state.tarifs=action.payload;
+  },
+
+  setPublicites:(state,action)=>{
+    state.publicites=action.payload;
+  },
+  setPublicite:(state,action)=>{
+    state.publicite=action.payload;
+  },
+  setCourses:(state,action)=>{
+    state.courses=action.payload;
+  },
+  setAdminPilote:(state,action)=>{
+    state.adminPilote=action.payload;
+  },
+  setAdminSoldeClient:(state,action)=>{
+    state.adminSoldeClient=action.payload;
+  },
+  setAdminClient:(state,action)=>{
+    state.adminClient=action.payload;
+  },
+  setAdminClients:(state,action)=>{
+    state.adminClients=action.payload;
+  }
+
+   
+  
+
+},
 });
 
-export const {setIcon,setSearchDestinationText, setDestinationName,setDistance,setMaps, setTab,setDriver,setUsers,setMe,setCourse,setLoading,setType,setDepart,setDestination } = counterSlice.actions;
+export const {
+  setIcon,
+  setSearchDestinationText, 
+  setDestinationName,
+  setDistance,setMaps, 
+  setTab,
+  setDriver,
+  setUsers,
+  setMe,
+  setCourse,
+  setLoading,
+  setType,
+  setDepart,
+  setDestination,
+  setTarifs,
+  setPublicites,
+  setPublicite,
+  setCourses,
+  setAdminPilote,
+  setAdminSoldeClient,
+  setAdminClient,
+  setAdminClients
+
+} = counterSlice.actions;
 
 
 export const selectTab = (state) => state.counter.tab;
@@ -97,4 +155,13 @@ export const selectDistance=(state)=> state.counter.distance;
 export const selectDestinationName=(state)=> state.counter.destinationName;
 export const selectSearchDestinationText=(state)=> state.counter.searchDestinationText;
 export const selectIcon=(state)=> state.counter.icon;
+export const selectTarifs=(state)=> state.counter.tarifs;
+export const selectPublicites=(state)=> state.counter.publicites;
+export const selectPulicite=(state)=> state.counter.publicite;
+export const selectCourses=(state)=> state.counter.courses;
+export const selectAdminPilote=(state)=> state.counter.adminPilote;
+export const selectAdminSoldeClient=(state)=> state.counter.adminSoldeClient;
+export const selectAdminClient=(state)=> state.counter.adminClient;
+export const selectAdminClients=(state)=> state.counter.adminClients;
+
 export default counterSlice.reducer;

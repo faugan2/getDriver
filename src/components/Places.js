@@ -4,7 +4,8 @@ import { selectDepart, selectDestinationName, selectDistance, selectMap,
     selectSearchDestinationText, setDestination, setDestinationName,
     selectType,
     setCourse,
-    selectIcon
+    selectIcon,
+    selectTarifs
 
 } from "../features/counterSlice";
 import "./places.scss";
@@ -175,17 +176,33 @@ const Places=()=>{
         set_origin(depart);
     },[depart]);
 
-    const [deplacement,set_deplacement]=useState(300);
+    const [deplacement,set_deplacement]=useState(0);
     const [ht,set_ht]=useState(0);
     const [total,set_total]=useState(0);
+    const [course,set_course]=useState(0);
+
+    const tarifs=useSelector(selectTarifs);
+
+    useEffect(()=>{
+        console.log("le tarfis est ",tarifs,"pour ",type);
+        if(type==null) return;
+        const index=type.index;
+        const res=tarifs.filter((tarif)=>{
+            return tarif.type==index;
+        })
+        if(res.length==0) return;
+        const res2=res[0];
+        set_deplacement(res2.frais_fixe);
+        set_course(res2.course);
+    },[tarifs,type]);
 
     useEffect(()=>{
         if(distance==0) return;
-        const res=distance*150;
+        const res=distance*course;
         set_ht(res.toFixed(2));
-        set_total((res+deplacement).toFixed());
+        set_total((parseFloat(res)+parseFloat(deplacement)).toFixed(2));
 
-    },[distance]);
+    },[distance,course,deplacement]);
 
     const lancer_recherche=async (e)=>{
         
@@ -299,7 +316,7 @@ const Places=()=>{
 
                <div className="prix_detail">
                    <p>Course</p>
-                   <p>{distance} x 100</p>
+                   <p>{distance} x {course}</p>
                    <p>{ht} CFA</p>
                </div>
 

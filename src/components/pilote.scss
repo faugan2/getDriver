@@ -1,0 +1,16 @@
+.pilote{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-size:0.7rem;
+    
+    >.nom{
+        font-weight: bold;
+    }
+
+    >.type{
+        color:gray;
+        font-size:0.7rem;
+    }
+}

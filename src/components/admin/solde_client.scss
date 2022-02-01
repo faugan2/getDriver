@@ -1,0 +1,73 @@
+.solde_client{
+    font-size: 0.8rem;
+    >.top{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        >p:first-child{
+            font-size: 2rem;
+            border:1px solid green;
+            width:80px;
+            height:80px;
+            border-radius: 50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        >p:last-child{
+            font-weight: bold;
+            font-size:1rem;
+        }
+
+        border-bottom: 1px solid silver;
+        padding-bottom: 1rem;
+    }
+
+    >.bottom{
+        
+        margin-top: 1rem;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+
+        >.line{
+            display:flex;
+            flex-direction:column;
+            margin-top: 1rem;
+            >label{
+                font-weight: bold;
+            }
+            >button{
+                padding:0.5rem;
+                width:100px;
+                font-weight: bold;
+                font-size:0.8rem;
+            }
+            div{
+                display:flex;
+                align-items:center;
+                background-color:whitesmoke;
+                justify-content:center;
+                
+                >input{
+                    border:none;
+                    outline:none;
+                    background-color:whitesmoke;
+                    padding:0.5rem;
+                }
+            }
+            
+        }
+    }
+
+    >.footer{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin-top: 2rem;
+        font-weight: bold;
+    }
+}

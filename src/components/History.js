@@ -15,6 +15,7 @@ import {setCourse} from "../features/counterSlice";
 import {bus,vehicule_leger,vehicule_lourd,taxi} from "./img";
 
 import "./historique.scss";
+import Course from './Course';
 const History = () => {
     const styles=useStyles();
 	const history=useHistory();
@@ -87,92 +88,29 @@ const History = () => {
 				   d=d[1]+" "+d[2]+" "+d[3];
 				   
 				   console.log("the date is ",str_date)
-				  
-				   return(
-						<div key={key} className={styles.course} onClick={e=>{
-							go_to_recherche_pilote(e,key,destination,destination_name,user,price,date,categorie,origin,type,distance,search)
-							}}>
-						
-							<button style={{
-								position:"absolute",
-								right:"0rem",
-								top:"0rem",
-								
-								height:"1.5rem",
-								border:"none",
-								background:"none",
-								color:"gray",
-								display:"flex",
-								
-							}}
-							onClick={e => remove_course(e,key)}
-							>
-								<p style={{color:"gray",fontSize:"0.7rem",display:"none"}} id={`payienter_${key}`}>patientez...</p>
-								<DeleteIcon style={{fontSize:"1rem"}} />
-								
-							</button>
-							<div className={styles.course_top}>
-								<div style={{
-									display:"flex",
-									flexDirection:"column",
-									justifyContent:"center",
-									alignItems:"center",
-								}}>
-									
-								{type.index==1 && <img src={taxi} style={{width:30,height:30,resize:"contain",borderRadius:"50%"}}/>} 
-								{type.index==2 && <img src={vehicule_leger} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>} 
-								{type.index==3 && <img src={vehicule_lourd} style={{width:30,height:30,resize:"contain",borderRadius:"50%"}}/>} 
-								{type.index==4 &&<img src={bus} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>} 
-									
-								</div>
-								<div style={{marginLeft:"0.5rem"}}>
-									<p style={{
-										fontSize:"0.7rem",
-										fontWeight:"bold",
-									}}>{destination_name}
-									</p>
-									<p style={{
-										fontSize:"0.7rem",
-										color:"gray",
-									}}>
-										{type.name}
-									</p>
 
-									
-								</div>
-							</div>
-							
-							
-							
-							<div style={{
-								display:"flex",
-								justifyContent:"space-between",
-								alignItmes:"center",
-								fontSize: "0.7rem"
-								}}
-								className="historique_bottom"
-								>
-								<div>
-									<p>Date</p>
-									<p>{d}</p>
-								</div>
-								<div>
-									<p>Km</p>
-									<p>{distance}</p>
-								</div>
-								<div>
-									<p>Prix</p>
-									<p>{price.total} CFA</p>
-								</div>
-								<div>
-									<p style={{textAlign:"center"}}>Etat</p>
-									<p>En cours</p>
-								</div>
-							</div>
-							
-							
-						</div>
-				   );
+				   return <Course 
+				   can_delete={true}
+				   	key={key}
+					destination={destination}
+					destination_name={destination_name}
+					user={user}
+					price={price}
+					date={date}
+					categorie={categorie}
+					origin={origin}
+					type={type}
+					distance={distance}
+					str_date={str_date}
+					search={search}
+					d={d}
+					remove_course={e=>remove_course(e,key)}
+					go_to_recherche_pilote={e=>{
+						go_to_recherche_pilote(e,key,destination,destination_name,user,price,date,categorie,origin,type,distance,search)
+					}}
+				   />
+				  
+				   
 			   })
 		   }
            
@@ -225,6 +163,11 @@ const useStyles = makeStyles({
 		padding:"1rem",
 		position:"relative",
 		marginBottom:"1rem",
+
+		"&:last-child":{
+			
+			marginBottom:"4rem"
+		}
 	},
 	
 	course_top:{

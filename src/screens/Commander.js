@@ -6,7 +6,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import map from "../components/img/map.png";
 import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux";
-import {selectType, setCourse,setDepart,setDestination,selectDepart,selectDestination, setSearchDestinationText} from "../features/counterSlice";
+import {selectSearchDestinationText,selectType, setCourse,setDepart,setDestination,selectDepart,selectDestination, setSearchDestinationText} from "../features/counterSlice";
 import { useHistory } from 'react-router';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import RoomIcon from '@material-ui/icons/Room';
@@ -162,6 +162,36 @@ const Commander=(props)=>{
 		//initService(dep);
 	  },[])
 
+	  const search=useSelector(selectSearchDestinationText)
+	  useEffect(()=>{
+		  let id_inter=0;
+		  
+		if(search=="" && latitude!=0 && longitude!=0){
+			const zone=document.querySelector("#zone_destination");
+			let opacity=1;
+			id_inter=setInterval(()=>{
+				if(opacity==1){
+					opacity=0.5;
+				}else{
+					opacity=1;
+				}
+				if(zone==null) {
+					return;
+				}
+				zone.style.opacity=opacity;
+			},500);
+			
+		}else{
+			console.log("going to clear intervval")
+			const zone2=document.querySelector("#zone_destination");
+			if(zone2==null){
+				return;
+			}
+			zone2.style.opacity=1;
+			clearInterval(id_inter);
+		}
+	  },[search,latitude,longitude]);
+
 	return(
 		<div className="commander" style={{position:"relative"}}>
 			{(longitude==0 && latitude==0) && <HeaderBack title="Patientez..." />}
@@ -212,8 +242,12 @@ const Commander=(props)=>{
 									display:"flex",
 									alignItems:"center",
 									borderRadius:"5px",
-									}}>
-									<RoomIcon style={{fontSize:"1.2rem",color:"gray"}} />
+									
+									
+									}}
+									
+									>
+									<RoomIcon style={{fontSize:"1.2rem",color:"gray"}}  id="zone_destination"/>
 									<input 
 									value={search_destination}
 									onChange={e=>{

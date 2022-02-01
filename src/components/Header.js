@@ -152,7 +152,7 @@ export default function ProminentAppBar() {
 
         {
           me?.type==2 &&  <div className={classes.bottom} id="top_btns">
-          <button onClick={(e)=>{handle_set_tab(0)}}>Passagers</button>
+          <button onClick={(e)=>{handle_set_tab(0)}}>Courses</button>
           <button onClick={(e)=>{handle_set_tab(1)}}>Historique</button>
           <button onClick={(e)=>{handle_set_tab(2)}}>Contacts</button>
        </div>

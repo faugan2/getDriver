@@ -6,10 +6,13 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Modal from "./Modal";
 import AjouterClient from "./AjouterClient";
-
+import { setAdminSoldeClient,selectAdminSoldeClient, setAdminClient, setAdminClients } from "../../features/counterSlice";
+import {useDispatch,useSelector} from "react-redux";
+import SoldeClient from "./SoldeClient";
 const Clients=()=>{
     const [data,setData]=useState([]);
     const [data_show,set_data_show]=useState([]);
+    const dispatch= useDispatch();
     useEffect(()=>{
         db.collection("users").where("type","==",1).onSnapshot((snap)=>{
             const d=[];
@@ -25,6 +28,7 @@ const Clients=()=>{
                 d.push(data);
             })
             setData(d);
+            dispatch(setAdminClients(d))
             console.log(d);
         })
     },[]);
@@ -33,9 +37,7 @@ const Clients=()=>{
     const open_add_modal=()=>{
         set_modal_add(true);
     }
-    const close_modal=()=>{
-        set_modal_add(false);
-    }
+   
 
     const delete_user=async(id)=>{
         await db.collection("users").doc(id).delete();
@@ -62,6 +64,66 @@ const Clients=()=>{
         set_data_show(res);
     },[search])
 
+    useEffect(()=>{
+        
+        db.collection("argent").onSnapshot((snap)=>{
+            const d=[];
+            snap.docs.map((doc)=>{
+                const key=doc.id;
+                const data=doc.data();
+                data.key=key;
+                d.push(data);
+            })
+
+            dispatch(setAdminSoldeClient(d));
+        })
+    },[])
+
+    const soldes=useSelector(selectAdminSoldeClient);
+
+    useEffect(()=>{
+        if(data_show.length==0 || soldes.length==0) return;
+        setTimeout(()=>{
+            const tds=document.querySelectorAll(".solde");
+        for(var i=0; i<tds.length; i++){
+            const td=tds[i];
+            const key=td.dataset.key;
+            const email=td.dataset.email
+
+            set_solde(soldes,key,email,td);
+            
+        }
+        },5000);
+        
+    },[data_show,soldes])
+
+    const set_solde=(soldes,key,email,td)=>{
+        const res=soldes.filter((solde)=>{
+            return solde.email==email;
+        });
+        var total=0;
+        for(var j=0; j<res.length; j++){
+            let t=parseFloat(res[j].montant);
+            total+=t;
+            console.log(t);
+        }
+        td.innerHTML=total;
+    }
+
+    const solde_client=(e)=>{
+        const el=e.target;
+        const key=el.dataset.key;
+        const email=el.dataset.email;
+        const type=el.dataset.type;
+        dispatch(setAdminClient(key))
+        set_open_solde(true);
+    }
+
+    const [open_solde,set_open_solde]=useState(false);
+    const close_modal=()=>{
+        set_open_solde(false);
+    }
+
     return (
         <div className="clients">
             <div className="head">
@@ -84,6 +146,7 @@ const Clients=()=>{
                             <th width="35%" style={{textAlign:"left"}}>Nom</th>
                             <th width="35%" style={{textAlign:"left"}}>Email</th>
                             <th width="10%">Solde</th>
+                            <th width="10%">Poto</th>
                             <th width="10%">Actions</th>
                         </tr>
                     </thead>
@@ -101,7 +164,16 @@ const Clients=()=>{
                                         <td align="center">{date}</td>
                                         <td>{nom}</td>
                                         <td>{user.email}</td>
-                                        <td align="center">{user.solde}</td>
+                                        <td 
+                                        align="center" 
+                                        className="solde" 
+                                        data-key={user.key} 
+                                        data-email={user.email}
+                                        data-type={user.type}
+                                        onClick={solde_client}
+                                        style={{cursor:"pointer"}}
+                                        ></td>
+                                        <td></td>
                                         <td align="center">
                                             <div className="table_actions">
                                                 <button onClick={delete_user.bind(this,user.key)}>
@@ -122,6 +194,13 @@ const Clients=()=>{
                 click={close_modal}
                 open={true} 
                 content={<AjouterClient />} 
+            />}
+
+            {open_solde==true && <Modal 
+                width={30}
+                click={close_modal}
+                open={true} 
+                content={<SoldeClient />} 
             />}
         </div>
     )

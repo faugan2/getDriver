@@ -8,7 +8,7 @@ import logo from "../components/img/logo.jpg"
 import {db} from "../firebase_file";
 
 import {useDispatch} from "react-redux";
-import {setUsers,setLoading} from "../features/counterSlice";
+import {setUsers,setLoading, setTarifs, setPublicites, setCourses} from "../features/counterSlice";
 
 const Splash = () => {
     const styles=useStyles();
@@ -31,9 +31,10 @@ const Splash = () => {
 
     const load_users=async ()=>{
 		set_loading(true);
+       
 		
         const ref=db.collection("users");
-        ref.onSnapshot((snap)=>{
+        ref.onSnapshot(async (snap)=>{
             const users=[];
            snap.docs.map((user)=>{
             const key=user.id;
@@ -45,6 +46,10 @@ const Splash = () => {
            })
            dispatch(setUsers(users));
 		   set_loading(false);
+
+           await load_tarifs();
+           await load_pub();
+           await load_courses();
            //send to redux;
         })
     }
@@ -53,6 +58,53 @@ const Splash = () => {
 	useEffect(()=>{
 		dispatch(setLoading(loading));
 	},[loading])
+
+    const load_tarifs=async ()=>{
+        db.collection("tarifs").onSnapshot((snap)=>{
+            const d=[];
+            snap.docs.map((doc)=>{
+                const key=doc.id;
+                const data=doc.data();
+                data.key=key;
+                d.push(data)
+            })
+            dispatch(setTarifs(d));
+            console.log("traif=",d);
+        })
+    }
+
+    const load_pub=async ()=>{
+        db.collection("publicites").onSnapshot((snap)=>{
+            const d=[];
+            snap.docs.map((doc)=>{
+                const key=doc.id;
+               
+              
+
+                const timestamp=doc.data().date?.seconds*1000;
+			    const dt=new Date(timestamp).toUTCString();
+			    const t={key:doc.id, ...doc.data(),timestamp,str_date:dt}
+			
+
+                d.push(t)
+            })
+            dispatch(setPublicites(d));
+        })
+    }
+
+    const load_courses=async ()=>{
+        db.collection("courses").onSnapshot((snap)=>{
+            const d=[];
+            snap.docs.map((doc)=>{
+                const key=doc.id;
+                const data=doc.data();
+                data.key=key;
+                d.push(data);
+            })
+
+            dispatch(setCourses(d))
+        })
+    }
     return (
         <div className={styles.container}>
              <div style={{width:100,height:100}}>

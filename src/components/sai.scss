@@ -1,0 +1,41 @@
+.sai{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-size:0.8rem;
+
+    >.nom{
+        font-weight: bold;
+        border-bottom: 1px solid silver;
+        margin-bottom: 1rem;
+       padding:0.5rem;
+    }
+
+    >.adresse{
+        text-align:center;
+        margin-bottom: 0.5rem;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+    }
+
+    >.telephone{
+        text-align:center;
+        margin-bottom:0.5rem;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+    }
+
+    >.email{
+        text-align:center;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        
+    }
+}

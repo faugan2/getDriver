@@ -7,6 +7,9 @@ import firebase from "firebase";
 import {auth,db, storage} from "../../firebase_file";
 import PhotoIcon from '@material-ui/icons/Photo';
 import SettingsIcon from '@material-ui/icons/Settings';
+import {useSelector,useDispatch} from "react-redux";
+import {selectAdminPilote} from "../../features/counterSlice";
+
 const AjouterClient= (e)=>{
 
     const [nom,set_nom]=useState("");
@@ -16,6 +19,19 @@ const AjouterClient= (e)=>{
     const [type,set_type]=useState("0");
     const [photo,set_photo]=useState(null);
     const ref=useRef(null);
+    const [url,set_url]=useState(null);
+
+    const pilote=useSelector(selectAdminPilote);
+
+    useEffect(()=>{
+        if(pilote==null) return;
+        set_nom(pilote.nom);
+        set_type(pilote.type);
+        set_pw(pilote.password);
+        set_email(pilote.email);
+        set_url(pilote.url);
+
+    },[pilote]);
 
     const ajouter_client=async (e)=>{
         set_alerte("");
@@ -37,78 +53,73 @@ const AjouterClient= (e)=>{
         }
 
         const files=ref.current.files;
-        if(files.length==0){
-            alert("Aucune photo n'est ajoutée");
-            return;
-        }
-
-        const file=files[0];
-        const filename=file.name;
-        
-       
-
         const btn=e.target;
         btn.disabled=true;
         btn.innerHTML="Patientez...";
 
-        const ref_storage=storage.ref("images/"+filename);
-        ref_storage.put(file).then(()=>{
-            ref_storage.getDownloadURL().then((url)=>{
-                const user={
-                    url,
-                    nom,
-                    email
-                    ,password:pw,
-                    type:2,
-                    date:firebase.firestore.FieldValue.serverTimestamp(),
-                    pilote:type
-                }
+        if(files.length==0){
+            const user={
+                nom,
+                email
+                ,password:pw,
+                type:2,
+                pilote:type
+            }
 
-                console.log("the objct is user",user)
-                auth.createUserWithEmailAndPassword(email,pw).then(async ()=>{
-                await db.collection("users").add(user);
-                btn.disabled=false;
-                    btn.innerHTML="Ajouter";
-                    set_nom("");
-                    set_email("");
-                    set_pw("");
-                    set_alerte("Pilote bien ajouté");
-                    auth.signOut();
+            db.collection("users").doc(pilote.key).update(user,{merge:true}).then(()=>{
+                    btn.innerHTML="Modifier";
+                   
+                    set_alerte("Pilote bien modifié");
+            }).catch((err)=>{
+                    btn.disabled=false;
+                    btn.innerHTML="Modifier";
+                    set_alerte(err.message);
+            })
+        }else{
+            const file=files[0];
+            const filename=file.name;
+            const ref_storage=storage.ref("images/"+filename);
 
+            ref_storage.put(file).then(()=>{
+                ref_storage.getDownloadURL().then(async (url)=>{
+                    const user={
+                        url,
+                        nom,
+                        email
+                        ,password:pw,
+                        type:2,
+                        pilote:type
+                    }
+
+                    set_url(url);
+
+                    await db.collection("users").doc(pilote.key).update(user,{merge:true});
+                    btn.innerHTML="Modifier";
+                    set_alerte("Pilote bien modifié");
+                    btn.disabled=false;
+                    
                 }).catch((err)=>{
                     btn.disabled=false;
-                    btn.innerHTML="Ajouter";
+                    btn.innerHTML="Modifier";
                     set_alerte(err.message);
                 })
             }).catch((err)=>{
                 btn.disabled=false;
-                btn.innerHTML="Ajouter";
+                btn.innerHTML="Modifier";
                 set_alerte(err.message);
             })
-        }).catch((err)=>{
-            btn.disabled=false;
-            btn.innerHTML="Ajouter";
-            set_alerte(err.message);
-        })
+        }
+
+       
+        
+    
+      
+
+       
+       
 
 
-        /*const user={nom,email,password:pw,type:2,date:firebase.firestore.FieldValue.serverTimestamp(),pilote:type}
-        auth.createUserWithEmailAndPassword(email,pw).then(async ()=>{
-           await db.collection("users").add(user);
-           btn.disabled=false;
-            btn.innerHTML="Ajouter";
-            set_nom("");
-            set_email("");
-            set_pw("");
-            set_alerte("Pilote bien ajouté");
-            auth.signOut();
-
-        }).catch((err)=>{
-            btn.disabled=false;
-            btn.innerHTML="Ajouter";
-            set_alerte(err.message);
-        })
-        */
+        
         
 
     }
@@ -155,6 +166,8 @@ const AjouterClient= (e)=>{
                     <PhotoIcon style={{color:"gray",fontSize:"1.2rem"}}/>
                     <input type="file"  ref={ref} accept="image/*" />
                 </div>
+
+                {url!=null && <img src={url} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>}
                 
             </div>
 
@@ -169,7 +182,7 @@ const AjouterClient= (e)=>{
             </div>
 
             <div className="line">
-                <button onClick={ajouter_client}>Ajouter</button>
+                <button onClick={ajouter_client}>Modifier</button>
             </div>
 
             <div className="line">

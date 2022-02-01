@@ -10,6 +10,10 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import {useState,useEffect} from "react";
 import CloseIcon from '@material-ui/icons/Close';
 import { bus, taxi, vehicule_leger, vehicule_lourd } from '../components/img';
+import { selectUsers } from '../features/counterSlice';
+import { useSelector } from 'react-redux';
+import Pilote from "../components/Pilote";
+
 const Recherche=()=>{
     const history=useHistory();
     const go_back = () => {
@@ -40,6 +44,37 @@ const Recherche=()=>{
 
     const [clone,set_clone]=useState(null);
     const [index,set_index]=useState(0);
+    
+    const users=useSelector(selectUsers);
+    const [pilotes,set_pilotes]=useState(users);
+    const [pilotes_show,set_pilotes_show]=useState(users)
+    const [search,set_search]=useState("");
+    useEffect(()=>{
+        const res=users.filter((user)=>{
+            if(index==0){
+                return user.type==2 && user.pilote!=undefined ;
+            }else{
+                return user.type==2 && user.pilote==index && user.pilote!=undefined;
+            }
+            
+        })
+        set_pilotes(res);
+        set_pilotes_show(res);
+
+    },[users,index]);
+
+    useEffect(()=>{
+        if(search==""){
+            set_pilotes_show(pilotes);
+            return;
+        }
+        const res=pilotes_show.filter((pilote)=>{
+            return pilote.nom.toLowerCase().indexOf(search.toLowerCase())>=0;
+        })
+
+        set_pilotes_show(res);
+    },[search])
+
     return(
         <div className="recherche">
             <div className="recherche_head">
@@ -49,7 +84,10 @@ const Recherche=()=>{
                     </button>
                     <div>
                         <div id="option">{clone}</div>
-                        <input type="text" placeholder="Rechercher..." autoFocus style={{fontSize:"0.8rem",color:"gray"}} />
+                        <input type="text" placeholder="Rechercher..." 
+                        autoFocus style={{fontSize:"0.8rem",color:"gray"}} 
+                        onChange={e=>set_search(e.target.value)}
+                        />
                         {index!=0 && <button style={{
                             border:"none",
                             outline:"none",
@@ -93,6 +131,20 @@ const Recherche=()=>{
                 </div>
             </div>
             <div className="recherche_body">
+                <div style={{
+                        minHeight:"60vh",
+                        display:"flex",
+                        alignItems:"flex-start",
+                        flexWrap:"wrap",
+                        gap:"1rem",
+                        padding:"0.5rem",
+                    }}>
+                {
+                    pilotes_show.map((pilote)=>{
+                        return <Pilote pilote={pilote} />
+                    })
+                }
+                </div>
                 
             </div>
         </div>

@@ -13,9 +13,11 @@ import Contacts from "../components/Contacts";
 import History from "../components/History";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useHistory } from 'react-router';
-import pub from "../components/img/pub.gif";
+
 import Main from "../components/Main";
-import { Loader } from "@googlemaps/js-api-loader"
+import { Loader } from "@googlemaps/js-api-loader";
+import Publicites from "../components/Publicites";
+
 const styles = {
     slide: {
       backgroundColor: 'whitesmoke',
@@ -120,27 +122,7 @@ const Home=()=>{
         <div style={{position:"relative",backgroundColor:"whitesmoke"}}>
 
            
-          <button style={{
-            background:"white",
-            width:"100%",
-           border:"none",
-           position:"fixed",
-           bottom:0,
-           zIndex:1,
-           padding:0,
-           margin:0,
-          }}
-           onClick={go_to_pub}
-          > 
-          
-              <img src={pub} style={{
-                width:"100%",
-                height:"50px",
-                objectFit:"cover",
-                margin:0,
-                padding:0,
-              }} />
-            </button>
+            <Publicites />
          
             <Header />
             <SwipeableViews enableMouseEvents index={index} onChangeIndex={handleChangeIndex}>
