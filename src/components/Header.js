@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {useSelector,useDispatch} from "react-redux";
-import {selectTab,setTab,selectUsers, setMe,selectMe,selectLoading} from "../features/counterSlice";
+import {selectTab,setTab,selectUsers, setMe,selectMe,selectLoading, setCode, setEtape, setLogin} from "../features/counterSlice";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -56,6 +56,9 @@ export default function ProminentAppBar() {
 
   const logout=()=>{
     auth.signOut();
+    dispatch(setCode(null));
+    dispatch(setLogin(null));
+    dispatch(setEtape(1));
     history.replace("/");
   }
 
@@ -74,6 +77,7 @@ export default function ProminentAppBar() {
 
     const email=auth?.currentUser?.email;
     const res=u.filter((user)=>{
+      
       return user.email==email;
     })
     if(res.length>0){
@@ -90,7 +94,7 @@ export default function ProminentAppBar() {
     btns.forEach((btn)=>{
         btn.classList.remove("active");
     })
-    console.log("the real index is ",tab_index)
+    console.log("the real index is ",tab_index,me)
     btns[tab_index]?.classList.add("active");
   },[tab_index,me]);
 

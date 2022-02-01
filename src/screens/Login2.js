@@ -14,7 +14,7 @@ const Login=()=>{
 
     const dispatch= useDispatch();
     const generated_code=()=>{
-        if(code!=""){
+        if(code!=null){
             dispatch(setCode(null));
             setTimeout(()=>{
                 dispatch(setCode(code))
@@ -38,7 +38,7 @@ const Login=()=>{
     },[])
 
     useEffect(()=>{
-        if(code==null) return;
+        if(code==null || info==null) return;
         const telephone=info.telephone;
         const tel_code=info.tel_code;
         if(telephone=="" || telephone==undefined || telephone==null){

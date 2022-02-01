@@ -27,9 +27,9 @@ const Main=()=>{
     dispatch(setDepart(null));
     dispatch(setDestination(null));
    },[]);
+   
     return(
         <div className="main">
-
             <div className="main_info">
                 <h1>Bonjour {auth?.currentUser?.displayName},</h1>
                 <p>Quel type de pilote cherchez-vous ?</p>

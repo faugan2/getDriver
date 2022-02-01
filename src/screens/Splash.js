@@ -19,7 +19,7 @@ const Splash = () => {
         load_users();
         auth.onAuthStateChanged((user)=>{
             if(user==null){
-                history.replace("/login");
+                history.replace("/login2");
             }else{
                 const email=auth?.currentUser.email;
                 
