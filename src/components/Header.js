@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {useSelector,useDispatch} from "react-redux";
-import {selectTab,setTab,selectUsers, setMe,selectMe,selectLoading, setCode, setEtape, setLogin} from "../features/counterSlice";
+import {selectTab,setTab,selectUsers, setMe,selectMe,selectLoading, setCode, setEtape, setLogin, setOldLogin} from "../features/counterSlice";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -59,6 +59,7 @@ export default function ProminentAppBar() {
     dispatch(setCode(null));
     dispatch(setLogin(null));
     dispatch(setEtape(1));
+    dispatch(setOldLogin(null));
     history.replace("/");
   }
 

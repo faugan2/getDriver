@@ -5,7 +5,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import {useState,useEffect,useRef} from "react";
 import {storage,db,auth} from "../firebase_file";
 import {useSelector,useDispatch} from "react-redux";
-import {selectLogin} from "../features/counterSlice";
+import {selectLogin,selectCode, selectOldLogin} from "../features/counterSlice";
 import {useHistory} from "react-router";
 
 const LoginEtape3=()=>{
@@ -13,8 +13,10 @@ const LoginEtape3=()=>{
     const [url,set_url]=useState(null);
     const [nom,set_nom]=useState("");
     const info=useSelector(selectLogin);
+    const validation=useSelector(selectCode);
     const ref=useRef(null);
     const history=useHistory();
+    const old_login=useSelector(selectOldLogin);
 
     const pick_image=()=>{
         ref.current.click();
@@ -52,7 +54,7 @@ const LoginEtape3=()=>{
             const ref_storage=storage.ref("images/"+filename);
             ref_storage.put(file).then(()=>{
                 ref_storage.getDownloadURL().then((url)=>{
-                    const client={nom,url,...info}
+                    const client={nom,url,...info,validation}
                     
                     create_account(client,btn);
 
@@ -67,7 +69,7 @@ const LoginEtape3=()=>{
                 set_alerte(err.message);
             })
         }else{
-            const client={nom,...info}        
+            const client={nom,...info,validation}        
             create_account(client,btn);
         }
     }
@@ -94,14 +96,16 @@ const LoginEtape3=()=>{
             auth.createUserWithEmailAndPassword(email,password).then(()=>{
                 //insert user into database
                 db.collection("users").add(new_client).then(async ()=>{
-                    btn.disabled=false;
-                    btn.innerHTML="Terminer";
-                    console.log("All is OK");
+                    
 
                     await auth.currentUser.updateProfile({
                         displayName:client.nom,
                         photoURL:client.url
                     })
+
+                    btn.disabled=false;
+                    btn.innerHTML="Terminer";
+                    console.log("All is OK");
 
                     history.replace("/");
 
@@ -128,6 +132,9 @@ const LoginEtape3=()=>{
                         displayName:client.nom,
                         photoURL:client.url
                     })
+                    btn.disabled=false;
+                    btn.innerHTML="Terminer";
+                    
 
                     history.replace("/");
                 }).catch((err)=>{
@@ -147,6 +154,16 @@ const LoginEtape3=()=>{
         btn.innerHTML="Terminer";
         
     }
+
+    useEffect(()=>{
+        if(old_login==null) return;
+        const url=old_login.url;
+        if(url!=undefined){
+            set_url(url);
+        }
+
+        set_nom(old_login.nom);
+    },[old_login])
 
     return(
         <div className="login_etape3">

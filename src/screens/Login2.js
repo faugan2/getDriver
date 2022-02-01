@@ -3,9 +3,10 @@ import LoginFooter from "../components/LoginFooter";
 import LoginEtape1 from "../components/LoginEtape1";
 import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux";
-import { selectCode, selectEtape, selectLogin, setCode } from "../features/counterSlice";
+import { selectCode, selectEtape, selectLogin, setCode,setOldLogin } from "../features/counterSlice";
 import LoginEtape2 from "../components/LoginEtape2";
 import LoginEtape3 from "../components/LoginEtape3";
+import {db} from "../firebase_file";
 const Login=()=>{
     
     const etape=useSelector(selectEtape);
@@ -37,7 +38,7 @@ const Login=()=>{
         generated_code();
     },[])
 
-    useEffect(()=>{
+    useEffect(async ()=>{
         if(code==null || info==null) return;
         const telephone=info.telephone;
         const tel_code=info.tel_code;
@@ -49,7 +50,25 @@ const Login=()=>{
             return;
         }
 
-        console.log("going to send the smsm with",code);
+        //send sms
+
+        // get user old info
+        let c=info.code;
+        const email=(c+""+tel_code+""+telephone+"@"+c+".com").toLowerCase();
+
+         const snap=await db.collection("users")
+        .where("email","==",email)
+        .get();
+
+        if(snap.docs.length>0){
+            const doc=snap.docs[0];
+            const key=doc.id;
+            const data=doc.data();
+            data.key=key;
+            dispatch(setOldLogin(data));
+        }
+
+        console.log("going to send the smsm with",code,email);
 
     },[code,info]);
     
