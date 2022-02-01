@@ -25,6 +25,8 @@ import Direction from "./screens/Direction";
 import RecherchePilote from './screens/RecherchePilote';
 import Admin from "./screens/Admin";
 
+import Login2 from "./screens/Login2";
+
 function App() {
   return (
     <Router>
@@ -35,6 +37,10 @@ function App() {
 
           <Route path="/login" exact >
             <Login />
+          </Route>
+
+          <Route path="/login2" exact >
+            <Login2 />
           </Route>
 
           <Route path="/register" exact >

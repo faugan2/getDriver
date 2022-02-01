@@ -1,0 +1,108 @@
+.login2{
+    background-color:whitesmoke;
+    min-height:100vh;
+    position:relative;
+
+    >.head{
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        text-align:center;
+        padding:1rem;
+        >h1{
+            font-size:1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        >p{
+            font-size: 0.8rem;
+        }
+    }
+
+    >.body{
+        padding:1rem;
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        
+        >.line{
+           
+            width: 100%;
+            margin-bottom: 1rem;
+            
+            >div{
+                display:flex;
+                align-items:center;
+                background-color:white;
+                border-bottom:1px solid silver;
+                >select{
+                    flex:1;
+                    padding:0.5rem;
+                    border:none;
+                    outline:none;
+                    background-color:white;
+                    text-align:center;
+                    flex:3;
+                }
+
+                >input{
+                    outline:none;
+                    border:none;
+                    padding:0.5rem;
+                    text-align:center;
+                    flex:3
+                }
+
+                >p{
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                    
+                    width:50px;
+                }
+                
+            }
+
+            
+        }
+
+        .line2{
+            width: 100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            >button{
+                padding:1rem;
+                width:50%;
+                border:none;
+                background-color:white;
+                font-size: 0.8rem;
+                font-weight: bold;
+                cursor:pointer;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    >.footer{
+        position:fixed;
+        bottom:0;
+        background-color:white;
+        width:100%;
+        height:60px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
+        font-size: 0.8rem;
+
+        >div{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            >p:last-child{
+                color:gray;
+                font-size:0.7rem;
+            }
+        }
+    }
+}
