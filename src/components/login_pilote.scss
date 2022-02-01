@@ -8,6 +8,7 @@
 
         >p{
             font-weight: bold;
+            
         }
         
     }
@@ -22,13 +23,19 @@
 
             >label{
                 font-weight: bold;
+                color:rgba(0,0,0,0.5)
             }
 
             >div{
                 border-bottom: 1px solid silver;
+                display:flex;
+                
                 >input{
                     border:none;
                     outline:none;
+                    text-align:center;
+                    letter-spacing: 10px;
+                    width:150px;
                 }
             }
 
@@ -39,6 +46,7 @@
                 background-color:#3f51b5;
                 color:white;
                 border:none;
+                border-radius: 3px;
             }
         }
     }

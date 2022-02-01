@@ -14,7 +14,7 @@ const LoginPilote=()=>{
                 <div className="line">
                     <label>Code Pilote</label>
                     <div>
-                        <input type="text" autoFocus />
+                        <input type="tel" autoFocus maxLength={6}  />
                         <LockOpenIcon style={{color:"gray",fontSize:"1.2rem"}}/>
                     </div>
                 </div>
