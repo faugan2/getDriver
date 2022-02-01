@@ -24,6 +24,9 @@ const initialState = {
   adminSoldeClient:[],
   adminClient:null,
   adminClients:[],
+  etape:1,
+  code:null,
+  login:null,
   
 };
 
@@ -107,8 +110,16 @@ export const counterSlice = createSlice({
   },
   setAdminClients:(state,action)=>{
     state.adminClients=action.payload;
+  },
+  setEtape:(state,action)=>{
+    state.etape=action.payload;
+  },
+  setCode:(state,action)=>{
+    state.code=action.payload;
+  },
+  setLogin:(state,action)=>{
+    state.login=action.payload;
   }
-
    
   
 
@@ -136,7 +147,10 @@ export const {
   setAdminPilote,
   setAdminSoldeClient,
   setAdminClient,
-  setAdminClients
+  setAdminClients,
+  setEtape,
+  setCode,
+  setLogin,
 
 } = counterSlice.actions;
 
@@ -163,5 +177,8 @@ export const selectAdminPilote=(state)=> state.counter.adminPilote;
 export const selectAdminSoldeClient=(state)=> state.counter.adminSoldeClient;
 export const selectAdminClient=(state)=> state.counter.adminClient;
 export const selectAdminClients=(state)=> state.counter.adminClients;
+export const selectEtape=(state)=> state.counter.etape;
+export const selectCode=(state)=> state.counter.code;
+export const selectLogin=(state)=> state.counter.login;
 
 export default counterSlice.reducer;

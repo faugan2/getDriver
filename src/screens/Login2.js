@@ -1,101 +1,65 @@
 import "./login2.scss";
-import ReactCountryFlag from "react-country-flag"
+import LoginFooter from "../components/LoginFooter";
+import LoginEtape1 from "../components/LoginEtape1";
 import {useState,useEffect} from "react";
-import codes from 'country-calling-code';
-import Modal from "../components/admin/Modal";
-import LoginPilote from "../components/LoginPilote";
-
+import {useSelector,useDispatch} from "react-redux";
+import { selectCode, selectEtape, selectLogin, setCode } from "../features/counterSlice";
+import LoginEtape2 from "../components/LoginEtape2";
+import LoginEtape3 from "../components/LoginEtape3";
 const Login=()=>{
-    const [pays,set_pays]=useState([])
-    const [code,set_code]=useState("TG")
-    const [tel_code,set_tel_code]=useState("+228");
-    useEffect(()=>{
+    
+    const etape=useSelector(selectEtape);
+    const code=useSelector(selectCode);
+    const info=useSelector(selectLogin);
 
-        const res=codes.filter((item)=>{
-            return item.isoCode2==code;
-        })
-
-        console.log("the line is ",res);
-        if(res.length>0){
-            set_tel_code(res[0].countryCodes[0]);
+    const dispatch= useDispatch();
+    const generated_code=()=>{
+        if(code!=""){
+            dispatch(setCode(null));
+            setTimeout(()=>{
+                dispatch(setCode(code))
+                return;
+            },2000)
+            return;
         }
-    },[code])
+        
+        let c="";
+        for(var i=0; i<6; i++){
+            const n=Math.round(Math.random()*9);
+            c+=n;
+        }
+        
+        dispatch(setCode(c));
+        
+    }
 
     useEffect(()=>{
-        set_pays(codes);
-    },[codes]);
+        generated_code();
+    },[])
 
-    const [open,set_open]=useState(false);
-    const close_modal=()=>{
-        set_open(false);
-    }
+    useEffect(()=>{
+        if(code==null) return;
+        const telephone=info.telephone;
+        const tel_code=info.tel_code;
+        if(telephone=="" || telephone==undefined || telephone==null){
+            return;
+        }
+
+        if(tel_code=="" || tel_code==undefined || tel_code==null){
+            return;
+        }
+
+        console.log("going to send the smsm with",code);
+
+    },[code,info]);
+    
     return(
         <div className="login2">
-           
-            <div className="head">
-                <h1>Qui êtes-vous ?</h1>
-                <p>Veillez confirmer votre identité en quelques secondes</p>
-            </div>
-
-            <div className="body">
-                <div className="line">
-                    <div>
-                        <p>
-                        <ReactCountryFlag countryCode={code}
-                            style={{
-                                fontSize: '2em',
-                                lineHeight: '2em',
-                            }}
-                            svg
-                        />
-                        </p>
-                        <select onChange={e=>set_code(e.target.value)} value={code}>
-                            {
-                                pays.map((p)=>{
-                                    return(
-                                        <option key={p.isoCode2} value={p.isoCode2}>{p.country}</option>
-                                    )
-                                })
-                            }
-                        </select>
-                    </div>
-                    
-                </div>
-
-                <div className="line">
-                        
-                        <div>
-                            <p>+{tel_code}</p>
-                            <input type="tel"  />
-                        </div>
-                </div>
-
-                <div className="line2">
-                    <button>Continuez</button>
-                </div>
-
-                <div className="line">
-                        <p>
-                            Etes-vous un pilote ? 
-                            <button onClick={e=>set_open(true)}>Cliquez ici</button>
-                        </p>
-                </div>
-            </div>
-
-            <div className="footer">
-                <div>
-                    <p>From</p>
-                    <p>Service Afrique International</p>
-                </div>
-            </div>
-
-            {
-                open==true && <Modal 
-                    content={<LoginPilote />}
-                    open={true}
-                    click={close_modal}
-                />
-            }
+           {etape==1 && <LoginEtape1 />}
+           {etape==2 && <LoginEtape2  generated_code={generated_code} />}
+           {etape==3 && <LoginEtape3  />}
+           <LoginFooter />
+            
         </div>
     );
 }
