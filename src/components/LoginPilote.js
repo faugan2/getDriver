@@ -1,6 +1,6 @@
 import "./login_pilote.scss";
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import {useState,useEffect} from "react";
+import {useState,useEffect,useRef} from "react";
 import {db,auth} from "../firebase_file";
 import {useSelector,useDispatch} from "react-redux";
 import {setMe} from "../features/counterSlice";
@@ -77,6 +77,40 @@ const LoginPilote=({click})=>{
             set_alerte("");
         },3000)
     }
+
+    const ref=useRef(null);
+    useEffect(()=>{
+        if(ref.current==null) return;
+
+        ref.current.addEventListener("focus",focused);
+        ref.current.addEventListener("blur",blured);
+        return()=>{
+            if(ref.current!=null){
+                ref.current.removeEventListener("focus",focused);
+                ref.current.removeEventListener("blur",blured);
+            }
+            
+        }
+    },[ref])
+
+    const focused=()=>{
+        console.log("i am now focused")
+        document.querySelector("#footer").style.display="none";
+    }
+
+    const blured=()=>{
+        console.log("i am blured")
+        document.querySelector("#footer").style.display="block";
+    }
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            ref.current.focus();
+            focused();
+        },1000)
+    },[])
+
+
     return(
         <div className="login_pilote">
             <div className="head">
@@ -87,7 +121,9 @@ const LoginPilote=({click})=>{
                 <div className="line">
                     <label>Code Pilote</label>
                     <div>
-                        <input type="tel" autoFocus maxLength={6}  value={code} onChange={e=>set_code(e.target.value)}/>
+                        <input type="tel" autoFocus maxLength={6}  
+                        ref={ref}
+                        value={code} onChange={e=>set_code(e.target.value)}/>
                         <LockOpenIcon style={{color:"gray",fontSize:"1.2rem"}}/>
                     </div>
                 </div>
