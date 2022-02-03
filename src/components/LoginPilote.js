@@ -121,7 +121,7 @@ const LoginPilote=({click})=>{
                 <div className="line">
                     <label>Code Pilote</label>
                     <div>
-                        <input type="tel" autoFocus maxLength={6}  
+                        <input type="tel"  maxLength={6}  
                         ref={ref}
                         value={code} onChange={e=>set_code(e.target.value)}/>
                         <LockOpenIcon style={{color:"gray",fontSize:"1.2rem"}}/>
