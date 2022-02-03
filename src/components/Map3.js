@@ -37,6 +37,9 @@ function haversine_distance(mk1, mk2) {
 
       const [map,set_map]=useState(null);
       const [depart_marker,set_depart_marker]=useState(null);
+      const [destination_marker,set_destination_marker]=useState(null);
+      const [poly_center,set_poly_center]=useState(null);
+      const [poly_destination,set_poly_destination]=useState(null);
 
     useEffect(()=>{
 
@@ -75,7 +78,11 @@ function haversine_distance(mk1, mk2) {
            title:0
         });
         des_marker.setMap(m);
+        set_destination_marker(des_marker);
         m.setZoom(10);
+
+        set_poly_center(center);
+        set_poly_destination(destination);
 
         var line=new google.maps.Polyline({path:[center,destination],map:m});
 
@@ -92,7 +99,29 @@ function haversine_distance(mk1, mk2) {
     useEffect(()=>{
         dispatch(setMaps(map))
     },[map])
+
+    useEffect(()=>{
+        if(depart==null) return;
+        const google=window.google;
+        var geocoder  = new google.maps.Geocoder();
+        const lat=depart.lat;
+        const lng=depart.lng;
+        var latlng = new google.maps.LatLng(lat, lng);
+
+        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[1]) {
+                    console.log("Location: " + results[1].formatted_address);
+                }
+            }
+        });
+
+       // console.log("geocoder is",latlng);
+    },[depart])
    
+    const place_changed=async ()=>{
+        console.log("place changed");
+    }
 
 
     return(

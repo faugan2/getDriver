@@ -21,6 +21,8 @@ import Maps from "../components/Map";
 import Map2 from "../components/Map2";
 import Map3 from "../components/Map3";
 import Places from "../components/Places";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const Commander=(props)=>{
 	
@@ -76,21 +78,43 @@ const Commander=(props)=>{
 		
 	},[]);
 
+	const [alerte,set_alerte]=useState("Détection de votre position...");
 	useEffect(()=>{
 		const google=window.google ;
 		console.log("je sui sgoogle",google);
+		dispatch(setDepart(null));
 		navigator.geolocation.getCurrentPosition(function(position) {
-			console.log("Latitude is :", position.coords.latitude);
-			console.log("Longitude is :", position.coords.longitude);
+			console.log("position",position);
 			const objet={lat:position.coords.latitude,lng:position.coords.longitude};
 			dispatch(setDepart(objet));
 			set_longitude(position.coords.latitude);
 			set_latitude(position.coords.longitude)
 			set_arrive(true);
 		  },
+
+		  showError
 		 
 		  );
 	},[])
+
+	
+
+	function showError(error) {
+		switch(error.code) {
+		  case error.PERMISSION_DENIED:
+			set_alerte("User denied the request for Geolocation.")
+			break;
+		  case error.POSITION_UNAVAILABLE:
+			set_alerte("Location information is unavailable.")
+			break;
+		  case error.TIMEOUT:
+			set_alerte("The request to get user location timed out.")
+			break;
+		  case error.UNKNOWN_ERROR:
+			set_alerte("An unknown error occurred.")
+			break;
+		}
+	  }
 
 	useEffect(()=>{
 		if(t==null) return;
@@ -201,7 +225,11 @@ const Commander=(props)=>{
 			<div className="commander_body">
 				{
 					(longitude==0 && latitude==0)? 
-					<p style={{textAlign:"center",fontSize:"0.8rem",padding:"1rem"}}>Détection de votre position...</p>:
+					<div style={{backgroundColor:"#e8e8e8",display:"flex",justifyContent:"center",alignItems:"center",padding:"1rem",gap:"0.5rem"}}>
+							<CircularProgress style={{color:"gray",fontSize:"1.2rem"}} size={15} />
+							<p style={{textAlign:"center",fontSize:"0.8rem",margin:0}}>{alerte}</p>
+					</div>
+					:
 					<div className="maps" style={{position:"relative"}}>
 						<div><Map3 /></div>
 						<div><Places /></div>
