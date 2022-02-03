@@ -132,8 +132,8 @@ const Splash = () => {
              <div style={{width:100,height:100}}>
                <img src={logo} style={{width:"100%"}}/>
              </div>
-            <CircularProgress color="secondary" />
-            <p>Chargement...</p>
+            <CircularProgress style={{color:"#3f51b5"}} size={15} />
+            <p style={{fontSize:"0.8rem",fontWeight:"bold"}}>Chargement...</p>
         </div>
     )
 }
@@ -144,13 +144,13 @@ export default Splash
 const useStyles = makeStyles((theme) => ({
 
     container:{
-        backgroundColor:"white",
+        backgroundColor:"#e8e8e8",
         display:"flex",
         height:"100vh",
         justifyContent:"center",
         alignItems:"center",
         flexDirection:"column",
-        color:"gray",
+        color:"black",
     },
 
     root: {

@@ -137,7 +137,7 @@ const LoginEtape3=()=>{
                     btn.innerHTML="Terminer";
                     
 
-                    history.replace("/");
+                    history.replace("/main");
                 }).catch((err)=>{
                     btn.disabled=false;
                     btn.innerHTML="Terminer";
@@ -151,8 +151,7 @@ const LoginEtape3=()=>{
             })
         }
 
-        btn.disabled=false;
-        btn.innerHTML="Terminer";
+        
         
     }
 

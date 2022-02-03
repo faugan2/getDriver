@@ -17,6 +17,7 @@ import { useHistory } from 'react-router';
 import Main from "../components/Main";
 import { Loader } from "@googlemaps/js-api-loader";
 import Publicites from "../components/Publicites";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = {
     slide: {
@@ -136,7 +137,23 @@ const Home=()=>{
                 <div style={Object.assign({}, styles.slide, styles.slide1,{height:h})} className="slide" id="slide1">
                     {me?.type==1 && <Main />}
                     {me?.type==2 &&  <Passengers /> }
-
+                    {
+                        me==null && 
+                            <div style={{
+                                display:"flex",
+                                flexDirection:"column",
+                                alignItems:"center",
+                                justifyContent:"center",
+                                padding:"1rem",
+                                width:"100vw",
+                            }}>
+                             <CircularProgress style={{color:"#3f51b5"}} size={15} />
+                             <p style={{
+                                 fontSize:"0.8rem",
+                                 fontWeight:"bold",
+                             }}>Chargement...</p>
+                            </div>
+                    }
                    
                     
                 </div>
