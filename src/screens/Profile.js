@@ -97,8 +97,16 @@ const Profile=()=>{
 	}
 
 	useEffect(()=>{
-		console.log("all courese are",courses)
+		const res=courses.filter((item)=>{
+			return item.user==me.email;
+		})
+
+		set_encours(res.length);
 	},[courses])
+
+	useEffect(()=>{
+		set_total(encours+termine);
+	},[encours,termine])
 	return(
 		<div className="profile">
 			<HeaderBack title="Mon Profile" />
