@@ -7,6 +7,7 @@ import {storage,db,auth} from "../firebase_file";
 import {useSelector,useDispatch} from "react-redux";
 import {selectLogin,selectCode, selectOldLogin} from "../features/counterSlice";
 import {useHistory} from "react-router";
+import firebase from "firebase";
 
 const LoginEtape3=()=>{
     const [alerte,set_alerte]=useState("");
@@ -84,7 +85,7 @@ const LoginEtape3=()=>{
         const email=(code+""+tel_code+""+telephone+"@"+code+".com").toLowerCase();
         const password=tel_code+""+telephone;
 
-        const new_client={...client,email,password,type:1};
+        const new_client={...client,email,password,type:1,date:firebase.firestore.FieldValue.serverTimestamp()};
         const snap=await db.collection("users")
         .where("email","==",email)
         .where("password","==",password)

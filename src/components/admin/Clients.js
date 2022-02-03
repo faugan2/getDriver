@@ -9,6 +9,9 @@ import AjouterClient from "./AjouterClient";
 import { setAdminSoldeClient,selectAdminSoldeClient, setAdminClient, setAdminClients } from "../../features/counterSlice";
 import {useDispatch,useSelector} from "react-redux";
 import SoldeClient from "./SoldeClient";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AfficherClientPhoto from "./AfficherClientPhoto";
+
 const Clients=()=>{
     const [data,setData]=useState([]);
     const [data_show,set_data_show]=useState([]);
@@ -122,8 +125,16 @@ const Clients=()=>{
     const [open_solde,set_open_solde]=useState(false);
     const close_modal=()=>{
         set_open_solde(false);
+        set_open_photo(false);
     }
 
+    const [url_client,set_url_client]=useState(undefined);
+    const show_user=(url)=>{
+        
+        set_url_client(url)
+        set_open_photo(true);
+    }
+    const [open_photo,set_open_photo]=useState(false);
     return (
         <div className="clients">
             <div className="head">
@@ -143,10 +154,10 @@ const Clients=()=>{
                     <thead>
                         <tr>
                             <th width="10%">Date</th>
-                            <th width="35%" style={{textAlign:"left"}}>Nom</th>
-                            <th width="35%" style={{textAlign:"left"}}>Email</th>
+                            <th width="" style={{textAlign:"left"}}>Nom</th>
+                            <th width="" style={{textAlign:"left"}}>Email</th>
                             <th width="10%">Solde</th>
-                            <th width="10%">Poto</th>
+                            <th width="8%">Poto</th>
                             <th width="10%">Actions</th>
                         </tr>
                     </thead>
@@ -173,7 +184,12 @@ const Clients=()=>{
                                         onClick={solde_client}
                                         style={{cursor:"pointer"}}
                                         ></td>
-                                        <td></td>
+                                        <td align="center" onClick={show_user.bind(this,user.url)} >
+                                            {user.url==undefined && <AccountCircleIcon />}
+                                            {user.url!=undefined &&
+                                            <img src={user.url} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>
+                                        }
+                                        </td>
                                         <td align="center">
                                             <div className="table_actions">
                                                 <button onClick={delete_user.bind(this,user.key)}>
@@ -201,6 +217,13 @@ const Clients=()=>{
                 click={close_modal}
                 open={true} 
                 content={<SoldeClient />} 
+            />}
+
+            {open_photo==true && <Modal 
+                width={30}
+                click={close_modal}
+                open={true} 
+                content={<AfficherClientPhoto url={url_client} />} 
             />}
         </div>
     )

@@ -9,7 +9,7 @@ import {setType,setDepart,setDestination, setIcon} from "../features/counterSlic
 import {useDispatch} from "react-redux";
 import {auth} from "../firebase_file";
 import {useEffect, useState} from "react";
-
+import driver from "./img/driver.jpg"
 
 import {bus,vehicule_leger,vehicule_lourd,taxi} from "./img";
 
@@ -38,6 +38,7 @@ const Main=()=>{
             <button onClick={go_to_commande.bind(this,4,"Bus",{icon:<DirectionsBusIcon style={{fontSize:"1.2rem",opacity:0.6}}/>})}>
                     <div>
                         {/*<DirectionsBusIcon  style={{width:60,height:60,resize:"contain",color:"gray"}}/>*/}
+                       
                         <img src={bus} style={{width:60,height:60,resize:"contain"}}/>
                     </div>
                     <p>Bus</p>

@@ -35,6 +35,13 @@
                 font-size: 0.7rem;
                 font-weight: 600;
             }
+
+            >div{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content:center;
+            }
         }
 }
 }

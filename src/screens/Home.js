@@ -20,7 +20,7 @@ import Publicites from "../components/Publicites";
 
 const styles = {
     slide: {
-      backgroundColor: 'whitesmoke',
+      backgroundColor: '#e8e8e8',
       
     },
     slide1: {

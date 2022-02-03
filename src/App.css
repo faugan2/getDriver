@@ -1,7 +1,10 @@
 :root{
 	--blue:"#3f51b5";
   }
-  
+ 
+  body{
+	  background-color:#e8e8e8;
+  }
 
 *{
 	margin:0;
