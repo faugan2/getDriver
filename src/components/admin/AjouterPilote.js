@@ -17,6 +17,19 @@ const AjouterClient= (e)=>{
     const [photo,set_photo]=useState(null);
     const ref=useRef(null);
 
+    const get_code_pilote=()=>{
+        let cp="";
+        for(var i=0; i<6; i++){
+            cp+=Math.round(Math.random()*9);
+        }
+
+        return cp;
+    }
+
+    useEffect(()=>{
+        const c=get_code_pilote();
+        set_pw(c);
+    },[]);
     const ajouter_client=async (e)=>{
         set_alerte("");
         if(nom==""){
@@ -28,11 +41,20 @@ const AjouterClient= (e)=>{
             return;
         }
         if(pw==""){
-            set_alerte("Le mot de passe est vide");
+            set_alerte("Le code pilote est vide");
         }
 
         if(type=="0"){
             set_alerte("Le type de pilote est vide");
+            return;
+        }
+        if(pw.length<6){
+            set_alerte("Le code pilote doit être de 6 chiffres");
+            return;
+        }
+
+        if(isNaN(parseInt(pw))){
+            set_alerte("Le code pilote doit être composé uniquement que de chiffre");
             return;
         }
 
@@ -160,10 +182,12 @@ const AjouterClient= (e)=>{
 
 
             <div className="line">
-                <label>Mot de passe du pilote</label>
+                <label>Code pilote (6 chiffres)</label>
                 <div>
                     <LockIcon style={{color:"gray",fontSize:"1.2rem"}}/>
-                    <input type="text" placeholder="Mot de passe"  value={pw} onChange={e=>set_pw(e.target.value)}/>
+                    <input type="text" placeholder="Code pilote"  
+                    maxLength={6}
+                    value={pw} onChange={e=>set_pw(e.target.value)}/>
                 </div>
                 
             </div>

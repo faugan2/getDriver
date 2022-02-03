@@ -96,6 +96,7 @@ const Clients=()=>{
                             <th width="10%">Type</th>
                             <th width="25%" style={{textAlign:"left"}}>Nom</th>
                             <th width="25%" style={{textAlign:"left"}}>Email</th>
+                            <th>Code</th>
                             <th width="10%">Etoiles</th>
                             <th width="5%">Photo</th>
                             <th width="10%">Actions</th>
@@ -116,6 +117,7 @@ const Clients=()=>{
                                         <td align="center">{types[user.pilote]}</td>
                                         <td>{nom}</td>
                                         <td>{user.email}</td>
+                                        <td>{user.password}</td>
                                         <td align="center">
                                             <StarBorderIcon style={{color:"gray",fontSize:"1.2rem"}} />
                                         </td>

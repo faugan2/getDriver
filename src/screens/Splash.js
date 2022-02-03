@@ -8,7 +8,7 @@ import logo from "../components/img/logo.jpg"
 import {db} from "../firebase_file";
 
 import {useDispatch} from "react-redux";
-import {setUsers,setLoading, setTarifs, setPublicites, setCourses} from "../features/counterSlice";
+import {setUsers,setLoading, setTarifs, setPublicites, setCourses, setOnline} from "../features/counterSlice";
 
 const Splash = () => {
     const styles=useStyles();
@@ -105,6 +105,28 @@ const Splash = () => {
             dispatch(setCourses(d))
         })
     }
+
+    const onOffLine=(event)=>{
+        if(navigator.onLine){
+            console.log("we are online");
+            dispatch(setOnline(true))
+        }else{
+            console.log("we are offline");
+            dispatch(setOnline(false))
+        }
+    }
+    
+    useEffect(()=>{
+        window.addEventListener("online",onOffLine)
+        window.addEventListener("offline",onOffLine)
+    
+        return ()=>{
+            window.removeEventListener("online",onOffLine);
+            window.removeEventListener("offline",onOffLine);
+        }
+    },[]);
+
+    
     return (
         <div className={styles.container}>
              <div style={{width:100,height:100}}>

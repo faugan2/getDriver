@@ -5,7 +5,7 @@ import DirectionsBusIcon from '@material-ui/icons/DirectionsBus';
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import {useHistory} from 'react-router';
-import {setType,setDepart,setDestination, setIcon} from "../features/counterSlice";
+import {setType,setDepart,setDestination, setIcon, setOnline} from "../features/counterSlice";
 import {useDispatch} from "react-redux";
 import {auth} from "../firebase_file";
 import {useEffect, useState} from "react";
@@ -27,9 +27,12 @@ const Main=()=>{
     dispatch(setDepart(null));
     dispatch(setDestination(null));
    },[]);
+
+   
    
     return(
         <div className="main">
+            
             <div className="main_info">
                 <h1>Bonjour {auth?.currentUser?.displayName},</h1>
                 <p>Quel type de pilote cherchez-vous ?</p>

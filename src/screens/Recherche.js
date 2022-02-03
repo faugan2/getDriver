@@ -131,14 +131,7 @@ const Recherche=()=>{
                 </div>
             </div>
             <div className="recherche_body">
-                <div style={{
-                        minHeight:"60vh",
-                        display:"flex",
-                        alignItems:"flex-start",
-                        flexWrap:"wrap",
-                        gap:"1rem",
-                        padding:"0.5rem",
-                    }}>
+                <div>
                 {
                     pilotes_show.map((pilote)=>{
                         return <Pilote pilote={pilote} />

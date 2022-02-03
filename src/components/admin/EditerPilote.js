@@ -23,6 +23,17 @@ const AjouterClient= (e)=>{
 
     const pilote=useSelector(selectAdminPilote);
 
+    const get_code_pilote=()=>{
+        let cp="";
+        for(var i=0; i<6; i++){
+            cp+=Math.round(Math.random()*9);
+        }
+
+        return cp;
+    }
+
+    
+
     useEffect(()=>{
         if(pilote==null) return;
         set_nom(pilote.nom);
@@ -44,11 +55,20 @@ const AjouterClient= (e)=>{
             return;
         }
         if(pw==""){
-            set_alerte("Le mot de passe est vide");
+            set_alerte("Le code pilote est vide");
         }
 
         if(type=="0"){
             set_alerte("Le type de pilote est vide");
+            return;
+        }
+
+        if(pw.length<6){
+            set_alerte("Le code pilote doit être égal à 6 chiffres");
+            return;
+        }
+        if(isNaN(parseInt(pw))){
+            set_alerte("Le code pilote doit être composé uniquement que de chiffre");
             return;
         }
 
@@ -68,7 +88,7 @@ const AjouterClient= (e)=>{
 
             db.collection("users").doc(pilote.key).update(user,{merge:true}).then(()=>{
                     btn.innerHTML="Modifier";
-                   
+                    btn.disabled=false;
                     set_alerte("Pilote bien modifié");
             }).catch((err)=>{
                     btn.disabled=false;
@@ -173,10 +193,12 @@ const AjouterClient= (e)=>{
 
 
             <div className="line">
-                <label>Mot de passe du pilote</label>
+                <label>Code pilote (6 chiffres)</label>
                 <div>
                     <LockIcon style={{color:"gray",fontSize:"1.2rem"}}/>
-                    <input type="text" placeholder="Mot de passe"  value={pw} onChange={e=>set_pw(e.target.value)}/>
+                    <input type="text" placeholder="Mot de passe" 
+                    maxLength={6}
+                    value={pw} onChange={e=>set_pw(e.target.value)}/>
                 </div>
                 
             </div>

@@ -10,10 +10,11 @@ const Pilote=({pilote})=>{
     return(
         <div className="pilote">
             
-            {pilote.pilote==1 && <img src={taxi} style={{width:50,height:50,resize:"contain",borderRadius:"50%"}}/>}
+            {/*pilote.pilote==1 && <img src={taxi} style={{width:50,height:50,resize:"contain",borderRadius:"50%"}}/>}
             {pilote.pilote==2 && <img src={vehicule_leger} style={{width:50,height:50,resize:"contain",borderRadius:"50%"}}/>}
             {pilote.pilote==3 && <img src={vehicule_lourd} style={{width:50,height:50,resize:"contain",borderRadius:"50%"}}/>}
-            {pilote.pilote==4 && <img src={bus} style={{width:50,height:50,resize:"contain",borderRadius:"50%"}}/>}
+            {pilote.pilote==4 && <img src={bus} style={{width:50,height:50,resize:"contain",borderRadius:"50%"}}/>*/}
+            <img src={pilote.url}  style={{width:50,height:50,resize:"contain",borderRadius:"50%"}}/>
             <p className="nom">{pilote.nom}</p>
             <p className="type">{types[pilote.pilote]}</p>
             <StarBorderIcon style={{color:"gray",fontSize:"1.2rem"}}/>

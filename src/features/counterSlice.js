@@ -28,6 +28,7 @@ const initialState = {
   code:null,
   login:null,
   oldLogin:null,
+  onLine:false,
   
 };
 
@@ -123,6 +124,9 @@ export const counterSlice = createSlice({
   },
   setOldLogin:(state,action)=>{
     state.oldLogin=action.payload;
+  },
+  setOnline:(state,action)=>{
+    state.onLine=action.payload;
   }
    
   
@@ -156,6 +160,7 @@ export const {
   setCode,
   setLogin,
   setOldLogin,
+  setOnline
 
 } = counterSlice.actions;
 
@@ -186,5 +191,6 @@ export const selectEtape=(state)=> state.counter.etape;
 export const selectCode=(state)=> state.counter.code;
 export const selectLogin=(state)=> state.counter.login;
 export const selectOldLogin=(state)=> state.counter.oldLogin;
+export const selectOnline=(state)=> state.counter.onLine;
 
 export default counterSlice.reducer;

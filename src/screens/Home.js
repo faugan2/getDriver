@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import Header from "../components/Header";
 import SwipeableViews from 'react-swipeable-views';
 import {useSelector,useDispatch} from "react-redux";
-import {selectTab,setTab,selectMe} from "../features/counterSlice";
+import {selectTab,setTab,selectMe, setOnline, selectOnline} from "../features/counterSlice";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
@@ -116,7 +116,14 @@ const Home=()=>{
 
     useEffect(()=>{
         const google=window.google ;
+        console.log("her we go");
     },[])
+
+   
+
+    
+    const online=useSelector(selectOnline);
+    
 
     return(
         <div style={{position:"relative",backgroundColor:"whitesmoke"}}>
@@ -129,6 +136,8 @@ const Home=()=>{
                 <div style={Object.assign({}, styles.slide, styles.slide1,{height:h})} className="slide" id="slide1">
                     {me?.type==1 && <Main />}
                     {me?.type==2 &&  <Passengers /> }
+
+                   
                     
                 </div>
                 <div style={Object.assign({}, styles.slide, styles.slide2,{height:h})} className="slide" id="slide2">

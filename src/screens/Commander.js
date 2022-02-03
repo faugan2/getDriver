@@ -245,12 +245,12 @@ const Commander=(props)=>{
 							padding:"0 0.5rem",
 						}}>
 								<button style={{
-									backgroundColor:"white",
+									backgroundColor:"#3f51b5",
 									border:"none",
 									borderRadius:"50%",
 									width:"2rem",
 									height:"2rem",
-									
+									color:"white",
 									marginRight:"0.5rem",
 									display:"flex",
 									alignItems:"center",
@@ -275,7 +275,7 @@ const Commander=(props)=>{
 									}}
 									
 									>
-									<RoomIcon style={{fontSize:"1.2rem",color:"gray"}}  id="zone_destination"/>
+									<RoomIcon style={{fontSize:"1.2rem",color:"#3f51b5"}}  id="zone_destination"/>
 									<input 
 									value={search_destination}
 									onChange={e=>{

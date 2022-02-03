@@ -19,6 +19,7 @@ import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import {auth, db} from "../firebase_file";
 import firebase from "firebase";
 import {useHistory} from "react-router-dom";
+import {bus,vehicule_leger,vehicule_lourd,taxi} from "./img";
 
 const Places=()=>{
 
@@ -300,7 +301,11 @@ const Places=()=>{
                    <button style={{border:"none",backgroundColor:"whitesmoke",flex:1,display:"flex",
                    alignItems:"center",justifyContent:"flex-start",fontSize:"0.7rem",gap:"0.5rem"}}>
                    
-                   {type?.icon.icon}
+                   
+                   {type.index==1 &&  <img src={taxi} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>}
+                   {type.index==2 &&  <img src={vehicule_leger} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>}
+                   {type.index==3 &&  <img src={vehicule_lourd} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>}
+                   {type.index==4 &&  <img src={bus} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>} 
                    {type?.name}
                         
                     </button>
@@ -338,11 +343,12 @@ const Places=()=>{
 
                }}>
                    <button style={{
-                       padding:"0.6rem",
-                        border:"1px solid silver",
-                        backgroundColor:"white",
+                       padding:"1rem",
+                        border:"none",
+                        backgroundColor:"#3f51b5",
                         borderRadius:"5px",
                         width:"150px",
+                        color:"white",
                    }}
                    onClick={lancer_recherche}
                    >Lancez la recherche</button>

@@ -5,8 +5,14 @@
     justify-content:center;
     font-size:0.7rem;
     
+    
     >.nom{
         font-weight: bold;
+        white-space: nowrap; 
+        width: 100px; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        text-align:center;
     }
 
     >.type{
