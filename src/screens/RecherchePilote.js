@@ -103,10 +103,7 @@ const RecherchePilote=()=>{
                     
                     </div>
                     <div style={{
-                        display:"flex",
-                        justifyContent:"space-between",
-                        alignItmes:"center",
-                        fontSize: "0.7rem"
+                        
                         }}
                         className="bottom"
                         >
