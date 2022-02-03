@@ -33,6 +33,31 @@ const LoginEtape2=({generated_code})=>{
         dispatch(setEtape(3));
     },[code_input])
 
+
+    useEffect(()=>{
+        if(ref.current==null) return;
+        
+        ref.current.addEventListener("focus",focused);
+        ref.current.addEventListener("blur",blured);
+        return()=>{
+            if(ref.current!=null){
+                ref.current.removeEventListener("focus",focused);
+                ref.current.removeEventListener("blur",blured);
+            }
+            
+        }
+    },[ref])
+
+    const focused=()=>{
+        document.querySelector("#footer").style.display="none";
+    }
+
+    const blured=()=>{
+        console.log("i am blured")
+        document.querySelector("#footer").style.display="block";
+    }
+
+
     return (
         <div className="login_etape2">
            <div className="head">

@@ -166,6 +166,31 @@ const LoginEtape3=()=>{
         set_nom(old_login.nom);
     },[old_login])
 
+    const ref2=useRef(null);
+
+    useEffect(()=>{
+        if(ref2.current==null) return;
+
+        ref2.current.addEventListener("focus",focused);
+        ref2.current.addEventListener("blur",blured);
+        return()=>{
+            if(ref2.current!=null){
+                ref2.current.removeEventListener("focus",focused);
+                ref2.current.removeEventListener("blur",blured);
+            }
+            
+        }
+    },[ref2])
+
+    const focused=()=>{
+        document.querySelector("#footer").style.display="none";
+    }
+
+    const blured=()=>{
+        console.log("i am blured")
+        document.querySelector("#footer").style.display="block";
+    }
+
     return(
         <div className="login_etape3">
             <div className="head" onClick={pick_image}>
@@ -182,7 +207,7 @@ const LoginEtape3=()=>{
                 <div className="line">
                         <label>Quel est votre nom ?</label>
                         <div>
-                            <input type="text" value={nom} onChange={e=>set_nom(e.target.value)} />
+                            <input type="text" value={nom} onChange={e=>set_nom(e.target.value)} ref={ref2} />
                             <AccountBoxIcon style={{color:"gray",fontSize:"1.2rem"}}/>
                         </div>
                 </div>

@@ -58,11 +58,15 @@ const LoginEtape1=()=>{
 
     useEffect(()=>{
         if(ref.current==null) return;
+
         ref.current.addEventListener("focus",focused);
         ref.current.addEventListener("blur",blured);
         return()=>{
-            ref.current.removeEventListener("focus",focused);
-            ref.current.removeEventListener("blur",blured);
+            if(ref.current!=null){
+                ref.current.removeEventListener("focus",focused);
+                ref.current.removeEventListener("blur",blured);
+            }
+            
         }
     },[ref])
 
