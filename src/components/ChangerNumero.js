@@ -79,7 +79,7 @@ const ChangerNumero=({click})=>{
         setTimeout(()=>{
             ref.current.focus();
             focused();
-        },3000)
+        },1000)
     },[])
     return(
         <div className="changer_numero">
