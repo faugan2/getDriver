@@ -104,9 +104,14 @@ const useStyles = makeStyles({
         color:"black",
         padding:"1rem",
         display:"flex",
+        alignItems:"center",
         flexDirection:"column",
-        
-        
+        width:"100%",
+        "&>div":{
+            
+            width:"100%",
+            flex:1,
+        },
 		
         gap:"1rem",
 		

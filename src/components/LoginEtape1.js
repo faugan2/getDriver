@@ -114,7 +114,7 @@ const LoginEtape1=()=>{
 
             {
                 open==true && <Modal 
-                    content={<LoginPilote />}
+                    content={<LoginPilote click={close_modal} />}
                     open={true}
                     click={close_modal}
                 />
