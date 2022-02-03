@@ -8,7 +8,7 @@ const Course=({go_to_recherche_pilote,key,d,destination,destination_name,user,
     user_info,
     price,date,categorie,origin,type,distance,search,remove_course,can_delete})=>{
     const styles=useStyles();
-    console.log("user is ",user);
+    
     return(
         <div className={styles.course} onClick={go_to_recherche_pilote}>
         
@@ -37,14 +37,38 @@ const Course=({go_to_recherche_pilote,key,d,destination,destination_name,user,
                     justifyContent:"center",
                     alignItems:"center",
                 }}>
-                    
-                {/*type.index==1 && <img src={taxi} style={{width:30,height:30,resize:"contain",borderRadius:"50%"}}/>} 
-                {type.index==2 && <img src={vehicule_leger} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>} 
-                {type.index==3 && <img src={vehicule_lourd} style={{width:30,height:30,resize:"contain",borderRadius:"50%"}}/>} 
-                {type.index==4 &&<img src={bus} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>*/} 
-                   {user_info?.url==undefined && <AccountCircleIcon /> }
-                   {user_info?.url!=undefined && 
+                
+                
+                {(user_info==undefined && type.index==1) && <img src={taxi} style={{width:30,height:30,resize:"contain",borderRadius:"50%"}}/>} 
+                {(user_info==undefined && type.index==2) && <img src={vehicule_leger} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>} 
+                {(user_info==undefined && type.index==3) && <img src={vehicule_lourd} style={{width:30,height:30,resize:"contain",borderRadius:"50%"}}/>} 
+                {(user_info==undefined && type.index==4) &&<img src={bus} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>} 
+
+
+                   {(user_info!=undefined && user_info?.url==undefined) && 
+                   <div style={{
+                       
+                       width:"60px",
+                       display:"flex",
+                       flexDirection:"column",
+                       alignItems:"center",
+                       justifyContent:"center",
+                   }}>
+                       <AccountCircleIcon style={{fontSize:"2rem"}}/>
+                       <p style={{fontSize:"0.8rem",}} className={styles.user_name}>{user_info.nom}</p>
+                   </div> }
+                   {(user_info!=undefined && user_info?.url!=undefined) && 
+                   <div style={{
+                       display:"flex",
+                       flexDirection:"column",
+                       alignItems:"center",
+                       justifyContent:"center",
+                       
+                       width:"60px"
+                   }}>
                    <img src={user_info.url} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>
+                   <p style={{fontSize:"0.8rem",}} className={styles.user_name}>{user_info.nom}</p>
+                   </div>
                    }
                 </div>
                 <div style={{marginLeft:"0.5rem"}}>
@@ -151,7 +175,17 @@ const Course=({go_to_recherche_pilote,key,d,destination,destination_name,user,
 	course_top:{
 		display:"flex",
 		alignItems:"center",
-	}
+	},
+
+    user_name:{
+        fontSize:"0.8rem",
+        textAlign:"center",
+        width:"50px",
+        whiteSpace:"nowrap",
+        overflow:"hidden",
+        textOverflow:"ellipsis",
+        color:"gray",
+    }
 })
 
 
