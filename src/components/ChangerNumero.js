@@ -66,6 +66,7 @@ const ChangerNumero=({click})=>{
     },[ref])
 
     const focused=()=>{
+        console.log("i am now focused")
         document.querySelector("#footer").style.display="none";
     }
 
@@ -73,6 +74,13 @@ const ChangerNumero=({click})=>{
         console.log("i am blured")
         document.querySelector("#footer").style.display="block";
     }
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            ref.current.focus();
+            focused();
+        },3000)
+    },[])
     return(
         <div className="changer_numero">
             <div className="line">
@@ -80,7 +88,7 @@ const ChangerNumero=({click})=>{
                 <div>
                    
                     <input type="tel"  placeholder="+228" maxLength={4} ref={ref} 
-                    autoFocus value={code} onChange={e=>set_code(e.target.value)}/>
+                     value={code} onChange={e=>set_code(e.target.value)}/>
                     <input type="tel" placeholder="91 56 75 90" ref={ref2}
                     value={telephone} onChange={e=>set_telephone(e.target.value)}
                     />
