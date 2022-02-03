@@ -11,6 +11,7 @@ const initialState = {
   type:0,
   icon:null,
   depart:null,
+  departName:"",
   destination:null,
   destinationName:"",
   distance:0,
@@ -29,6 +30,7 @@ const initialState = {
   login:null,
   oldLogin:null,
   onLine:false,
+  
   
 };
 
@@ -127,6 +129,9 @@ export const counterSlice = createSlice({
   },
   setOnline:(state,action)=>{
     state.onLine=action.payload;
+  },
+  setDepartName:(state,action)=>{
+    state.departName=action.payload;
   }
    
   
@@ -160,7 +165,8 @@ export const {
   setCode,
   setLogin,
   setOldLogin,
-  setOnline
+  setOnline,
+  setDepartName,
 
 } = counterSlice.actions;
 
@@ -192,5 +198,6 @@ export const selectCode=(state)=> state.counter.code;
 export const selectLogin=(state)=> state.counter.login;
 export const selectOldLogin=(state)=> state.counter.oldLogin;
 export const selectOnline=(state)=> state.counter.onLine;
+export const selectDepartName=(state)=> state.counter.departName;
 
 export default counterSlice.reducer;

@@ -59,14 +59,20 @@ const Courses=()=>{
                                 let date=new Date(user.date?.seconds*1000).toUTCString();
                                 date=date.split(" ");
                                 date=date[1]+" "+date[2]+" "+date[3];
-                                const lat=user.origin.lat;
-                                const lng=user.origin.lng;
+                                const lat=user.origin?.lat;
+                                const lng=user.origin?.lng;
                                 const destination_name=user.destination_name;
+                                const depart_name=user.depart_name;
+                                let str_depart_name=lat +" "+ lng
+                                if(depart_name!=undefined){
+                                    str_depart_name=depart_name;
+                                }
+
                                 return(
                                     <tr>
                                         <td>{date}</td>
                                         <td>{user.user}</td>
-                                        <td>{lat}  {lng}</td>
+                                        <td>{str_depart_name}</td>
                                         <td>{destination_name}</td>
                                         <td align="center">{user.distance}</td>
                                         <td align="center">{user.price.total}</td>

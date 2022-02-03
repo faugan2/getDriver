@@ -1,0 +1,98 @@
+[debug] [2022-02-03T13:46:46.183Z] ----------------------------------------------------------------------
+[debug] [2022-02-03T13:46:46.186Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\FOGAN\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-02-03T13:46:46.187Z] CLI Version:   10.1.2
+[debug] [2022-02-03T13:46:46.187Z] Platform:      win32
+[debug] [2022-02-03T13:46:46.187Z] Node Version:  v16.13.1
+[debug] [2022-02-03T13:46:46.190Z] Time:          Thu Feb 03 2022 13:46:46 GMT+0000 (heure moyenne de Greenwich)
+[debug] [2022-02-03T13:46:46.190Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-02-03T13:46:46.294Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-02-03T13:46:46.295Z] > authorizing via signed-in user (sicitg2021@gmail.com)
+[debug] [2022-02-03T13:46:46.295Z] [iam] checking project getdrivertogo for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-02-03T13:46:46.301Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/getdrivertogo:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-02-03T13:46:48.711Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 03 Feb 2022 13:46:55 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1116","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-02-03T13:46:48.719Z] > refreshing access token with scopes: []
+[debug] [2022-02-03T13:46:48.720Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-02-03T13:46:49.426Z] <<< HTTP RESPONSE 200 {"date":"Thu, 03 Feb 2022 13:46:56 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-02-03T13:46:49.470Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/getdrivertogo [none]
+[debug] [2022-02-03T13:46:50.457Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/getdrivertogo 200
+[debug] [2022-02-03T13:46:50.458Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/getdrivertogo {"projectId":"getdrivertogo","projectNumber":"861986497828","displayName":"getdrivertogo","name":"projects/getdrivertogo","resources":{"hostingSite":"getdrivertogo","storageBucket":"getdrivertogo.appspot.com","locationId":"us-central"},"state":"ACTIVE"}
+[info] 
+[info] === Deploying to 'getdrivertogo'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-02-03T13:46:50.471Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-02-03T13:46:50.471Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-02-03T13:46:51.133Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","date":"Thu, 03 Feb 2022 13:46:57 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-02-03T13:46:51.164Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/getdrivertogo/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-02-03T13:46:53.617Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 03 Feb 2022 13:47:00 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting[getdrivertogo]: beginning deploy... 
+[info] i  hosting[getdrivertogo]: found 39 files in build 
+[debug] [2022-02-03T13:46:54.706Z] > refreshing access token with scopes: []
+[debug] [2022-02-03T13:46:54.706Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-02-03T13:46:54.709Z] [hosting] hash cache [YnVpbGQ] stored for 39 files
+[debug] [2022-02-03T13:46:54.709Z] [hosting][hash queue][FINAL] {"max":1018,"min":13,"avg":76.38461538461539,"active":0,"complete":39,"success":39,"errored":0,"retried":0,"total":39,"elapsed":1033}
+[debug] [2022-02-03T13:46:55.665Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","date":"Thu, 03 Feb 2022 13:47:02 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-02-03T13:46:55.701Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/sites/getdrivertogo/versions/8f6f914fab97e069:populateFiles [none]
+[debug] [2022-02-03T13:46:55.702Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/sites/getdrivertogo/versions/8f6f914fab97e069:populateFiles {"files":{"/1.jpg":"c700940f00ed46c54667dfeafb942d4cb0cc8fa073c725b1ad005bd6b4213001","/2.jpg":"c07820e52c2c1e3e18451000da93e0b3dc1106c32bb37fd4674ad5fc63fc0e06","/3.jpg":"83325efeaf5c212749c9ce58121d26fcbc9210d9ca70bd3a5c08966aa79f74aa","/favicon.ico":"87aecafb41d21ea93b7af81398237b980c43ee880676c78630ee2d1e9a6d711f","/logo192.png":"ebf380e341383bbf65d6a762603f630a9f7610c97f32bd297bc097635bc37ee3","/logo512.png":"c55d034d9cf7abfac7600919cbf4f4ce2f3ea3478df91d01177e8ff136f58918","/manifest.json":"aff3449bdc238776f5d6d967f19ec491b36aed5fb7f23ccff6500736fd58494a","/paella.jpg":"30f9a63d6592d918c6cd305ba6f56c1b3af0183c007202ef6acb676081bfea7f","/robots.txt":"5fcd5c559ded0c02b3ed7840ca3ee77e95b798730af98d9f18bc627ac898071e","/asset-manifest.json":"39d6fae182fd0a4b0da7e3d3d491557562b71e75737ea4b8f201cb760b9239e5","/index.html":"ea4758e7c983b192962380476d85b1326bff909398c67277b8cf80b7a6465e35","/static/css/2.d0df8735.chunk.css":"5b1d29af7786f8a7b2543689c03cba6a273e2c38188c3a46d44349dc70f31295","/static/css/2.d0df8735.chunk.css.map":"cd0b92e89734b683d36d2d1b4cefa013ec57876aa81c2434f6344fbd275e52a8","/static/css/main.19793554.chunk.css":"b6096bed125118ffacf21405d3c8a9bb27987f608bf3b5f94ea789f581592cfc","/static/js/2.e7eeb22f.chunk.js.LICENSE.txt":"6747936f67b58b50e2e06721626382ce46da2c7c4f72ebac9b7d6d7dc02ecf94","/static/css/main.19793554.chunk.css.map":"47fd6c7b6a30d8d225d36e2e8a1d46ccfd8d3578e077403edd748f20fd784242","/static/js/runtime-main.84f2fb06.js":"ea6e50fcd00abae0b0c1164c1e993a9da86bce6dc96cb2cf102e4ff18c5d92d4","/static/js/runtime-main.84f2fb06.js.map":"76d0e301a14afd62fddb0cb3e2144dbf1ba574074c213750b49fa020aea7b7bb","/static/media/roboto-cyrillic-400-normal.5e493812.woff2":"15a2bda410dbfa3035da4d4b3265420b33f1a892737e099b6b11c062cf41214c","/static/media/roboto-cyrillic-ext-400-normal.493afe7a.woff2":"66540b2412b52d52f2a588a5796cbe82ec975d97ad9448261858642ce368b761","/static/media/roboto-greek-400-normal.1cbfc636.woff2":"efe23dbf516db92677f544406905968a0579006fa5f26875f8e2a4e4d1914077","/static/media/roboto-greek-ext-400-normal.bb723e84.woff2":"4db2bf2d230ebfdf2ff8b62d6b442712eb1f89c9a1f73eb7dc246ea8856c5373","/static/media/roboto-latin-400-normal.4673b453.woff2":"de722938f6c983a3e4a6ed514216cc50edca43465cb9576a6490129616377212","/static/media/roboto-latin-ext-400-normal.c3dcdbd5.woff2":"0efb094416252f3cef4dafe7acf4b945285a5cf73bf778ff53a76c22bd27cc1e","/static/media/roboto-vietnamese-400-normal.c0bec65d.woff2":"ee66503287c10b48079b52fc1c920977ff97a6c96ddae3e9a31cd5b30441f804","/static/media/taxi.56c89f99.jpg":"e349f2ec274a66c38bece51c005d239a6d43fb071e7c52f60096dc4e82204f8f","/static/media/vehicule_lourd.629d13ce.jpg":"310e83dc8aedb40afd6bd9cdc90cbc8bfd38e04a62eecbea90112438b71ae5b1","/static/media/sai.741fce9b.jpg":"05fcd8135e14f88338373d090c5221ad64256f48491b21bf6b4e2d5d5cdea7f1","/static/media/vehicule_leger.ff1cf5e2.jpg":"718e4a6739d7276931b26e15ec036f914eeda5a750a0c699e347308291c68392","/static/media/logo.7c1304a0.jpg":"f382b9c418e37f2a686992bb0c9c5dc2af56ae4cf5ac19719e21587ef5b58df6","/static/js/main.210daf26.chunk.js":"038270b439446faf37e0bd66766acc2ecf5cb82e016abf62e56f1d18a82f6eac","/static/media/paella.04bca6ff.jpg":"30f9a63d6592d918c6cd305ba6f56c1b3af0183c007202ef6acb676081bfea7f","/static/media/pub.f0d08024.gif":"2486f10edcda41326e449705d711174d347c81a5e5bdece0360dfb204904c415","/static/media/roboto-all-400-normal.376ea5d9.woff":"55f7198c32f1f96dffc4c9935f56aff5a510354b675776835cf238049685c971","/static/media/bus.fd5e3567.png":"003d5aff3c8465151b70385438326a2614da3c5d9bce16da88717aa9b555f75e","/static/media/map.28945a3c.png":"9be27e75cdefbd6a4bfbe4378ff6fa171419fcaf74e163ad19b1ea3add3a4700","/static/js/main.210daf26.chunk.js.map":"025fdc61218d96fa7838866f4e9a98f2fb8fd59b4faf22b3231f2344197eafc5","/static/js/2.e7eeb22f.chunk.js":"1297347f4d75ebb1361f29dba99b8d62c5d9e3385a2597440e2945e4c332af6e","/static/js/2.e7eeb22f.chunk.js.map":"3e32a9af965a8812a7673004042112802cac78dc0a3aa116610884d1215b2e5c"}}
+[debug] [2022-02-03T13:46:58.637Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/sites/getdrivertogo/versions/8f6f914fab97e069:populateFiles 200
+[debug] [2022-02-03T13:46:58.638Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/sites/getdrivertogo/versions/8f6f914fab97e069:populateFiles {"uploadRequiredHashes":["025fdc61218d96fa7838866f4e9a98f2fb8fd59b4faf22b3231f2344197eafc5","ea4758e7c983b192962380476d85b1326bff909398c67277b8cf80b7a6465e35","1297347f4d75ebb1361f29dba99b8d62c5d9e3385a2597440e2945e4c332af6e","3e32a9af965a8812a7673004042112802cac78dc0a3aa116610884d1215b2e5c","038270b439446faf37e0bd66766acc2ecf5cb82e016abf62e56f1d18a82f6eac","39d6fae182fd0a4b0da7e3d3d491557562b71e75737ea4b8f201cb760b9239e5"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files"}
+[debug] [2022-02-03T13:46:58.643Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/025fdc61218d96fa7838866f4e9a98f2fb8fd59b4faf22b3231f2344197eafc5 [none]
+[debug] [2022-02-03T13:46:58.643Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/025fdc61218d96fa7838866f4e9a98f2fb8fd59b4faf22b3231f2344197eafc5 [stream]
+[debug] [2022-02-03T13:46:58.647Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/ea4758e7c983b192962380476d85b1326bff909398c67277b8cf80b7a6465e35 [none]
+[debug] [2022-02-03T13:46:58.647Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/ea4758e7c983b192962380476d85b1326bff909398c67277b8cf80b7a6465e35 [stream]
+[debug] [2022-02-03T13:46:58.651Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/1297347f4d75ebb1361f29dba99b8d62c5d9e3385a2597440e2945e4c332af6e [none]
+[debug] [2022-02-03T13:46:58.651Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/1297347f4d75ebb1361f29dba99b8d62c5d9e3385a2597440e2945e4c332af6e [stream]
+[debug] [2022-02-03T13:46:58.654Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/3e32a9af965a8812a7673004042112802cac78dc0a3aa116610884d1215b2e5c [none]
+[debug] [2022-02-03T13:46:58.655Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/3e32a9af965a8812a7673004042112802cac78dc0a3aa116610884d1215b2e5c [stream]
+[debug] [2022-02-03T13:46:58.658Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/038270b439446faf37e0bd66766acc2ecf5cb82e016abf62e56f1d18a82f6eac [none]
+[debug] [2022-02-03T13:46:58.658Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/038270b439446faf37e0bd66766acc2ecf5cb82e016abf62e56f1d18a82f6eac [stream]
+[debug] [2022-02-03T13:46:58.661Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/39d6fae182fd0a4b0da7e3d3d491557562b71e75737ea4b8f201cb760b9239e5 [none]
+[debug] [2022-02-03T13:46:58.661Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/39d6fae182fd0a4b0da7e3d3d491557562b71e75737ea4b8f201cb760b9239e5 [stream]
+[debug] [2022-02-03T13:46:58.664Z] [hosting][populate queue][FINAL] {"max":3937,"min":3937,"avg":3937,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":3958}
+[debug] [2022-02-03T13:46:58.665Z] [hosting] uploads queued: 6
+[debug] [2022-02-03T13:47:01.483Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/038270b439446faf37e0bd66766acc2ecf5cb82e016abf62e56f1d18a82f6eac 200
+[debug] [2022-02-03T13:47:01.484Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/038270b439446faf37e0bd66766acc2ecf5cb82e016abf62e56f1d18a82f6eac [stream]
+[debug] [2022-02-03T13:47:01.487Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/ea4758e7c983b192962380476d85b1326bff909398c67277b8cf80b7a6465e35 200
+[debug] [2022-02-03T13:47:01.487Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/ea4758e7c983b192962380476d85b1326bff909398c67277b8cf80b7a6465e35 [stream]
+[debug] [2022-02-03T13:47:02.532Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/39d6fae182fd0a4b0da7e3d3d491557562b71e75737ea4b8f201cb760b9239e5 200
+[debug] [2022-02-03T13:47:02.532Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/39d6fae182fd0a4b0da7e3d3d491557562b71e75737ea4b8f201cb760b9239e5 [stream]
+[debug] [2022-02-03T13:47:02.819Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/025fdc61218d96fa7838866f4e9a98f2fb8fd59b4faf22b3231f2344197eafc5 200
+[debug] [2022-02-03T13:47:02.819Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/025fdc61218d96fa7838866f4e9a98f2fb8fd59b4faf22b3231f2344197eafc5 [stream]
+[debug] [2022-02-03T13:47:12.384Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/3e32a9af965a8812a7673004042112802cac78dc0a3aa116610884d1215b2e5c 200
+[debug] [2022-02-03T13:47:12.384Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/3e32a9af965a8812a7673004042112802cac78dc0a3aa116610884d1215b2e5c [stream]
+[debug] [2022-02-03T13:47:15.754Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/1297347f4d75ebb1361f29dba99b8d62c5d9e3385a2597440e2945e4c332af6e 200
+[debug] [2022-02-03T13:47:15.755Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/getdrivertogo/versions/8f6f914fab97e069/files/1297347f4d75ebb1361f29dba99b8d62c5d9e3385a2597440e2945e4c332af6e [stream]
+[debug] [2022-02-03T13:47:15.755Z] [hosting][upload queue][FINAL] {"max":17114,"min":2842,"avg":7436.333333333333,"active":0,"complete":6,"success":6,"errored":0,"retried":0,"total":6,"elapsed":17117}
+[info] +  hosting[getdrivertogo]: file upload complete 
+[debug] [2022-02-03T13:47:15.757Z] [hosting] deploy completed after 22137ms
+[debug] [2022-02-03T13:47:15.766Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "getdrivertogo"
+    },
+    "site": "getdrivertogo",
+    "version": "sites/getdrivertogo/versions/8f6f914fab97e069"
+  }
+]
+[info] i  hosting[getdrivertogo]: finalizing version... 
+[debug] [2022-02-03T13:47:15.769Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-02-03T13:47:15.769Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>

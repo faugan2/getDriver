@@ -17,6 +17,7 @@ const Main=()=>{
     const history=useHistory();
     const dispatch= useDispatch();
    const go_to_commande=(type,name,icon)=>{
+       console.log("going to commande",type,name) ;
        
         dispatch(setType({index:type,name,icon}));
         dispatch(setIcon(icon));

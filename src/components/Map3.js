@@ -1,6 +1,6 @@
 import {useState,useEffect} from "react";
 import { useSelector, useDispatch} from "react-redux";
-import {selectDepart,selectDestination, setDistance, setMaps} from "../features/counterSlice";
+import {selectDepart,selectDestination, setDepartName, setDistance, setMaps} from "../features/counterSlice";
 import { Loader } from "@googlemaps/js-api-loader"
 import RoomIcon from '@material-ui/icons/Room';
 import "./map3.scss";
@@ -112,7 +112,7 @@ function haversine_distance(mk1, mk2) {
             
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[1]) {
-                    console.log("Location: " + results[1].formatted_address);
+                    dispatch(setDepartName(results[1].formatted_address));
                 }
             }
         });

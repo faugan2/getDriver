@@ -5,7 +5,8 @@ import { selectDepart, selectDestinationName, selectDistance, selectMap,
     selectType,
     setCourse,
     selectIcon,
-    selectTarifs
+    selectTarifs,
+    selectDepartName
 
 } from "../features/counterSlice";
 import "./places.scss";
@@ -183,6 +184,7 @@ const Places=()=>{
     const [course,set_course]=useState(0);
 
     const tarifs=useSelector(selectTarifs);
+    const depart_name=useSelector(selectDepartName);
 
     useEffect(()=>{
         console.log("le tarfis est ",tarifs,"pour ",type);
@@ -213,11 +215,13 @@ const Places=()=>{
             origin,
             destination,
             distance,
+            depart_name,
             destination_name:des_name,
             price:{deplacement,course:ht,total},
             date:firebase.firestore.FieldValue.serverTimestamp(),
             search,
-            user:auth?.currentUser?.email
+            user:auth?.currentUser?.email,
+            status:1
         }
         console.log(course)
         const btn=e.target;
@@ -302,10 +306,10 @@ const Places=()=>{
                    alignItems:"center",justifyContent:"flex-start",fontSize:"0.7rem",gap:"0.5rem"}}>
                    
                    
-                   {type.index==1 &&  <img src={taxi} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>}
-                   {type.index==2 &&  <img src={vehicule_leger} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>}
-                   {type.index==3 &&  <img src={vehicule_lourd} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>}
-                   {type.index==4 &&  <img src={bus} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>} 
+                   {type?.index==1 &&  <img src={taxi} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>}
+                   {type?.index==2 &&  <img src={vehicule_leger} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>}
+                   {type?.index==3 &&  <img src={vehicule_lourd} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>}
+                   {type?.index==4 &&  <img src={bus} style={{width:20,height:20,resize:"contain",borderRadius:"50%"}}/>} 
                    {type?.name}
                         
                     </button>
