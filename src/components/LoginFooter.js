@@ -1,5 +1,5 @@
 const LoginFooter=()=>{
-    return(<div className="footer">
+    return(<div className="footer" id="footer">
         <div className="footer_top">
             <p>
                 Nos <label>Termes de sevice</label> et notre <label>Politique de confidentialité </label>

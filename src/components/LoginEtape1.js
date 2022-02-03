@@ -1,6 +1,6 @@
 
 import ReactCountryFlag from "react-country-flag"
-import {useState,useEffect} from "react";
+import {useState,useEffect,useRef} from "react";
 import codes from 'country-calling-code';
 import Modal from "./admin/Modal";
 import LoginPilote from "./LoginPilote";
@@ -16,6 +16,8 @@ const LoginEtape1=()=>{
     const [generated_code,set_generated_code]=useState("");
     const [alerte,set_alerte]=useState("");
     const dispatch= useDispatch();
+
+    const ref=useRef(null);
 
     useEffect(()=>{
 
@@ -54,6 +56,25 @@ const LoginEtape1=()=>{
         
     }
 
+    useEffect(()=>{
+        if(ref.current==null) return;
+        ref.current.addEventListener("focus",focused);
+        ref.current.addEventListener("blur",blured);
+        return()=>{
+            ref.current.removeEventListener("focus",focused);
+            ref.current.removeEventListener("blur",blured);
+        }
+    },[ref])
+
+    const focused=()=>{
+        document.querySelector("#footer").style.display="none";
+    }
+
+    const blured=()=>{
+        console.log("i am blured")
+        document.querySelector("#footer").style.display="block";
+    }
+
     return(
         <div className="login_etape1">
             <div className="head">
@@ -90,7 +111,9 @@ const LoginEtape1=()=>{
                         
                         <div>
                             <p>+{tel_code}</p>
-                            <input type="tel"  values={telephone} onChange={e=>set_telephone(e.target.value)} />
+                            <input type="tel"  values={telephone} onChange={e=>set_telephone(e.target.value)} 
+                            ref={ref}
+                            />
                         </div>
                 </div>
 
