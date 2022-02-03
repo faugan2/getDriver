@@ -1,10 +1,14 @@
 import {taxi, vehicule_leger, vehicule_lourd,bus} from "./img";
 import {makeStyles} from '@material-ui/core/styles';
 import {types} from "./admin/data";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import DeleteIcon from '@material-ui/icons/Delete';
-const Course=({go_to_recherche_pilote,key,d,destination,destination_name,user,price,date,categorie,origin,type,distance,search,remove_course,can_delete})=>{
+const Course=({go_to_recherche_pilote,key,d,destination,destination_name,user,
+    user_info,
+    price,date,categorie,origin,type,distance,search,remove_course,can_delete})=>{
     const styles=useStyles();
+    console.log("user is ",user);
     return(
         <div className={styles.course} onClick={go_to_recherche_pilote}>
         
@@ -34,11 +38,14 @@ const Course=({go_to_recherche_pilote,key,d,destination,destination_name,user,pr
                     alignItems:"center",
                 }}>
                     
-                {type.index==1 && <img src={taxi} style={{width:30,height:30,resize:"contain",borderRadius:"50%"}}/>} 
+                {/*type.index==1 && <img src={taxi} style={{width:30,height:30,resize:"contain",borderRadius:"50%"}}/>} 
                 {type.index==2 && <img src={vehicule_leger} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>} 
                 {type.index==3 && <img src={vehicule_lourd} style={{width:30,height:30,resize:"contain",borderRadius:"50%"}}/>} 
-                {type.index==4 &&<img src={bus} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>} 
-                    
+                {type.index==4 &&<img src={bus} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>*/} 
+                   {user_info?.url==undefined && <AccountCircleIcon /> }
+                   {user_info?.url!=undefined && 
+                   <img src={user_info.url} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>
+                   }
                 </div>
                 <div style={{marginLeft:"0.5rem"}}>
                     <p style={{

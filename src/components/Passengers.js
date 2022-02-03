@@ -65,6 +65,16 @@ const go_to_recherche_pilote=(e,key,destination,destination_name,user,price,date
 				   d=d.split(" ");
 				   d=d[1]+" "+d[2]+" "+d[3];
 
+                   const res=users.filter((item)=>{
+                       return item.email==user;
+                   })
+
+                   let user_info=null;
+                   if(res.length>0){
+                       user_info=res[0];
+                   }
+                   console.log("the res is ",res);
+
                   
 				   
 				   console.log("the date is ",str_date)
@@ -76,6 +86,7 @@ const go_to_recherche_pilote=(e,key,destination,destination_name,user,price,date
 					destination_name={destination_name}
 					user={user}
 					price={price}
+                    user_info={user_info}
 					date={date}
 					categorie={categorie}
 					origin={origin}
