@@ -207,8 +207,7 @@ const LoginEtape3=()=>{
                 <div className="line">
                         <label>Quel est votre nom ?</label>
                         <div>
-                            <input type="text" value={nom} onChange={e=>set_nom(e.target.value)} ref={ref2} />
-                            <AccountBoxIcon style={{color:"gray",fontSize:"1.2rem"}}/>
+                            <input type="text" value={nom} onChange={e=>set_nom(e.target.value)} ref={ref2} style={{textAlign:"center"}} />
                         </div>
                 </div>
 

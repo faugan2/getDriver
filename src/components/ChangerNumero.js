@@ -1,7 +1,7 @@
 import CallIcon from '@material-ui/icons/Call';
 import "./changer_numero.scss";
 import {useSelector,useDispatch} from "react-redux";
-import {useState,useEffect} from "react";
+import {useState,useEffect,useRef} from "react";
 import { selectLogin,setLogin } from '../features/counterSlice';
 
 const ChangerNumero=({click})=>{
@@ -33,17 +33,58 @@ const ChangerNumero=({click})=>{
         },3000)
 
     }
+
+    const ref=useRef(null);
+    const ref2=useRef(null);
+
+    useEffect(()=>{
+        if(ref2.current==null) return;
+
+        ref2.current.addEventListener("focus",focused);
+        ref2.current.addEventListener("blur",blured);
+        return()=>{
+            if(ref2.current!=null){
+                ref2.current.removeEventListener("focus",focused);
+                ref2.current.removeEventListener("blur",blured);
+            }
+            
+        }
+    },[ref2])
+
+    useEffect(()=>{
+        if(ref.current==null) return;
+
+        ref.current.addEventListener("focus",focused);
+        ref.current.addEventListener("blur",blured);
+        return()=>{
+            if(ref.current!=null){
+                ref.current.removeEventListener("focus",focused);
+                ref.current.removeEventListener("blur",blured);
+            }
+            
+        }
+    },[ref])
+
+    const focused=()=>{
+        document.querySelector("#footer").style.display="none";
+    }
+
+    const blured=()=>{
+        console.log("i am blured")
+        document.querySelector("#footer").style.display="block";
+    }
     return(
         <div className="changer_numero">
             <div className="line">
                 <label>Saisissez le nouveau numéro</label>
                 <div>
                    
-                    <input type="tel"  placeholder="+228" maxLength={4}  autoFocus value={code} onChange={e=>set_code(e.target.value)}/>
-                    <input type="tel" placeholder="91 56 75 90"
+                    <input type="tel"  placeholder="+228" maxLength={4} ref={ref} 
+                    autoFocus value={code} onChange={e=>set_code(e.target.value)}/>
+                    <input type="tel" placeholder="91 56 75 90" ref={ref2}
                     value={telephone} onChange={e=>set_telephone(e.target.value)}
                     />
-                    <CallIcon  style={{color:"gray",fontSize:"1.2rem"}}/>
+                    
                 </div>
             </div>
 
