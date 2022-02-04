@@ -50,6 +50,10 @@ const Recherche=()=>{
     const [pilotes_show,set_pilotes_show]=useState(users)
     const [search,set_search]=useState("");
     useEffect(()=>{
+        if(users.length==0){
+            history.replace("/");
+            return;
+        }
         const res=users.filter((user)=>{
             if(index==0){
                 return user.type==2 && user.pilote!=undefined ;

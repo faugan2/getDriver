@@ -73,28 +73,33 @@ const Commander=(props)=>{
 			set_destination(nom);
 		}
 	}
+	const d=useSelector(selectDepart)
 
 	useEffect(()=>{
-		
-	},[]);
+		console.log("le depart est ",d);
+	},[d]);
 
 	const [alerte,set_alerte]=useState("Détection de votre position...");
 	useEffect(()=>{
 		const google=window.google ;
 		console.log("je sui sgoogle",google);
 		dispatch(setDepart(null));
-		navigator.geolocation.getCurrentPosition(function(position) {
-			console.log("position",position);
-			const objet={lat:position.coords.latitude,lng:position.coords.longitude};
-			dispatch(setDepart(objet));
-			set_longitude(position.coords.latitude);
-			set_latitude(position.coords.longitude)
-			set_arrive(true);
-		  },
-
-		  showError
-		 
-		  );
+		setTimeout(()=>{
+			navigator.geolocation.getCurrentPosition(function(position) {
+				console.log("position",position);
+				const objet={lat:position.coords.latitude,lng:position.coords.longitude};
+				dispatch(setDepart(objet));
+				set_longitude(position.coords.latitude);
+				set_latitude(position.coords.longitude)
+				set_arrive(true);
+			  },
+	
+			  showError,
+			  { enableHighAccuracy: false, timeout: 5000},
+			  );
+		},1000)
+		
+		
 	},[])
 
 	

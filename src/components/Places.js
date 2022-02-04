@@ -255,9 +255,11 @@ const Places=()=>{
                    
                }}>
                     
-                    <button style={{border:"none",backgroundColor:"whitesmoke",flex:1,display:"flex",
+                    <button style={{border:"none",backgroundColor:"#e8e8ef",flex:1,display:"flex",
                     alignItems:"center",justifyContent:"flex-start",fontSize:"0.7rem",gap:"0.5rem"}}>
-                        <RoomIcon style={{fontSize:"1.2rem",opacity:0.6}} />
+                        <RoomIcon style={{
+                            color:"#3f51b5",
+                            fontSize:"1.2rem"}} />
                         {des_name}
                         
                         </button>
@@ -267,8 +269,12 @@ const Places=()=>{
                             set_show_detail(!show_detail);
                             set_show_places(!show_places);
                         }}
-                        style={{border:"none",backgroundColor:"white",width:"2rem",height:"2rem",borderRadius:"50%"}}>
-                        <MoreHorizIcon />
+                        style={{
+                            display:"flex",
+                            alignItems:"center",
+                            justifyContent:"center",
+                            border:"none",backgroundColor:"white",width:"2rem",height:"2rem",borderRadius:"50%"}}>
+                        <MoreHorizIcon style={{color:"#3f51b5"}} />
                     </button>
                </div>
 
@@ -282,9 +288,12 @@ const Places=()=>{
                    
                    
 
-                   <button style={{border:"none",backgroundColor:"whitesmoke",flex:1,display:"flex",
+                   <button style={{border:"none",backgroundColor:"#e8e8ef",flex:1,display:"flex",
                    alignItems:"center",justifyContent:"flex-start",fontSize:"0.7rem",gap:"0.5rem"}}>
-                   <AirplanemodeActiveIcon style={{fontSize:"1.2rem",opacity:0.6}} />
+                   <AirplanemodeActiveIcon style={{
+                      
+                       color:"#3f51b5",
+                       fontSize:"1.2rem"}} />
                    {distance} KM
                         
                     </button>
@@ -302,7 +311,7 @@ const Places=()=>{
                    
                    
 
-                   <button style={{border:"none",backgroundColor:"whitesmoke",flex:1,display:"flex",
+                   <button style={{border:"none",backgroundColor:"#e8e8ef",flex:1,display:"flex",
                    alignItems:"center",justifyContent:"flex-start",fontSize:"0.7rem",gap:"0.5rem"}}>
                    
                    
@@ -351,7 +360,7 @@ const Places=()=>{
                         border:"none",
                         backgroundColor:"#3f51b5",
                         borderRadius:"5px",
-                        width:"150px",
+                        width:"80%",
                         color:"white",
                    }}
                    onClick={lancer_recherche}
