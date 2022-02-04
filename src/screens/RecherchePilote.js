@@ -10,6 +10,7 @@ import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import {taxi,vehicule_leger,vehicule_lourd,bus} from "../components/img";
 import Pilote from "../components/Pilote";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const RecherchePilote=()=>{
     const c=useSelector(selectCourse);
@@ -25,7 +26,7 @@ const RecherchePilote=()=>{
             return user.type==2 && user.pilote==type;
         })
         console.log("pilotes are ",res);
-        set_loading(false);
+        set_loading(true);
         set_pilotes(res);
     },[users,c]);
     useEffect(()=>{
@@ -43,7 +44,10 @@ const RecherchePilote=()=>{
             <div className="recherche_body">
                 
                 {
-                    loading==true && <div className="info"><p>Recherche encours...</p></div>
+                    loading==true && <div className="info">
+                        <CircularProgress style={{color:"#3f51b5"}} size={15}/>
+                        <p>Recherche de pilotes encours...</p>
+                        </div>
                 }
                 {(pilotes.length==0 && loading==false) && <div className="info">
                     <p>Aucun pilote n'est trouvé dans votre entourage</p>
