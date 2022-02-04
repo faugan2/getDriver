@@ -152,8 +152,32 @@ export default function ProminentAppBar() {
       }).catch((err)=>{
         console.log("driver error updating the driver location")
       })
+      const icon=document.querySelector(".active_location");
+      if(icon==undefined){
+        return;
+      }
+      animate_location_icon(icon.parentNode);
+
+
 
   },[driverLocation]);
+  const [op,set_op]=useState(0.5);
+  const animate_location_icon=(icon)=>{
+    console.log("calling opacity")
+    let new_op;
+   if(op==1){
+     new_op=0.5;
+   }else{
+     new_op=1;
+   }
+    setTimeout(()=>{
+      icon.style.opacity=new_op;
+      set_op(new_op);
+      animate_location_icon(icon);
+    },1000)
+
+    
+  }
 
   useEffect(()=>{
     if(me==null) return;
