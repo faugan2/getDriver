@@ -137,10 +137,7 @@ export default function ProminentAppBar() {
       
       if(me.type==1) return;
 
-      if(first_load==true){
-        set_first_load(false)
-        return;
-      }
+      
 
       const key=me.key;
       console.log("driver =",key);
