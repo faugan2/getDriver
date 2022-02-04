@@ -1,0 +1,32 @@
+.enable_disabled_location{
+    >.line{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        font-size:0.8rem;
+
+        >p{
+            font-weight: bold;
+            text-align:center;
+        }
+
+        >button{
+            margin-top: 1rem;
+            padding:0.5rem;
+            font-weight: bold;
+            border:none;
+            width:100%;
+        }
+
+        >.btn_activer_location{
+            background-color:#3f51b5;
+            color:white;
+        }
+
+        >.btn_disable_location{
+            background-color:indianred;
+            color:white;
+        }
+    }
+}

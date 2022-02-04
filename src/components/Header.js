@@ -131,7 +131,7 @@ export default function ProminentAppBar() {
 
       const key=me.key;
       console.log("driver =",key);
-/*
+
       db.collection("users").doc(key)
       .update({
         location_active:driverLocation,
@@ -140,10 +140,10 @@ export default function ProminentAppBar() {
       .then(()=>{
         console.log("driver location activation uupdated")
       }).catch((err)=>{
-        console.log("error updating the driver location")
-      })*/
+        console.log("driver error updating the driver location")
+      })
 
-  },[driverLocation,me]);
+  },[driverLocation]);
   return (
     <div className={classes.root} id="header">
       <AppBar position="static" style={{backgroundColor:"white"}}>
@@ -154,7 +154,7 @@ export default function ProminentAppBar() {
           
           {me?.type==2 && <IconButton aria-label="search" color="inherit" onClick={enable_disabled_location}>
             {driverLocation==false && <LocationOffIcon  style={{color:"gray"}}/>}
-            {driverLocation==true && <LocationOnIcon  style={{color:"gray"}}/>}
+            {driverLocation==true && <LocationOnIcon  style={{color:"#3f51b5"}} className="active_location" />}
           </IconButton>
           }
 
