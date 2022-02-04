@@ -57,12 +57,10 @@ const RecherchePilote=()=>{
                 {
                     (pilotes.length >0 && loading==false) && 
                     <div className="liste_pilotes" style={{
-                        minHeight:"60vh",
-                        display:"flex",
-                        alignItems:"flex-start",
-                        flexWrap:"wrap",
-                        gap:"1rem",
-                        padding:"0.5rem",
+                        
+                        display:"grid",
+                        gridTemplateColumns:"1fr 1fr 1fr",
+                        
                     }}>
                            {
                                pilotes.map((pilote)=>{
@@ -77,7 +75,7 @@ const RecherchePilote=()=>{
 
 
 
-                <div className="course">
+                <div className="course" style={{display:"none"}}>
                     <div className="top">
                     {course?.type.index==1 &&  <img src={taxi} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>} 
                     {course?.type.index==2 &&  <img src={vehicule_leger} style={{width:25,height:25,resize:"contain",borderRadius:"50%"}}/>} 
