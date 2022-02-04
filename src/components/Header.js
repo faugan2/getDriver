@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {useSelector,useDispatch} from "react-redux";
-import {selectTab,setTab,selectUsers, setMe,selectMe,selectLoading, setCode, setEtape, setLogin, setOldLogin, selectDriverLocation} from "../features/counterSlice";
+import {setDriverLocation,selectTab,setTab,selectUsers, setMe,selectMe,selectLoading, setCode, setEtape, setLogin, setOldLogin, selectDriverLocation} from "../features/counterSlice";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -69,6 +69,7 @@ export default function ProminentAppBar() {
   const u=useSelector(selectUsers);
   const [users,set_users]=useState([]);
   const [me,set_me]=useState(null);
+  const [first_load,set_first_load]=useState(true)
 
   useEffect(()=>{
    
@@ -85,10 +86,17 @@ export default function ProminentAppBar() {
       return user.email==email;
     })
     if(res.length>0){
+      
       set_me(res[0]);
       dispatch(setMe(res[0]));
+      if(res[0].type==2){
+        dispatch(setDriverLocation(res[0].location_active));
+      }
+    
     }
   },[u,auth]);
+
+ 
 
   
 
@@ -129,6 +137,11 @@ export default function ProminentAppBar() {
       
       if(me.type==1) return;
 
+      if(first_load==true){
+        set_first_load(false)
+        return;
+      }
+
       const key=me.key;
       console.log("driver =",key);
 
@@ -144,6 +157,17 @@ export default function ProminentAppBar() {
       })
 
   },[driverLocation]);
+
+  useEffect(()=>{
+    if(me==null) return;
+    const type=me.type;
+    if(type==1) return;
+    const location_active=me.location_active;
+    //dispatch(setDriverLocation(location_active));
+
+  },[me]);
+
+  
   return (
     <div className={classes.root} id="header">
       <AppBar position="static" style={{backgroundColor:"white"}}>
