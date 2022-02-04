@@ -356,7 +356,7 @@ const Places=()=>{
 
                }}>
                    <button style={{
-                       padding:"1rem",
+                       padding:"0.5rem",
                         border:"none",
                         backgroundColor:"#3f51b5",
                         borderRadius:"5px",
