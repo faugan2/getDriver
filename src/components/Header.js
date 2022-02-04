@@ -8,16 +8,19 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {useSelector,useDispatch} from "react-redux";
-import {selectTab,setTab,selectUsers, setMe,selectMe,selectLoading, setCode, setEtape, setLogin, setOldLogin} from "../features/counterSlice";
+import {selectTab,setTab,selectUsers, setMe,selectMe,selectLoading, setCode, setEtape, setLogin, setOldLogin, selectDriverLocation} from "../features/counterSlice";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import {auth} from "../firebase_file";
+import {auth,db} from "../firebase_file";
 import {useHistory} from "react-router";
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import LockIcon from '@material-ui/icons/Lock';
-
-
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import LocationOffIcon from '@material-ui/icons/LocationOff';
+import Modal from "./admin/Modal";
+import EnableDisableLocation from './EnableDisableLocation';
+import firebase from "firebase";
 export default function ProminentAppBar() {
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -111,6 +114,36 @@ export default function ProminentAppBar() {
   const go_to_search=()=>{
     history.push("/recherche");
   }
+
+  const enable_disabled_location=()=>{
+    set_open(true);
+  }
+
+  const [open,set_open]=useState(false);
+  const close_modal=()=>{
+    set_open(false);
+  }
+  const driverLocation=useSelector(selectDriverLocation);
+  useEffect(()=>{
+      if(me==null) return;
+      
+      if(me.type==1) return;
+
+      const key=me.key;
+      console.log("driver =",key);
+/*
+      db.collection("users").doc(key)
+      .update({
+        location_active:driverLocation,
+        date:firebase.firestore.FieldValue.serverTimestamp()
+      },{merge:true})
+      .then(()=>{
+        console.log("driver location activation uupdated")
+      }).catch((err)=>{
+        console.log("error updating the driver location")
+      })*/
+
+  },[driverLocation,me]);
   return (
     <div className={classes.root} id="header">
       <AppBar position="static" style={{backgroundColor:"white"}}>
@@ -119,12 +152,27 @@ export default function ProminentAppBar() {
         
           <h2 style={{color:"black",position:"absolute",left:"1rem",fontSize:"1rem"}}>Get Driver</h2>
           
+          {me?.type==2 && <IconButton aria-label="search" color="inherit" onClick={enable_disabled_location}>
+            {driverLocation==false && <LocationOffIcon  style={{color:"gray"}}/>}
+            {driverLocation==true && <LocationOnIcon  style={{color:"gray"}}/>}
+          </IconButton>
+          }
+
           <IconButton aria-label="search" color="inherit" onClick={go_to_search}>
             <SearchIcon  style={{color:"black"}}/>
           </IconButton>
+
           <IconButton aria-label="display more actions" edge="end" color="inherit" onClick={handleClick} style={{color:"black"}}>
             <MoreIcon />
           </IconButton>
+
+          {
+            open==true && <Modal 
+            open={true}
+            content={<EnableDisableLocation click={close_modal}/>}
+
+            />
+          }
 
           <Menu
             id="simple-menu"

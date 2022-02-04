@@ -30,6 +30,7 @@ const initialState = {
   login:null,
   oldLogin:null,
   onLine:false,
+  driverLocation:false,
   
   
 };
@@ -132,6 +133,9 @@ export const counterSlice = createSlice({
   },
   setDepartName:(state,action)=>{
     state.departName=action.payload;
+  },
+  setDriverLocation:(state,action)=>{
+    state.driverLocation=action.payload;
   }
    
   
@@ -167,6 +171,7 @@ export const {
   setOldLogin,
   setOnline,
   setDepartName,
+  setDriverLocation
 
 } = counterSlice.actions;
 
@@ -199,5 +204,6 @@ export const selectLogin=(state)=> state.counter.login;
 export const selectOldLogin=(state)=> state.counter.oldLogin;
 export const selectOnline=(state)=> state.counter.onLine;
 export const selectDepartName=(state)=> state.counter.departName;
+export const selectDriverLocation=(state)=> state.counter.driverLocation;
 
 export default counterSlice.reducer;
