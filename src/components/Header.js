@@ -153,7 +153,8 @@ export default function ProminentAppBar() {
         console.log("driver error updating the driver location")
       })
       const icon=document.querySelector(".active_location");
-      if(icon==undefined){
+      console.log("the icon is ",icon);
+      if(icon==undefined || icon==null){
         return;
       }
       animate_location_icon(icon.parentNode);
@@ -164,6 +165,11 @@ export default function ProminentAppBar() {
   const [op,set_op]=useState(0.5);
   const animate_location_icon=(icon)=>{
     console.log("calling opacity")
+
+    if(icon==undefined){
+      console.log("the icon is undefined");
+      return;
+    }
     let new_op;
    if(op==1){
      new_op=0.5;
