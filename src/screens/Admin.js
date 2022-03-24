@@ -1,4 +1,4 @@
-import "./admin.scss";
+import "../styles/admin.scss";
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';

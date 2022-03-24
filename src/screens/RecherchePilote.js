@@ -1,8 +1,8 @@
 import {useState,useEffect} from "react";
 import { useSelector,useDispatch} from "react-redux";
-import {selectCourse, selectUsers} from "../features/counterSlice";
+import {selectCourse, selectUsers,selectMe,setPilote,setClient,setCommande} from "../features/counterSlice";
 import HeaderBack from "../components/HeaderBack";
-import "./recherche_pilote.scss";
+import "../styles/recherche_pilote.scss";
 import CallIcon from '@material-ui/icons/Call';
 import LocalTaxiIcon from '@material-ui/icons/LocalTaxi';
 import DirectionsBusIcon from '@material-ui/icons/DirectionsBus';
@@ -11,7 +11,11 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import {taxi,vehicule_leger,vehicule_lourd,bus} from "../components/img";
 import Pilote from "../components/Pilote";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import BottomSheet from "../components/BottomSheet";
+import PiloteFound from "../components/PiloteFound";
+import {auth,db} from "../firebase_file";
 
+const moment=require("moment-timezone");
 const RecherchePilote=()=>{
     const c=useSelector(selectCourse);
     const [course,set_course]=useState(null);
@@ -19,25 +23,80 @@ const RecherchePilote=()=>{
     const users=useSelector(selectUsers);
     const [pilotes,set_pilotes]=useState([]);
     const [loading,set_loading]=useState(true);
+    const [position,set_position]=useState(null);
+    const [open,set_open]=useState(false);
+
+    const me=useSelector(selectMe);
+    const dispatch= useDispatch();
+
     useEffect(()=>{
         if(c==null) return;
+        
+
         let type=c.type.index;
         const res=users.filter((user)=>{
             return user.type==2 && user.pilote==type;
         })
-        console.log("pilotes are ",res);
-        set_loading(true);
-        set_pilotes(res);
+        
+        
+
+       const res2= res.filter((item,i)=>{
+            const location=item.location;
+            return location!=undefined;
+        })
+
+        const res3=res2.filter((item,i)=>{
+            const active=item.location_active;
+            const available=item.available;
+            
+            if(active==undefined) return false;
+            if(available==undefined) return false;
+
+
+            return (active && available);
+        })
+       
+        set_loading(false);
+        set_pilotes(res3);
+
     },[users,c]);
     useEffect(()=>{
         set_course(c);
-        console.log("we got",c)
         if(c==null) return;
-        var d=new Date(c?.date?.seconds*1000).toUTCString();
-        d=d.split(" ");
-        d=d[1]+" "+d[2]+" "+d[3];
+        var d=moment(c?.date?.seconds*1000).format("ll");
         set_date(d);
     },[c])
+
+    useEffect(()=>{
+        const id=navigator.geolocation.watchPosition(function(position) {
+            
+            const objet={lat:position.coords.latitude,lng:position.coords.longitude};
+            console.log("position of client ",objet);
+            db.collection("users").doc(me?.key).update({location:objet},{merge:true});
+
+            
+          },
+
+          (err)=>{console.log("erreur=",err)},
+          { enableHighAccuracy: true, timeout: 5000},
+          );
+
+          return ()=>{
+              console.log("position of we must clear the watch");
+              navigator.geolocation.clearWatch(id);
+          }
+    },[]);
+
+    const open_bottom=(pilote,course)=>{
+        dispatch(setPilote(pilote));
+        dispatch(setClient(me));
+        dispatch(setCommande(course));
+        set_open(true);
+    }
+    const close_bottom=()=>{
+        set_open(false);
+        dispatch(setPilote(null));
+    }
     return (
         <div className="recherche">
             <HeaderBack title="Recherche de pilotes" />
@@ -69,7 +128,14 @@ const RecherchePilote=()=>{
                            {
                                pilotes.map((pilote)=>{
                                    return(
-                                       <Pilote key={pilote.key} pilote={pilote}/>
+                                       <Pilote 
+                                       key={pilote.key} 
+                                       pilote={pilote} 
+                                       distance={true} 
+                                       me={me}
+                                       course={c}
+                                       click={open_bottom.bind(this,pilote,c)}
+                                       />
                                    );
                                })
                            }
@@ -128,6 +194,8 @@ const RecherchePilote=()=>{
                     </div>
                 </div>
             </div>
+
+            {open==true && <BottomSheet content={<PiloteFound click={close_bottom} />} />}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import HeaderBack from "../components/HeaderBack";
-import "./discuter.scss";
+import "../styles/discuter.scss";
 import SendIcon from '@material-ui/icons/Send';
 import {selectDriver} from "../features/counterSlice";
 import {useDispatch,useSelector} from "react-redux";

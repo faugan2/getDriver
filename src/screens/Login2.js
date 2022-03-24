@@ -1,4 +1,4 @@
-import "./login2.scss";
+import "../styles/login2.scss";
 import LoginFooter from "../components/LoginFooter";
 import LoginEtape1 from "../components/LoginEtape1";
 import {useState,useEffect} from "react";

@@ -1,17 +1,34 @@
 import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { selectCourses, selectUsers } from '../features/counterSlice';
-import { useSelector } from 'react-redux';
+import { selectCourses, selectUsers,selectDriverLocation,setOpenLocation } from '../features/counterSlice';
+import {selectCourse,selectMe,setPilote,setClient,setCommande} from "../features/counterSlice";
+import { useSelector,useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import {auth,db} from "../firebase_file";
 import SearchIcon from '@material-ui/icons/Search';
 import Course from './Course';
+import RoomIcon from '@material-ui/icons/Room';
+import "../styles/passengers.scss";
+import PiloteFound from './PiloteFound';
+import BottomSheet from "./BottomSheet";
+
 export default function Passengers() {
   const classes = useStyles();
+  const dispatch= useDispatch();
+
   const [data,set_data]=useState([]);
   const c=useSelector(selectCourses)
   const users=useSelector(selectUsers);
+  const location=useSelector(selectDriverLocation);
+  const me=useSelector(selectMe);
+
+  const [location_active,set_location_active]=useState(false);
+ const [open,set_open]=useState(false);
+
+  useEffect(()=>{
+    set_location_active(location);
+  },[location]);
 
   useEffect(()=>{
     const res=users.filter((user)=>{
@@ -28,9 +45,13 @@ export default function Passengers() {
     console.log("courses are",res2)
   },[c,users]);
 
-  const remove_course=async (e,key)=>{
+    const remove_course=async (e,key)=>{
    
-}
+    }
+
+    const open_activate_location=()=>{
+        dispatch(setOpenLocation(true));
+    }
 
 const go_to_recherche_pilote=(e,key,destination,destination_name,user,price,date,categorie,origin,type,distance,search)=>{
    /* const course={
@@ -49,6 +70,33 @@ const go_to_recherche_pilote=(e,key,destination,destination_name,user,price,date
     history.push("/recherche_pilote");*/
 }
 
+
+    const open_bottom=(pilote,course)=>{
+        dispatch(setPilote(pilote));
+        dispatch(setClient(me));
+        dispatch(setCommande(course));
+        set_open(true);
+    }
+    const close_bottom=()=>{
+        set_open(false);
+        dispatch(setPilote(null));
+        dispatch(setClient(null));
+    }
+    if(location_active==false){
+        return(
+            <div className="location_off">
+                <p>Activez votre localisation géographique pour : </p>
+                <ul>
+                    <li>Voir les courses</li>
+                    <li>Etre visible aux passagers</li>
+                </ul>
+                <button onClick={open_activate_location}>
+                    <RoomIcon style={{fontSize:"1.2re"}}/>
+                    Activer ma localisation</button>
+            </div>
+        )
+    }
+
   return (
     <div className={classes.container}>
        {data.length==0 && <h1>Aucune course</h1>}
@@ -59,7 +107,9 @@ const go_to_recherche_pilote=(e,key,destination,destination_name,user,price,date
         {
             data.length>0 && <div>
                {
-			   data.map(({key,destination,destination_name,user,price,date,categorie,origin,type,distance,str_date,search})=>{
+			   data.map((course,i)=>{
+                   const {key,destination,destination_name,user,price,date,categorie,origin,type
+                    ,distance,str_date,search}=course;
 				let d=new Date(date?.seconds*1000).toUTCString();  
                 //let d=str_date
 				   d=d.split(" ");
@@ -97,8 +147,13 @@ const go_to_recherche_pilote=(e,key,destination,destination_name,user,price,date
 					d={d}
 					remove_course={e=>remove_course(e,key)}
 					go_to_recherche_pilote={e=>{
-						go_to_recherche_pilote(e,key,destination,destination_name,user,price,date,categorie,origin,type,distance,search)
+                        open_bottom(me,course);
+						//go_to_recherche_pilote(e,key,destination,destination_name,user,price,date,categorie,origin,type,distance,search)
 					}}
+
+                    me={me}
+                    course={course}
+                    click={open_bottom.bind(this,me,course)}
 				   />
 				  
 				   
@@ -106,6 +161,8 @@ const go_to_recherche_pilote=(e,key,destination,destination_name,user,price,date
 		   }
             </div>
         }
+
+        {open==true && <BottomSheet content={<PiloteFound click={close_bottom} />} />}
     </div>
   );
 }

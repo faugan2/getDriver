@@ -1,4 +1,4 @@
-import "./login_etape3.scss";
+import "../styles/login_etape3.scss";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';

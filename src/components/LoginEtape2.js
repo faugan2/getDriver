@@ -1,4 +1,4 @@
-import "./login_etape2.scss";
+import "../styles/login_etape2.scss";
 import {useSelector,useDispatch} from "react-redux";
 import { selectLogin,setLogin,selectCode, setEtape, } from "../features/counterSlice";
 import {useState,useEffect,useRef} from "react";

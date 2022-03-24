@@ -23,7 +23,7 @@
             position:absolute;
             bottom:1rem;
             right:0.5rem;
-            background-color:#3f51b5;
+            background-color:var(--color);
             width:3rem;
             height:3rem;
             border-radius:50%;
@@ -54,21 +54,23 @@
             >div{
                 display:flex;
                 align-items:center;
-                background-color:white;
-                border-bottom: 1px solid silver;
+                background-color:gray;
+                margin-top: 0.5rem;
                 >input{
-                    padding:1rem;
+                    padding:0.8rem;
                     flex:1;
                     border:none;
                     outline:none;
+                    background-color:gray;
+                    color:white;
                 }
             }
 
             >button{
                 padding:1rem;
-                width:120px;
-                background-color:#3f51b5;
-                color:white;
+                width:150px;
+                background-color:white;
+                color:var(--main);
                 border:none;
                 font-weight: bold;
                 border-radius: 3px;

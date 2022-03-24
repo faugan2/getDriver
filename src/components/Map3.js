@@ -3,7 +3,7 @@ import { useSelector, useDispatch} from "react-redux";
 import {selectDepart,selectDestination, setDepartName, setDistance, setMaps} from "../features/counterSlice";
 import { Loader } from "@googlemaps/js-api-loader"
 import RoomIcon from '@material-ui/icons/Room';
-import "./map3.scss";
+import "../styles/map3.scss";
 const Map3=()=>{
     
       const dispatch= useDispatch();
@@ -45,7 +45,7 @@ function haversine_distance(mk1, mk2) {
 
         
        
-       /* if(loader==null || loader==undefined || depart==null) return;
+       if(loader==null || loader==undefined || depart==null) return;
 
         set_center({ lat: depart.lat, lng: depart.lng });
 
@@ -90,7 +90,7 @@ function haversine_distance(mk1, mk2) {
         dispatch(setDistance(distance));
         console.log("the disatnce is",distance);
 
-        });*/
+        });
         
     },[loader,depart,destination]);
 
@@ -101,7 +101,7 @@ function haversine_distance(mk1, mk2) {
     },[map])
 
     useEffect(()=>{
-        /*if(depart==null) return;
+        if(depart==null) return;
         const google=window.google;
         var geocoder  = new google.maps.Geocoder();
         const lat=depart.lat;
@@ -115,7 +115,7 @@ function haversine_distance(mk1, mk2) {
                     dispatch(setDepartName(results[1].formatted_address));
                 }
             }
-        });*/
+        });
 
        // console.log("geocoder is",latlng);
     },[depart])

@@ -3,7 +3,7 @@ import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux";
 import {selectTab,setTab,selectUsers, setMe,selectMe,selectLoading} from "../features/counterSlice";
 import { useHistory } from 'react-router';
-import "./headerback.scss";
+import "../styles/headerback.scss";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const HeaderBack =({title})=>{
 	const history=useHistory();
@@ -24,7 +24,7 @@ const HeaderBack =({title})=>{
 	return(
 		<div className="headerback">
 			<button onClick={go_back}>
-			<ArrowBackIcon style={{color:"black"}}/>
+			<ArrowBackIcon style={{color:"white"}}/>
 			</button>
 			{title}
 		</div>

@@ -8,7 +8,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {useSelector,useDispatch} from "react-redux";
-import {setDriverLocation,selectTab,setTab,selectUsers, setMe,selectMe,selectLoading, setCode, setEtape, setLogin, setOldLogin, selectDriverLocation} from "../features/counterSlice";
+import {setDriverLocation,selectTab,setTab,selectUsers, setMe,selectMe,selectLoading, 
+  setCode, setEtape, setLogin, setOldLogin, selectDriverLocation,selectOpenLocation,setOpenLocation,
+  selectAvailable, selectCommandes,setInteraction,selectInteraction,setClient,setPilote,selectClient,selectPilote,
+  setCommande
+} from "../features/counterSlice";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -21,6 +25,12 @@ import LocationOffIcon from '@material-ui/icons/LocationOff';
 import Modal from "./admin/Modal";
 import EnableDisableLocation from './EnableDisableLocation';
 import firebase from "firebase";
+import "../styles/header.scss";
+import BlockIcon from '@material-ui/icons/Block';
+import Available from "./Available";
+import BottomSheet from "./BottomSheet";
+import PiloteFound from './PiloteFound';
+
 export default function ProminentAppBar() {
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -32,7 +42,7 @@ export default function ProminentAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const classes = useStyles();
+ 
   const [tab,set_tab]=useState(0)
   const dispatch= useDispatch();
   const history=useHistory();
@@ -40,6 +50,7 @@ export default function ProminentAppBar() {
   const tab_index=useSelector(selectTab);
   const m=useSelector(selectMe)
   const loading=useSelector(selectLoading);
+  const ol=useSelector(selectOpenLocation);
   
   useEffect(()=>{
 	if(m==null && loading==false){
@@ -48,13 +59,10 @@ export default function ProminentAppBar() {
 },[m,loading])
 
   const handle_set_tab=(index)=>{
-      console.log(index);
       if(index==undefined){
           return;
       }
       dispatch(setTab(index));
-     // set_tab(index);
-     console.log("here we go",index)
   }
 
   const logout=()=>{
@@ -102,7 +110,7 @@ export default function ProminentAppBar() {
 
   useEffect(()=>{
     set_tab(tab_index);
-    const btns=document.querySelectorAll("#top_btns > button");
+    const btns=document.querySelectorAll(".bottom > button");
     btns.forEach((btn)=>{
         btn.classList.remove("active");
     })
@@ -120,7 +128,10 @@ export default function ProminentAppBar() {
   }
 
   const go_to_search=()=>{
-    history.push("/recherche");
+    const zone=document.querySelector(".top_search.p");
+    if(zone==null){
+      history.push("/recherche");
+    }
   }
 
   const enable_disabled_location=()=>{
@@ -130,6 +141,7 @@ export default function ProminentAppBar() {
   const [open,set_open]=useState(false);
   const close_modal=()=>{
     set_open(false);
+    dispatch(setOpenLocation(false))
   }
   const driverLocation=useSelector(selectDriverLocation);
   useEffect(()=>{
@@ -137,10 +149,13 @@ export default function ProminentAppBar() {
       
       if(me.type==1) return;
 
-      
+
+      if(driverLocation== null) return;
 
       const key=me.key;
       console.log("driver =",key);
+
+      console.time("Updating");
 
       db.collection("users").doc(key)
       .update({
@@ -152,38 +167,20 @@ export default function ProminentAppBar() {
       }).catch((err)=>{
         console.log("driver error updating the driver location")
       })
+
+      console.timeEnd("Updating");
       const icon=document.querySelector(".active_location");
       console.log("the icon is ",icon);
       if(icon==undefined || icon==null){
         return;
       }
-      animate_location_icon(icon.parentNode);
+     /// animate_location_icon(icon?.parentNode);
 
 
 
   },[driverLocation]);
   const [op,set_op]=useState(0.5);
-  const animate_location_icon=(icon)=>{
-    console.log("calling opacity")
-
-    if(icon==undefined){
-      console.log("the icon is undefined");
-      return;
-    }
-    let new_op;
-   if(op==1){
-     new_op=0.5;
-   }else{
-     new_op=1;
-   }
-    setTimeout(()=>{
-      icon.style.opacity=new_op;
-      set_op(new_op);
-      animate_location_icon(icon);
-    },1000)
-
-    
-  }
+  
 
   useEffect(()=>{
     if(me==null) return;
@@ -194,36 +191,121 @@ export default function ProminentAppBar() {
 
   },[me]);
 
+  useEffect(()=>{
+    set_open(ol);
+  },[ol])
+
+  const [available,set_available]=useState(false);
+  const a=useSelector(selectAvailable);
+  const [open_available,set_open_available]=useState(false);
+  useEffect(()=>{
+    set_available(a);
+  },[a]);
+
+
+  const handle_available=()=>{
+    set_open_available(true);
+  }
+  const close_modal_available=()=>{
+    set_open_available(false);
+  }
+
+  const commandes=useSelector(selectCommandes);
+  const client=useSelector(selectClient);
+  const pilote=useSelector(selectPilote);
+
+  const [open_interaction,set_open_interaction]=useState(false);
+
+  useEffect(()=>{
+    if(u==null) return;
+    if(commandes==null) return;
+
+    const res=commandes.filter((item)=>{
+      return item?.client==m?.key || item?.pilote==m?.key;
+    })
+    
+    if(res.length==0) return;
+    const line=res[0];
+    dispatch(setCommande(line));
+
+    const pilote_key=line.pilote;
+    const client_key=line.client;
+    
+    const res_client=u.filter((item)=>{
+      return item.key==client_key;
+    })
+    if(res_client.length>0){
+      dispatch(setClient(res_client[0]));
+    }
+
+    const res_pilote=u.filter((item)=>{
+      return item.key==pilote_key;
+    })
+
+    if(res_pilote.length>0){
+      dispatch(setPilote(res_pilote[0]));
+    }
+
+  },[commandes,u])
+
+  useEffect(()=>{
+    if(client==null || pilote==null || commandes==null || commandes?.length==0){
+      set_open_interaction(false);
+    }else{
+      set_open_interaction(true);
+    }
+  },[client,pilote,commandes])
   
   return (
-    <div className={classes.root} id="header">
-      <AppBar position="static" style={{backgroundColor:"white"}}>
-        <Toolbar className={classes.toolbar} style={{position:"relative"}}>
-         
-        
-          <h2 style={{color:"black",position:"absolute",left:"1rem",fontSize:"1rem"}}>Get Driver</h2>
-          
-          {me?.type==2 && <IconButton aria-label="search" color="inherit" onClick={enable_disabled_location}>
-            {driverLocation==false && <LocationOffIcon  style={{color:"gray"}}/>}
-            {driverLocation==true && <LocationOnIcon  style={{color:"#3f51b5"}} className="active_location" />}
-          </IconButton>
-          }
+    <div className="header">
+     
 
-          <IconButton aria-label="search" color="inherit" onClick={go_to_search}>
-            <SearchIcon  style={{color:"black"}}/>
-          </IconButton>
-
-          <IconButton aria-label="display more actions" edge="end" color="inherit" onClick={handleClick} style={{color:"black"}}>
-            <MoreIcon />
-          </IconButton>
-
-          {
+        {
             open==true && <Modal 
             open={true}
             content={<EnableDisableLocation click={close_modal}/>}
 
             />
           }
+
+        {
+            open_available==true && <Modal 
+            open={true}
+            content={<Available click={close_modal_available} available={available} />}
+
+            />
+          }
+
+        <div className="top">
+          <h2>Get Driver</h2>
+         
+          <div className={`top_search ${me?.type==2 ? "p":"c" }`}  onClick={go_to_search}>
+              <SearchIcon  style={{color:"gray",fontSize:"1.2rem"}}/>
+              Rechercher
+          </div>
+          {
+            me?.type==2 && 
+            <button 
+            onClick={handle_available}
+            style={{padding:"0 0.5rem",backgroundColor:"transparent",border:"none"}}
+            >
+              {available==false && <BlockIcon style={{color:"white"}} />}
+              {available==true && <BlockIcon style={{color:"var(--color)"}} />}
+            </button>
+          }
+          {me?.type==2 && 
+          <button  onClick={enable_disabled_location} 
+          style={{padding:"0 0.5rem",backgroundColor:"transparent",border:"none"}}
+          >
+            {driverLocation==false && <LocationOffIcon  style={{color:"white"}}/>}
+            {driverLocation==true && <LocationOnIcon  style={{color:"var(--color)"}} className="active_location" />}
+          </button>
+          }
+
+          
+          <IconButton aria-label="display more actions" edge="end" color="inherit" onClick={handleClick}>
+            <MoreIcon style={{color:"white"}} />
+          </IconButton>
 
           <Menu
             id="simple-menu"
@@ -244,10 +326,10 @@ export default function ProminentAppBar() {
          </Menu>
 
 
-        </Toolbar>
+        </div>
 
         {
-          me?.type==1 &&  <div className={classes.bottom} id="top_btns">
+          me?.type==1 &&  <div className="bottom" >
           <button onClick={(e)=>{handle_set_tab(0)}}>Pilote</button>
           <button onClick={(e)=>{handle_set_tab(1)}}>Historique</button>
           <button onClick={(e)=>{handle_set_tab(2)}}>Contacts</button>
@@ -255,7 +337,7 @@ export default function ProminentAppBar() {
         }
 
         {
-          me?.type==2 &&  <div className={classes.bottom} id="top_btns">
+          me?.type==2 &&  <div className="bottom" >
           <button onClick={(e)=>{handle_set_tab(0)}}>Courses</button>
           <button onClick={(e)=>{handle_set_tab(1)}}>Historique</button>
           <button onClick={(e)=>{handle_set_tab(2)}}>Contacts</button>
@@ -263,55 +345,8 @@ export default function ProminentAppBar() {
         }
        
 
-        
-      </AppBar>
+       {open_interaction==true && <BottomSheet content={<PiloteFound click={null} />} />}
+      
     </div>
   );
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-   
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-   
-  },
-  toolbar: {
-   
-    alignItems: 'center',
-    display:"flex",
-    justifyContent:"flex-end"
-    
-  },
-  title: {
-    flexGrow: 1,
-    alignSelf: 'flex-end',
-    opacity:0,
-  },
-
-  bottom:{
-      display:"flex",
-      justifyContent:"center",
-      "& > button":{
-          flex:1,
-          padding:"0.3rem",
-          border:"none",
-          backgroundColor:"transparent",
-          color:"gray",
-          fontSize:"0.9rem",
-          display:"flex",
-          justifyContent:"center",
-          alignItems:"center",
-          outline:"none",
-          cursor:"pointer",
-          "&.active":{
-            borderBottom:"2px solid black",
-            color:"black"
-            
-          }
-      }
-  }
-
-}));

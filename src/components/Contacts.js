@@ -6,7 +6,7 @@ import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import CommuteIcon from '@material-ui/icons/Commute';
 import img from "./img/paella.jpg";
-import "./contacts.scss";
+import "../styles/contacts.scss";
 
 const Services=()=>{
     const styles=useStyles();

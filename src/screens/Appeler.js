@@ -2,7 +2,7 @@ import HeaderBack from "../components/HeaderBack";
 import {selectDriver} from "../features/counterSlice";
 import {useDispatch,useSelector} from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
-import "./appeler.scss";
+import "../styles/appeler.scss";
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import img from "../components/img/1.jpg";
 import MicOffIcon from '@material-ui/icons/MicOff';

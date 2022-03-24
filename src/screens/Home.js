@@ -90,6 +90,7 @@ const Home=()=>{
 
     useEffect(()=>{
         setIndex(tab_index);
+        console.log("the tab index is ",tab_index);
     },[tab_index]);
 
     const handleChangeIndex=(index)=>{
@@ -134,9 +135,10 @@ const Home=()=>{
          
             <Header />
             <SwipeableViews enableMouseEvents index={index} onChangeIndex={handleChangeIndex}>
-                <div style={Object.assign({}, styles.slide, styles.slide1,{height:h})} className="slide" id="slide1">
-                    {me?.type==1 && <Main />}
-                    {me?.type==2 &&  <Passengers /> }
+                <div style={Object.assign({}, styles.slide, styles.slide1,{height:"var(100vh - 160px)"})} 
+                className="slide" id="slide1">
+                    {(me?.type==1 && index==0) && <Main />}
+                    {(me?.type==2 && index==0) &&  <Passengers /> }
                     {
                         me==null && 
                             <div style={{
@@ -157,11 +159,11 @@ const Home=()=>{
                    
                     
                 </div>
-                <div style={Object.assign({}, styles.slide, styles.slide2,{height:h})} className="slide" id="slide2">
-                   <History />
+                <div style={Object.assign({}, styles.slide, styles.slide2,{height:"var(100vh - 160px)"})} className="slide" id="slide2">
+                   {index==1 && <History />}
                 </div>
-                <div style={Object.assign({}, styles.slide, styles.slide3,{height:h})} className="slide" id="slide3">
-                    <Contacts />
+                <div style={Object.assign({}, styles.slide, styles.slide3,{height:"var(100vh - 160px)"})} className="slide" id="slide3">
+                    {index==2 && <Contacts />}
                 </div>
                 
         </SwipeableViews>

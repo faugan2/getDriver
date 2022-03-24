@@ -1,19 +1,55 @@
 import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux";
 import {auth,db} from "../firebase_file";
-import {selectDriverLocation, setDriverLocation} from "../features/counterSlice"
-import "./enable_disable_location.scss";
+import {selectDriverLocation, setDriverLocation,setOpenLocation,selectMe} from "../features/counterSlice"
+import CloseIcon from '@material-ui/icons/Close';
+import "../styles/enable_disable_location.scss";
 
 const EnableDisableLocation=({click})=>{
     const location=useSelector(selectDriverLocation);
     const dispatch= useDispatch();
-    console.log("driver location is ",location);
-    const update_location=()=>{
-        dispatch(setDriverLocation(!location))
-        click();
+    const me=useSelector(selectMe)
+   
+    const update_location=async ()=>{
+        
+        if(location==false){
+            (async()=>{
+               navigator.geolocation.watchPosition(async function (position) {
+                    
+                    const rand=0;
+
+                    const objet={lat:position.coords.latitude+rand,lng:position.coords.longitude+rand};
+                    console.log("updating position=",rand);
+                    await db.collection("users").doc(me?.key).update({location:objet},{merge:true});
+                    dispatch(setDriverLocation(!location));
+                    dispatch(setOpenLocation(false));
+                    click();
+                },
+        
+                  showError,
+                  { enableHighAccuracy: true, timeout: 5000},
+                  );
+            })();
+        }else{
+            dispatch(setDriverLocation(!location));
+            dispatch(setOpenLocation(false));
+            click();
+        }
     }
+
+    const showError=(err)=>{
+        console.log("updating there is an ERROR",err)
+    }
+
+    useEffect(()=>{
+       if(location==false){
+           console.log("updating going to ask for it")
+       }
+    },[location]);
     return(
         <div className="enable_disabled_location">
+
+            
             {location==false &&
             
                 <div className="line">
@@ -35,6 +71,15 @@ const EnableDisableLocation=({click})=>{
                     <button onClick={update_location} className="btn_disable_location">Désactivée ma localisation</button>
                 </div>
             }
+            <div className="btn_close">
+                <button onClick={e=>{
+                    click();
+                    dispatch(setOpenLocation(false));
+                }}>
+                    <CloseIcon style={{color:"gray",fontSize:"1.2rem"}}/>
+                </button>
+            </div>
+           
             
         </div>
     );

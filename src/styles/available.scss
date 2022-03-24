@@ -1,0 +1,42 @@
+.available{
+    display:flex;
+    flex-direction:column;
+    padding:0;
+    margin:0;
+    >.btn_close{
+        
+        width:40px;
+        height:40px;
+        border-radius: 50%;
+        border:none;
+        color:gray;
+        margin:auto;
+        margin-top: 2rem;
+    }
+
+    >.btn_add{
+        padding:0.6rem;
+        border:none;
+        background-color:var(--main);
+        color:white;
+        border-radius: 3px;
+        font-weight: bold;
+    }
+    >.btn_remove{
+        padding:0.6rem;
+        border:none;
+        background-color:indianred;
+        color:white;
+        border-radius: 3px;
+        font-weight: bold;
+        
+    }
+
+    >.alerte{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        margin-top: 1rem;
+        font-size: 0.8rem;
+    }
+}

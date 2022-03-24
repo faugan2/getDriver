@@ -1,4 +1,4 @@
-import "./sai.scss";
+import "../styles/sai.scss";
 import RoomIcon from '@material-ui/icons/Room';
 import CallIcon from '@material-ui/icons/Call';
 import EmailIcon from '@material-ui/icons/Email';

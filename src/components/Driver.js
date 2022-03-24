@@ -1,5 +1,5 @@
 import Avatar from '@material-ui/core/Avatar';
-import   "./driver.scss";
+import   "../styles/driver.scss";
 import avatar from "./img/1.jpg";
 import PersonIcon from '@material-ui/icons/Person';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';

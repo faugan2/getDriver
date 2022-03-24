@@ -8,10 +8,11 @@ import logo from "../components/img/logo.jpg"
 import {db} from "../firebase_file";
 
 import {useDispatch} from "react-redux";
-import {setUsers,setLoading, setTarifs, setPublicites, setCourses, setOnline} from "../features/counterSlice";
+import {setUsers,setLoading, setTarifs, setPublicites, setCourses, setOnline,setCommandes} from "../features/counterSlice";
+import "prevent-pull-refresh";
+import "../styles/splash.scss";
 
 const Splash = () => {
-    const styles=useStyles();
     const history=useHistory();
     const dispatch= useDispatch();
 	const [loading,set_loading]=useState(false);
@@ -23,7 +24,7 @@ const Splash = () => {
             }else{
                 const email=auth?.currentUser.email;
                 
-                history.replace("/main");
+               history.replace("/main");
             }
         })
        
@@ -50,6 +51,7 @@ const Splash = () => {
            await load_tarifs();
            await load_pub();
            await load_courses();
+           await load_commandes();
            //send to redux;
         })
     }
@@ -70,6 +72,20 @@ const Splash = () => {
             })
             dispatch(setTarifs(d));
             console.log("traif=",d);
+        })
+    }
+
+    const load_commandes=async ()=>{
+        db.collection("commandes").onSnapshot((snap)=>{
+            const d=[];
+            snap.docs.map((doc)=>{
+                const key=doc.id;
+                const data=doc.data();
+                data.key=key;
+                d.push(data)
+            })
+            dispatch(setCommandes(d));
+            
         })
     }
 
@@ -128,35 +144,20 @@ const Splash = () => {
 
     
     return (
-        <div className={styles.container}>
-             <div style={{width:100,height:100}}>
+        <div className="splash">
+             <div style={{width:100,height:100}} className="top">
                <img src={logo} style={{width:"100%"}}/>
              </div>
-            <CircularProgress style={{color:"#3f51b5"}} size={15} />
-            <p style={{fontSize:"0.8rem",fontWeight:"bold"}}>Chargement...</p>
+            <CircularProgress style={{color:"var(--color)"}} size={15} />
+            <p style={{fontSize:"0.8rem",fontWeight:"bold",color:"var(--color)"}}>Chargement...</p>
+
+            <div className="bottom">
+                <p>from</p>
+                <p>Service Afrique International</p>
+            </div>
         </div>
     )
 }
 
 export default Splash
 
-
-const useStyles = makeStyles((theme) => ({
-
-    container:{
-        backgroundColor:"#e8e8e8",
-        display:"flex",
-        height:"100vh",
-        justifyContent:"center",
-        alignItems:"center",
-        flexDirection:"column",
-        color:"black",
-    },
-
-    root: {
-      display: 'flex',
-      '& > * + *': {
-        marginLeft: theme.spacing(2),
-      },
-    },
-  }));

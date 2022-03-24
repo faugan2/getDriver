@@ -1,4 +1,6 @@
 .enable_disabled_location{
+    position:relative;
+    
     >.line{
         display:flex;
         flex-direction:column;
@@ -20,13 +22,32 @@
         }
 
         >.btn_activer_location{
-            background-color:#3f51b5;
+            background-color:var(--main);
             color:white;
+            padding:0.6rem;
         }
 
         >.btn_disable_location{
             background-color:indianred;
             color:white;
+            padding:0.6rem;
         }
+    }
+
+    >.btn_close{
+    
+    margin-top: 1rem;
+   display:flex;
+    justify-content:center;
+    >button{
+        width:40px;
+        height:40px;
+        border-radius: 50%;
+        border:none;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
     }
 }

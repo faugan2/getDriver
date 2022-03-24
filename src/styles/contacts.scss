@@ -1,0 +1,21 @@
+.contacts{
+   
+    min-height:calc(100vh - 160px);
+    >.body{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        padding:1rem;
+        gap:1rem;
+        >h1{
+             font-size:0.8rem;
+             margin-bottom: 1rem;
+             text-align:center;
+        }
+        > p{
+            font-size:0.8rem;
+            text-align:center;
+        }
+    }
+   
+}

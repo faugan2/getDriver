@@ -1,7 +1,7 @@
 import HeaderBack from "../components/HeaderBack";
 import {auth,db,storage} from "../firebase_file";
 import img from "../components/img/1.jpg";
-import "./profile.scss";
+import "../styles/profile.scss";
 import {useSelector,useDispatch} from "react-redux";
 import {selectCourses, selectMe, setMe} from "../features/counterSlice";
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
@@ -10,6 +10,7 @@ import {useState,useEffect, useRef} from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import EditIcon from '@material-ui/icons/Edit';
 import CheckIcon from '@material-ui/icons/Check';
+
 const Profile=()=>{
 	
 

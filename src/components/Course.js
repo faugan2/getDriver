@@ -16,7 +16,7 @@ const Course=({go_to_recherche_pilote,key,d,destination,destination_name,user,
                 position:"absolute",
                 right:"0rem",
                 top:"0rem",
-                
+                zIndex:"1",
                 height:"1.5rem",
                 border:"none",
                 background:"none",

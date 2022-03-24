@@ -20,8 +20,8 @@
 
             >button{
                 border:none;
-                background-color:#e8e8e8;
-                color:#3f51b5;
+                background-color:transparent;
+                color:var(--color);
             }
         }
     }
@@ -33,18 +33,19 @@
             display:flex;
             align-items:center;
             justify-content:center;
-            background-color:white;
+            background-color:gray;
             width:150px;
             margin:auto;
-            border-bottom: 1px solid silver;
+           
             >input{
                 width:150px;
-                padding:1rem;
+                padding:0.8rem;
                 border:none;
                 outline:none;
                 text-align:center;
                 letter-spacing: 10px;
-                
+                background-color:gray;
+                color:white;
             }
         }
 
@@ -57,9 +58,9 @@
                 font-size: 0.8rem;
                 >button{
                     border:none;
-                    background-color:#e8e8e8;
+                    background-color:transparent;
                     padding:0.5rem;
-                    color:#3f51b5;
+                    color:var(--color);
                 }
             }
         }

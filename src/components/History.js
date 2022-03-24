@@ -14,7 +14,7 @@ import {useDispatch} from "react-redux";
 import {setCourse} from "../features/counterSlice";
 import {bus,vehicule_leger,vehicule_lourd,taxi} from "./img";
 
-import "./historique.scss";
+import "../styles/historique.scss";
 import Course from './Course';
 const History = () => {
     const styles=useStyles();
@@ -44,10 +44,11 @@ const History = () => {
 	
 	const remove_course=async (e,key)=>{
 		console.log(e);
+		e.stopPropagation();
 		const btn=e.target;
 		btn.disabled=true;
-		const btn_alert=document.querySelector(`#payienter_${key}`);
-		btn_alert.style.display="block";
+		//const btn_alert=document.querySelector(`#payienter_${key}`);
+		//btn_alert.style.display="block";
 		await db.collection("courses").doc(key).delete();
 		//await deleteDoc((doc(db,"courses",key)));
 		
@@ -90,7 +91,7 @@ const History = () => {
 				   console.log("the date is ",str_date)
 
 				   return <Course 
-				   can_delete={true}
+				   	can_delete={true}
 				   	key={key}
 					destination={destination}
 					destination_name={destination_name}
@@ -126,7 +127,7 @@ const useStyles = makeStyles({
         padding:"1rem",
         display:"flex",
         flexDirection:"column",
-        
+        minHeight:"calc(100vh - 160px)",
         
 		
         gap:"1rem",

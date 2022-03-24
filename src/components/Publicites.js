@@ -7,6 +7,9 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import {useDispatch,useSelector} from "react-redux";
 import Modal from "./admin/Modal";
 import Sai from "./Sai";
+
+import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+
 const Publicites=()=>{
     const history=useHistory();
     const [data,set_data]=useState([]);
@@ -23,11 +26,8 @@ const Publicites=()=>{
         set_data(pub);
     },[pub])
     const go_to_pub=(e)=>{
-        
-        let i=index;
-        if(i==data.length) i--;
-        const selected_pub=data[i];
-        dispatch(setPublicite(selected_pub))
+
+        dispatch(setPublicite(e))
         history.push("/publicite");
     }
 
@@ -46,7 +46,7 @@ const Publicites=()=>{
 
     },[data]);
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         if(data.length==0){
             return;
         }
@@ -63,109 +63,63 @@ const Publicites=()=>{
         set_index(current);
 
        },5000)
-    },[index,data]);
+    },[index,data]);*/
+
+
     if(data.length==0){
         return null;
     }
     return(
         
-        data.length>0 && <div style={{
-            background:"#2faad6",
-            width:"100%",
+        data.length>0 && 
+        
+        <div style={{
+            background:"var(--sub)",
+            width:"100vw",
            border:"none",
            position:"fixed",
            bottom:0,
            zIndex:1,
-           padding:0,
-           margin:0,
            height:"60px",
            display:"flex",
            fontSize:"0.8rem",
+           overflow:"hidden",
           }}
           
           > 
-          
-          {sai==true && <Modal content={<Sai />} open={true} click={close_sai}/>}
-          <div style={{
-              
-              width:"70px",
-              display:"flex",
-              alignItems:"center",
-              justifyContent:"center",
-          }}
-          onClick={go_to_sai}
-          >
-             <button style={{
-                 backgroundColor:"white",
-                 border:"none",
-                 height:"55px",
-             }}>
-                <img src={logo} style={{width:50,height:50,resize:"cover",borderRadius:"50%"}}/>
-             </button>
-          </div>
-
-          <div style={{
-              flex:1,
-              display:"flex",
-              alignItems:"center",
-              justifyContent:"center",
-              flexDirection:"column",
-
-              }}
-              onClick={go_to_pub}
-              >
-                  
-                  <p style={{
-                      textAlign:"center",
-                      whiteSpace:"nowrap",
-                      width:"200px",
-                      textOverflow:"ellipsis",
-                      overflow:"hidden",
-                      fontWeight:"bold",
-                      color:"black",
-                      marginBottom:"0.5rem",
-                      fontSize:"0.7rem",
-                      }}>
-                        {titre}
-                      </p>
-                  <button style={{
-                      backgroundColor:"orange",
-                      padding:"0.2rem",
-                      width:"80px",
-                      border:"none",
-                      borderRadius:"3px",
-                      color:"white",
-                      opacity:0.9,
-                      display:"flex",
-                      alignItems:"center",
-                      justifyContent:"center",
-                      fontSize:"0.7rem",
-                  }}>
-                      Voir plus
-                  <ArrowForwardIosIcon style={{color:"white",fontSize:"1rem"}}/>
-                  </button>
-              
-              </div>
-          <div style={{
+          <ScrollMenu>
+          {
+              data.map((item,i)=>{
+                  console.log("footer ",i,item);
+                  return(
+                    <div style={{
              
-              width:"70px",
-              display:"flex",
-              alignItems:"center",
-              justifyContent:"center",
-              
-          }}
+                        width:"100vw",
+                        display:"flex",
+                        alignItems:"center",
+                        justifyContent:"center",
+                    }}
+                    
+                    onClick={go_to_pub.bind(this,item)}
+                    key={i}
+                    >
+                        <img src={item.url} style={{
+                         width:"100%",
+                         height:55,
+                         resize:"cover",
+                         objectFit:"cover",
+                          margin:0,
+                          padding:0,
+                        }} />
+                    </div>
+                  );
+              })
+          }
           
-          onClick={go_to_pub}
-          >
-              <img src={url} style={{
-               width:55,height:55,resize:"cover",
-                objectFit:"cover",
-                margin:0,
-                padding:0,
-              }} />
-          </div>
-             
+         
+          </ScrollMenu>
             </div>
+           
         
     );
 }

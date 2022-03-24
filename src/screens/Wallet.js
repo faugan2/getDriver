@@ -1,7 +1,7 @@
 import HeaderBack from "../components/HeaderBack";
 import {auth,db} from "../firebase_file";
 import img from "../components/img/1.jpg";
-import "./wallet.scss";
+import "../styles/wallet.scss";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import {useEffect, useState} from "react";

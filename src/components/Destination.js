@@ -1,4 +1,4 @@
-import "./destination.scss";
+import "../styles/destination.scss";
 import PlaceIcon from '@material-ui/icons/Place';
 const Destination=({nom,quartier,click})=>{
 	return(

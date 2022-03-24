@@ -1,7 +1,7 @@
 
 import HeaderBack from "../components/HeaderBack";
 import map from "../components/img/map.png";
-import "./details_commande.scss";
+import "../styles/details_commande.scss";
 import {useSelector,useDispatch} from "react-redux";
 import {selectCourse} from "../features/counterSlice";
 import {useState,useEffect} from "react";

@@ -1,8 +1,9 @@
 import HeaderBack from "../components/HeaderBack";
-import "./publicite.scss";
+import "../styles/publicite.scss";
 import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux";
 import { selectPulicite } from "../features/counterSlice";
+
 const Publicite=()=>{
 
     const pub=useSelector(selectPulicite);

@@ -1,3 +1,5 @@
+import "../styles/login_footer.scss";
+
 const LoginFooter=()=>{
     return(<div className="footer" id="footer">
         <div className="footer_top">

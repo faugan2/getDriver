@@ -31,8 +31,13 @@ const initialState = {
   oldLogin:null,
   onLine:false,
   driverLocation:false,
-  
-  
+  openLocation:false,
+  available:false,
+  pilote:null,
+  client:null,
+  commandes:null,
+  interfaction:false,
+  commande:null,
 };
 
 
@@ -136,8 +141,29 @@ export const counterSlice = createSlice({
   },
   setDriverLocation:(state,action)=>{
     state.driverLocation=action.payload;
-  }
+  },
+  setOpenLocation:(state,action)=>{
+    state.openLocation=action.payload;
+  },
+  setAvailable:(state,action)=>{
+    state.available=action.payload;
+  },
+  setPilote:(state,action)=>{
+    state.pilote=action.payload;
+  },
+  setClient:(state,action)=>{
+    state.client=action.payload;
+  },
    
+  setCommandes:(state,action)=>{
+    state.commandes=action.payload;
+  },
+  setCommande:(state,action)=>{
+    state.commande=action.payload;
+  },
+  setInteraction:(state,action)=>{
+    state.interfaction=action.payload;
+  }
   
 
 },
@@ -171,8 +197,14 @@ export const {
   setOldLogin,
   setOnline,
   setDepartName,
-  setDriverLocation
-
+  setDriverLocation,
+  setOpenLocation,
+  setAvailable,
+  setPilote,
+  setClient,
+  setCommandes,
+  setCommande,
+  setInteraction
 } = counterSlice.actions;
 
 
@@ -205,5 +237,12 @@ export const selectOldLogin=(state)=> state.counter.oldLogin;
 export const selectOnline=(state)=> state.counter.onLine;
 export const selectDepartName=(state)=> state.counter.departName;
 export const selectDriverLocation=(state)=> state.counter.driverLocation;
+export const selectOpenLocation=(state)=> state.counter.openLocation;
+export const selectAvailable=(state)=> state.counter.available;
+export const selectPilote=(state)=> state.counter.pilote;
+export const selectCommandes=(state)=> state.counter.commandes;
+export const selectCommande=(state)=> state.counter.commande;
+export const selectInteraction=(state)=> state.counter.interactive;
+export const selectClient=(state)=> state.counter.client;
 
 export default counterSlice.reducer;

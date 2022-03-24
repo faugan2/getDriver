@@ -1,5 +1,5 @@
 import HeaderBack from "../components/HeaderBack";
-import "./commander.scss";
+import "../styles/commander.scss";
 import SearchIcon from '@material-ui/icons/Search';
 import Destination from "../components/Destination";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -95,7 +95,7 @@ const Commander=(props)=>{
 			  },
 	
 			  showError,
-			  { enableHighAccuracy: false, timeout: 5000},
+			  { enableHighAccuracy: true, timeout: 5000},
 			  );
 		},1000)
 		
@@ -188,8 +188,9 @@ const Commander=(props)=>{
       }
 
 	  useEffect(()=>{
-		//initService(dep);
-	  },[])
+		  if(dep==null) return;
+		initService(dep);
+	  },[dep])
 
 	  const search=useSelector(selectSearchDestinationText)
 	  useEffect(()=>{
@@ -230,7 +231,8 @@ const Commander=(props)=>{
 			<div className="commander_body">
 				{
 					(longitude==0 && latitude==0)? 
-					<div style={{backgroundColor:"#e8e8e8",display:"flex",justifyContent:"center",alignItems:"center",padding:"1rem",gap:"0.5rem"}}>
+					<div style={{backgroundColor:"#e8e8e8",display:"flex",justifyContent:"center",
+					alignItems:"center",padding:"1rem",gap:"0.5rem"}}>
 							<CircularProgress style={{color:"gray",fontSize:"1.2rem"}} size={15} />
 							<p style={{textAlign:"center",fontSize:"0.8rem",margin:0}}>{alerte}</p>
 					</div>
@@ -250,12 +252,12 @@ const Commander=(props)=>{
 							padding:"0 0.5rem",
 						}}>
 								<button style={{
-									backgroundColor:"#3f51b5",
+									backgroundColor:"var(--main)",
 									border:"none",
 									borderRadius:"50%",
 									width:"2rem",
 									height:"2rem",
-									color:"white",
+									color:"var(--color)",
 									marginRight:"0.5rem",
 									display:"flex",
 									alignItems:"center",
@@ -280,7 +282,7 @@ const Commander=(props)=>{
 									}}
 									
 									>
-									<RoomIcon style={{fontSize:"1.2rem",color:"#3f51b5"}}  id="zone_destination"/>
+									<RoomIcon style={{fontSize:"1.2rem",color:"var(--color)"}}  id="zone_destination"/>
 									<input 
 									value={search_destination}
 									onChange={e=>{

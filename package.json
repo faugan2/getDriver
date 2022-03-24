@@ -20,6 +20,7 @@
     "firebase": "^8.10.0",
     "google-map-react": "^2.1.10",
     "google-maps-react": "^2.0.6",
+    "prevent-pull-refresh": "^1.0.6",
     "react": "^17.0.2",
     "react-country-flag": "^3.0.2",
     "react-dom": "^17.0.2",
@@ -29,7 +30,11 @@
     "react-scripts": "4.0.3",
     "react-swipeable-views": "^0.14.0",
     "sass": "^1.47.0",
-    "save": "^2.4.0"
+    "save": "^2.4.0",
+    "react-spring": "^9.4.3",
+    "react-spring-bottom-sheet": "^3.4.0",
+    "moment-timezone": "^0.5.34",
+    "react-horizontal-scrolling-menu": "^2.7.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -24,6 +24,7 @@
         justify-content:space-around;
         margin-bottom: 1rem;
         >button{
+           
         padding:1rem;
             background-color:white;
             margin:2px;
@@ -32,8 +33,9 @@
             height:150px;
 
             > p{
-                font-size: 0.7rem;
+                font-size: 0.8rem;
                 font-weight: 600;
+                margin-top: 1rem;
             }
 
             >div{
@@ -44,4 +46,24 @@
             }
         }
 }
+
+    .option1{
+        background-color:#a2b9bc !important;
+        color:white;
+    }
+
+    .option2{
+        background-color:#b2ad7f !important;
+        color:white;
+    }
+
+    .option3{
+        background-color:#d64161 !important;
+        color:white;
+    }
+    .option4{
+        background-color:#6b5b95 !important;
+        color:white;
+    }
 }
+

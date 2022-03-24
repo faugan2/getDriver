@@ -9,7 +9,7 @@ import { selectDepart, selectDestinationName, selectDistance, selectMap,
     selectDepartName
 
 } from "../features/counterSlice";
-import "./places.scss";
+import "../styles/places.scss";
 import RoomIcon from '@material-ui/icons/Room';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import AirplanemodeActiveIcon from '@material-ui/icons/AirplanemodeActive';
@@ -258,7 +258,7 @@ const Places=()=>{
                     <button style={{border:"none",backgroundColor:"#e8e8ef",flex:1,display:"flex",
                     alignItems:"center",justifyContent:"flex-start",fontSize:"0.7rem",gap:"0.5rem"}}>
                         <RoomIcon style={{
-                            color:"#3f51b5",
+                            color:"var(--color)",
                             fontSize:"1.2rem"}} />
                         {des_name}
                         
@@ -274,7 +274,7 @@ const Places=()=>{
                             alignItems:"center",
                             justifyContent:"center",
                             border:"none",backgroundColor:"white",width:"2rem",height:"2rem",borderRadius:"50%"}}>
-                        <MoreHorizIcon style={{color:"#3f51b5"}} />
+                        <MoreHorizIcon style={{color:"var(--color)"}} />
                     </button>
                </div>
 
@@ -292,7 +292,7 @@ const Places=()=>{
                    alignItems:"center",justifyContent:"flex-start",fontSize:"0.7rem",gap:"0.5rem"}}>
                    <AirplanemodeActiveIcon style={{
                       
-                       color:"#3f51b5",
+                       color:"var(--color)",
                        fontSize:"1.2rem"}} />
                    {distance} KM
                         
@@ -356,9 +356,9 @@ const Places=()=>{
 
                }}>
                    <button style={{
-                       padding:"0.5rem",
+                       padding:"0.6rem",
                         border:"none",
-                        backgroundColor:"#3f51b5",
+                        backgroundColor:"var(--main)",
                         borderRadius:"5px",
                         width:"80%",
                         color:"white",

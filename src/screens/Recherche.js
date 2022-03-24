@@ -1,6 +1,6 @@
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SearchIcon from '@material-ui/icons/Search';
-import "./recherche.scss";
+import "../styles/recherche.scss";
 import {useHistory} from "react-router";
 import Drivers from "../components/Drivers";
 import LocalTaxiIcon from '@material-ui/icons/LocalTaxi';
@@ -95,7 +95,8 @@ const Recherche=()=>{
                         {index!=0 && <button style={{
                             border:"none",
                             outline:"none",
-                            backgroundColor:"white",
+                            backgroundColor:"transparent",
+                            color:"white",
 
                         }}
                         onClick={(e)=>{
