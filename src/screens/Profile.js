@@ -34,7 +34,9 @@ const Profile=()=>{
 	}
 
 	useEffect(()=>{
-		if(me==null || me.url==undefined) return;
+		
+		if(me==null) return;
+		console.log("the me is ",me.nom);
 		set_url(me.url)
 		set_nom(me.nom);
 	},[me]);

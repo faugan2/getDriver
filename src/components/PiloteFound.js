@@ -154,8 +154,10 @@ const PiloteFound=({click})=>{
       }
 
       const close_pop=()=>{
+          
         dispatch(setClient(null));
         dispatch(setPilote(null));
+        click();
       }
      
       const open_modal_detail=()=>{

@@ -7,6 +7,8 @@ import LoginPilote from "./LoginPilote";
 import "../styles/login_etape1.scss";
 import {useSelector,useDispatch} from "react-redux";
 import {setEtape, setLogin} from "../features/counterSlice";
+import BottomSheet from "./BottomSheet";
+import Pays from "./Pays";
 
 const LoginEtape1=()=>{
     const [pays,set_pays]=useState([])
@@ -15,6 +17,8 @@ const LoginEtape1=()=>{
     const [telephone,set_telephone]=useState("");
     const [generated_code,set_generated_code]=useState("");
     const [alerte,set_alerte]=useState("");
+    const [open_pays,set_open_pays]=useState(false);
+    const [p,set_p]=useState("");
     const dispatch= useDispatch();
 
     const ref=useRef(null);
@@ -27,6 +31,7 @@ const LoginEtape1=()=>{
 
         console.log("the line is ",res);
         if(res.length>0){
+            set_p(res[0].country);
             set_tel_code(res[0].countryCodes[0]);
         }
     },[code])
@@ -50,6 +55,7 @@ const LoginEtape1=()=>{
             return;
         }
 
+        //send sms code to user phone
         const obj={telephone,code,tel_code}
         dispatch(setLogin(obj));
         dispatch(setEtape(2));
@@ -79,6 +85,14 @@ const LoginEtape1=()=>{
         document.querySelector("#footer").style.display="block";
     }
 
+    const close_pays=()=>{
+        set_open_pays(false);
+    }
+
+    const pays_selected=(code)=>{
+        set_code(code);
+    }
+
     return(
         <div className="login_etape1">
             <div className="head">
@@ -88,7 +102,7 @@ const LoginEtape1=()=>{
 
             <div className="body">
                 <div className="line">
-                    <div>
+                    <div onClick={e=>{set_open_pays(true)}}>
                         <p>
                         <ReactCountryFlag countryCode={code}
                             style={{
@@ -98,7 +112,10 @@ const LoginEtape1=()=>{
                             svg
                         />
                         </p>
-                        <select onChange={e=>set_code(e.target.value)} value={code}>
+                        <select onChange={e=>set_code(e.target.value)} value={code} 
+
+                        style={{display:"none"}}
+                        >
                             {
                                 pays.map((p)=>{
                                     return(
@@ -107,6 +124,7 @@ const LoginEtape1=()=>{
                                 })
                             }
                         </select>
+                        <p style={{flex:1}}>{p}</p>
                     </div>
                     
                 </div>
@@ -145,6 +163,11 @@ const LoginEtape1=()=>{
                     open={true}
                     click={close_modal}
                 />
+            }
+
+           {open_pays==true && <BottomSheet 
+                content={<Pays pays={pays} close={close_pays} selected={pays_selected}/>}
+            />
             }
         </div>
     );

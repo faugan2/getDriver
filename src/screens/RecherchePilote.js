@@ -39,12 +39,14 @@ const RecherchePilote=()=>{
         })
         
         
-
+        //console.log("all results are ",res);
        const res2= res.filter((item,i)=>{
             const location=item.location;
+            return true;
             return location!=undefined;
         })
 
+       
         const res3=res2.filter((item,i)=>{
             const active=item.location_active;
             const available=item.available;
@@ -57,7 +59,13 @@ const RecherchePilote=()=>{
         })
        
         set_loading(false);
-        set_pilotes(res3);
+        if(res3.length>1){
+            const res4=res3.slice(0,1);
+            set_pilotes(res4);
+        }else{
+            set_pilotes(res3);
+        }
+        
 
     },[users,c]);
     useEffect(()=>{
@@ -94,6 +102,7 @@ const RecherchePilote=()=>{
         set_open(true);
     }
     const close_bottom=()=>{
+        
         set_open(false);
         dispatch(setPilote(null));
     }
@@ -121,8 +130,9 @@ const RecherchePilote=()=>{
                     (pilotes.length >0 && loading==false) && 
                     <div className="liste_pilotes" style={{
                         
-                        display:"grid",
-                        gridTemplateColumns:"1fr 1fr 1fr",
+                        display:"flex",
+                        alignItems:"center",
+                        justifyContent:"center",
                         
                     }}>
                            {

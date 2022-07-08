@@ -18,6 +18,7 @@ const AjouterClient= (e)=>{
     const [alerte,set_alerte]=useState("");
     const [type,set_type]=useState("0");
     const [photo,set_photo]=useState(null);
+    const [telephone,set_telephone]=useState("");
     const ref=useRef(null);
     const [url,set_url]=useState(null);
 
@@ -41,6 +42,7 @@ const AjouterClient= (e)=>{
         set_pw(pilote.password);
         set_email(pilote.email);
         set_url(pilote.url);
+        set_telephone(pilote.telephone)
 
     },[pilote]);
 
@@ -63,6 +65,11 @@ const AjouterClient= (e)=>{
             return;
         }
 
+        if(telephone==""){
+            set_alerte("Le téléphone est vide");
+            return;
+        }
+
         if(pw.length<6){
             set_alerte("Le code pilote doit être égal à 6 chiffres");
             return;
@@ -80,8 +87,9 @@ const AjouterClient= (e)=>{
         if(files.length==0){
             const user={
                 nom,
-                email
-                ,password:pw,
+                email,
+                telephone,
+                password:pw,
                 type:2,
                 pilote:type
             }
@@ -105,8 +113,9 @@ const AjouterClient= (e)=>{
                     const user={
                         url,
                         nom,
-                        email
-                        ,password:pw,
+                        email,
+                        telephone,
+                        password:pw,
                         type:2,
                         pilote:type
                     }
@@ -199,6 +208,17 @@ const AjouterClient= (e)=>{
                     <input type="text" placeholder="Mot de passe" 
                     maxLength={6}
                     value={pw} onChange={e=>set_pw(e.target.value)}/>
+                </div>
+                
+            </div>
+
+            <div className="line">
+                <label>Téléphone</label>
+                <div>
+                    <LockIcon style={{color:"gray",fontSize:"1.2rem"}}/>
+                    <input type="text" placeholder="22890909090" 
+                   
+                    value={telephone} onChange={e=>set_telephone(e.target.value)}/>
                 </div>
                 
             </div>

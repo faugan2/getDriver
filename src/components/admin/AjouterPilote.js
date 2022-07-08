@@ -15,6 +15,7 @@ const AjouterClient= (e)=>{
     const [alerte,set_alerte]=useState("");
     const [type,set_type]=useState("0");
     const [photo,set_photo]=useState(null);
+    const [telephone,set_telephone]=useState("");
     const ref=useRef(null);
 
     const get_code_pilote=()=>{
@@ -48,6 +49,12 @@ const AjouterClient= (e)=>{
             set_alerte("Le type de pilote est vide");
             return;
         }
+
+        if(telephone==""){
+            set_alerte("Le téléphone est vide");
+            return;
+        }
+
         if(pw.length<6){
             set_alerte("Le code pilote doit être de 6 chiffres");
             return;
@@ -79,8 +86,9 @@ const AjouterClient= (e)=>{
                 const user={
                     url,
                     nom,
-                    email
-                    ,password:pw,
+                    email,
+                    telephone,
+                    password:pw,
                     type:2,
                     date:firebase.firestore.FieldValue.serverTimestamp(),
                     pilote:type
@@ -188,6 +196,17 @@ const AjouterClient= (e)=>{
                     <input type="text" placeholder="Code pilote"  
                     maxLength={6}
                     value={pw} onChange={e=>set_pw(e.target.value)}/>
+                </div>
+                
+            </div>
+
+            <div className="line">
+                <label>Téléphone</label>
+                <div>
+                    <LockIcon style={{color:"gray",fontSize:"1.2rem"}}/>
+                    <input type="text" placeholder="22890909090"  
+                    
+                    value={telephone} onChange={e=>set_telephone(e.target.value)}/>
                 </div>
                 
             </div>

@@ -20,6 +20,7 @@ const DetailCommand=({commande,close})=>{
         
     },[commandes])
     const close_detail=()=>{
+        
         close();
     }
 

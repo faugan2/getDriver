@@ -21,7 +21,7 @@ const EnableDisableLocation=({click})=>{
                     const objet={lat:position.coords.latitude+rand,lng:position.coords.longitude+rand};
                     console.log("updating position=",rand);
                     await db.collection("users").doc(me?.key).update({location:objet},{merge:true});
-                    dispatch(setDriverLocation(!location));
+                    dispatch(setDriverLocation(false));
                     dispatch(setOpenLocation(false));
                     click();
                 },
@@ -31,7 +31,7 @@ const EnableDisableLocation=({click})=>{
                   );
             })();
         }else{
-            dispatch(setDriverLocation(!location));
+            dispatch(setDriverLocation(false));
             dispatch(setOpenLocation(false));
             click();
         }
@@ -50,7 +50,7 @@ const EnableDisableLocation=({click})=>{
         <div className="enable_disabled_location">
 
             
-            {location==false &&
+            {(location==false || location==undefined) &&
             
                 <div className="line">
                     <p>

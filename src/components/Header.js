@@ -144,13 +144,14 @@ export default function ProminentAppBar() {
     dispatch(setOpenLocation(false))
   }
   const driverLocation=useSelector(selectDriverLocation);
+  
   useEffect(()=>{
       if(me==null) return;
       
       if(me.type==1) return;
 
 
-      if(driverLocation== null) return;
+      if(driverLocation== null || driverLocation==undefined) return;
 
       const key=me.key;
       console.log("driver =",key);
@@ -199,8 +200,10 @@ export default function ProminentAppBar() {
   const a=useSelector(selectAvailable);
   const [open_available,set_open_available]=useState(false);
   useEffect(()=>{
-    set_available(a);
-  },[a]);
+    if(me==null ) return;
+    if(me?.available==undefined) return;
+    set_available(me?.available);
+  },[me]);
 
 
   const handle_available=()=>{
@@ -297,7 +300,8 @@ export default function ProminentAppBar() {
           <button  onClick={enable_disabled_location} 
           style={{padding:"0 0.5rem",backgroundColor:"transparent",border:"none"}}
           >
-            {driverLocation==false && <LocationOffIcon  style={{color:"white"}}/>}
+            
+            {(driverLocation==false || driverLocation==undefined) && <LocationOffIcon  style={{color:"white"}}/>}
             {driverLocation==true && <LocationOnIcon  style={{color:"var(--color)"}} className="active_location" />}
           </button>
           }

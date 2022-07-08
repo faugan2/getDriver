@@ -26,7 +26,7 @@ const Pilote=({pilote,distance,me,course,click})=>{
             parseFloat(me_lat),
             parseFloat(me_lng)
         ).toFixed(2);
-        console.log("position of client distance is true",me.location,course.origin,km);
+        console.log("position of client distance is true",me.location,pilote.location,km);
     }
     return(
         <div className="pilote" onClick={click}>
