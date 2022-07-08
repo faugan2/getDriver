@@ -156,6 +156,7 @@ const Clients=()=>{
                             <th width="10%">Date</th>
                             <th width="" style={{textAlign:"left"}}>Nom</th>
                             <th width="" style={{textAlign:"left"}}>Email</th>
+                            <th width="" style={{textAlign:"left"}}>Téléphone</th>
                             <th width="10%">Solde</th>
                             <th width="8%">Poto</th>
                             <th width="10%">Actions</th>
@@ -175,6 +176,7 @@ const Clients=()=>{
                                         <td align="center">{date}</td>
                                         <td>{nom}</td>
                                         <td>{user.email}</td>
+                                        <td>{user.telephone}</td>
                                         <td 
                                         align="center" 
                                         className="solde" 
